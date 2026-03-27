@@ -1,0 +1,642 @@
+[
+    {
+        "id": 0,
+        "remarks": "https://github.com/free18/v2ray",
+        "site": "https://github.com/free18/v2ray",
+        "url": "https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/v.txt",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 1,
+        "remarks": "pojiezhiyuanjun/freev2",
+        "site": "https://github.com/pojiezhiyuanjun/freev2",
+        "url": "https://raw.githubusercontent.com/pojiezhiyuanjun/freev2/master/0316.txt",
+        "update_method": "change_date",
+        "update_mark": null
+    },
+    {
+        "id": 2,
+        "remarks": "Nodefree.org",
+        "site": "https://github.com/Fukki-Z/nodefree",
+        "url": "https://nodefree.org/dy/2025/05/20250530.yaml",
+        "update_method": "change_date",
+        "update_mark": null
+    },
+    {
+        "id": 3,
+        "remarks": "mianfeifq/share",
+        "site": "https://github.com/mianfeifq/share",
+        "url": "https://raw.githubusercontent.com/mianfeifq/share/main/data2024071.txt",
+        "update_method": "page_release",
+        "update_mark": null
+    },
+    {
+        "id": 4,
+        "remarks": "FiFier/v2rayShare",
+        "site": "https://github.com/FiFier/v2rayShare",
+        "url": "https://v2rayshare.com/wp-content/uploads/2025/05/20250530.txt",
+        "update_method": "change_date",
+        "update_mark": null
+    },
+    {
+        "id": 5,
+        "remarks": "huanongkejizhijia/clashnode",
+        "site": "https://github.com/huanongkejizhijia/clashnode",
+        "url": "https://clashnode.com/wp-content/uploads/2024/05/20240522.txt",
+        "update_method": "change_date",
+        "update_mark": null
+    },
+    {
+        "id": 6,
+        "remarks": "RenaLio/Mux2sub",
+        "site": "https://github.com/RenaLio/Mux2sub",
+        "url": "https://feiniaoyun.xyz/api/v1/client/subscribe?token=84de35f8615972ebc789e0a527b4d022",
+        "update_method": "update_airports",
+        "update_mark": null
+    },
+    {
+        "id": 7,
+        "remarks": "vpei/Free-Node-Merge",
+        "site": "https://github.com/vpei/Free-Node-Merge",
+        "url": "https://raw.githubusercontent.com/vpei/Free-Node-Merge/main/res/nod-5.txt",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 8,
+        "remarks": "colatiger/v2ray-nodes",
+        "site": "https://github.com/colatiger/v2ray-nodes",
+        "url": "https://bitbucket.org/huwo1/proxy_nodes/raw/f31ca9ec67b84071515729ff45b011b6b09c10f2/clash.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 9,
+        "remarks": "oslook/clash-freenode",
+        "site": "https://github.com/oslook/clash-freenode",
+        "url": "https://raw.githubusercontent.com/openrunner/clash-freenode/main/clash.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 10,
+        "remarks": "ssrsub/ssr",
+        "site": "https://github.com/ssrsub/ssr",
+        "url": "https://raw.githubusercontent.com/ssrsub/ssr/master/Clash.yml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 11,
+        "remarks": "Leon406/SubCrawler",
+        "site": "https://github.com/Leon406/SubCrawler",
+        "url": "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/all",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 12,
+        "remarks": "yu-steven/openit",
+        "site": "https://github.com/yu-steven/openit",
+        "url": "https://raw.githubusercontent.com/yu-steven/openit/main/Clash.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 13,
+        "remarks": "mahdibland/ShadowsocksAggregator",
+        "site": "https://github.com/mahdibland/ShadowsocksAggregator",
+        "url": "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 14,
+        "remarks": "iwxf/free-v2ray",
+        "site": "https://github.com/iwxf/free-v2ray",
+        "url": "https://iwxf.netlify.app",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 15,
+        "remarks": "DoveBoy/Vmess-Actions",
+        "site": "https://github.com/ldir92664/Vmess-Actions",
+        "url": "https://raw.githubusercontent.com/DoveBoy/Vmess-Actions/main/subscribe/clash.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 16,
+        "remarks": "gooooooooooooogle/Clash-Config",
+        "site": "https://github.com/gooooooooooooogle/Clash-Config",
+        "url": "https://raw.githubusercontent.com/gooooooooooooogle/Clash-Config/main/Clash.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 17,
+        "remarks": "Jsnzkpg/Jsnzkpg",
+        "site": "https://github.com/Jsnzkpg/Jsnzkpg",
+        "url": "https://raw.githubusercontent.com/Jsnzkpg/Jsnzkpg/Jsnzkpg/Jsnzkpg",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 18,
+        "remarks": "ermaozi/get_subscribe",
+        "site": "https://github.com/ermaozi/get_subscribe",
+        "url": "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 19,
+        "remarks": "wrfree/free",
+        "site": "https://github.com/wrfree/free",
+        "url": "https://raw.githubusercontent.com/wrfree/free/main/v2",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 20,
+        "remarks": "GreenFishStudio/GreenFish",
+        "site": "https://github.com/GreenFishStudio/GreenFish",
+        "url": "https://raw.gitslow.tk/yu-steven/openit/main/Clash.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 21,
+        "remarks": "anaer/Sub",
+        "site": "https://github.com/anaer/Sub",
+        "url": "https://raw.githubusercontent.com/anaer/Sub/main/clash.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 22,
+        "remarks": "xrayfree/free-ssr-ss-v2ray-vpn-clash",
+        "site": "https://github.com/xrayfree/free-ssr-ss-v2ray-vpn-clash",
+        "url": "https://freefq.neocities.org/free.txt",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 23,
+        "remarks": "mhmhone/shadowrocket-free-subscribe",
+        "site": "https://github.com/mhmhone/shadowrocket-free-subscribe",
+        "url": "https://bulink.me/sub/m5aep/cl",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 24,
+        "remarks": "aiboboxx/v2rayfree",
+        "site": "https://github.com/aiboboxx/v2rayfree",
+        "url": "https://raw.githubusercontent.com/aiboboxx/v2rayfree/main/v2",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 25,
+        "remarks": "Pawdroid/Free-servers",
+        "site": "https://github.com/Pawdroid/Free-servers",
+        "url": "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 26,
+        "remarks": "kxswa/k",
+        "site": "https://github.com/kxswa/k",
+        "url": "https://raw.githubusercontent.com/kxswa/k/k/base64",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 27,
+        "remarks": "Rokate/Proxy-Sub",
+        "site": "https://github.com/Rokate/Proxy-Sub",
+        "url": "https://raw.githubusercontent.com/Rokate/Proxy-Sub/main/clash/clash_trojan.yml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 28,
+        "remarks": "misersun/config003-002",
+        "site": "https://github.com/misersun/config003",
+        "url": "https://raw.githubusercontent.com/misersun/config003/main/config_all.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 29,
+        "remarks": "vveg26/SubAutoConv",
+        "site": "https://github.com/vveg26/SubAutoConv",
+        "url": "https://raw.githubusercontent.com/vveg26/SubAutoConv/main/sub/clash/url4.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 30,
+        "remarks": "clash.221207.xyz/pubclashyaml",
+        "site": "https://clash.221207.xyz/pubclashyaml",
+        "url": "https://clash.221207.xyz/pubclashyaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 31,
+        "remarks": "proxypool.toshiki.top/clash",
+        "site": "https://proxypool.toshiki.top/clash/proxies",
+        "url": "https://proxypool.toshiki.top/clash/proxies",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 32,
+        "remarks": "tbbatbb/Proxy",
+        "site": "https://github.com/tbbatbb/Proxy",
+        "url": "https://raw.githubusercontent.com/tbbatbb/Proxy/master/dist/clash.config.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 33,
+        "remarks": "mfuu/v2ray",
+        "site": "https://github.com/mfuu/v2ray",
+        "url": "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 34,
+        "remarks": "paimonhub/Paimonnode",
+        "site": "https://github.com/paimonhub/Paimonnode",
+        "url": "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 35,
+        "remarks": "webdao/v2ray",
+        "site": "https://github.com/webdao/v2ray",
+        "url": "https://raw.githubusercontent.com/webdao/v2ray/master/nodes.txt",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 36,
+        "remarks": "openRunner/clash-freenode",
+        "site": "https://github.com/openRunner/clash-freenode",
+        "url": "https://raw.githubusercontent.com/openRunner/clash-freenode/main/clash.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 37,
+        "remarks": "freefq/free",
+        "site": "https://github.com/freefq/free",
+        "url": "https://raw.githubusercontent.com/freefq/free/master/v2",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 38,
+        "remarks": "free886.herokuapp.com/clash",
+        "site": "https://free886.herokuapp.com/clash/proxies",
+        "url": "https://free886.herokuapp.com/clash/proxies",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 39,
+        "remarks": "xiyaowong/freeFQ",
+        "site": "https://github.com/xiyaowong/freeFQ",
+        "url": "https://raw.githubusercontent.com/xiyaowong/freeFQ/main/v2ray",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 40,
+        "remarks": "yaney01/Yaney01",
+        "site": "https://github.com/yaney01/Yaney01",
+        "url": "https://ghproxy.com//raw.githubusercontent.com/yaney01/Yaney01/main/yaney_01",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 41,
+        "remarks": "YasserDivaR/pr0xy",
+        "site": "https://github.com/YasserDivaR/pr0xy",
+        "url": "https://raw.githubusercontent.com/YasserDivaR/pr0xy/main/winformClash.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 42,
+        "remarks": "peasoft/NoMoreWalls",
+        "site": "https://github.com/peasoft/NoMoreWalls",
+        "url": "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 43,
+        "remarks": "mahdibland/get_v2",
+        "site": "https://github.com/mahdibland/get_v2",
+        "url": "https://raw.githubusercontent.com/mahdibland/get_v2/main/pub/dswang.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 44,
+        "remarks": "vveg26/get_proxy",
+        "site": "https://github.com/vveg26/get_proxy",
+        "url": "https://raw.githubusercontent.com/vveg26/get_proxy/main/dist/clash.config.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 45,
+        "remarks": "ripaojiedian/freenode",
+        "site": "https://gitlab.com/ripaojiedian/freenode",
+        "url": "https://gitlab.com/ripaojiedian/freenode/-/raw/main/sub",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 46,
+        "remarks": "free.dswang.ga/clash",
+        "site": "https://free.dswang.ga/clash",
+        "url": "https://free.dswang.ga/clash/proxies",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 47,
+        "remarks": "hellopool.herokuapp.com/clash",
+        "site": "https://hellopool.herokuapp.com/clash",
+        "url": "https://hellopool.herokuapp.com/clash/proxies",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 48,
+        "remarks": "free.jingfu.cf/clash",
+        "site": "https://free.jingfu.cf/clash",
+        "url": "https://free.jingfu.cf/clash/proxies",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 49,
+        "remarks": "sspool.herokuapp.com/clash",
+        "site": "https://sspool.herokuapp.com/clash",
+        "url": "https://sspool.herokuapp.com/clash/proxies",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 50,
+        "remarks": "ew732e8d8h1hi/q832yqwdu21u",
+        "site": "https://github.com/ew732e8d8h1hi/q832yqwdu21u",
+        "url": "https://raw.githubusercontent.com/ew732e8d8h1hi/q832yqwdu21u/main/out.txt",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 51,
+        "remarks": "AzadNetCH/Clash",
+        "site": "https://github.com/AzadNetCH/Clash",
+        "url": "https://raw.githubusercontent.com/AzadNetCH/Clash/main/AzadNet_IRAN-Direct2.yml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 52,
+        "remarks": "proxy.yugogo.xyz/clash",
+        "site": "https://proxy.yugogo.xyz/clash",
+        "url": "https://proxy.yugogo.xyz/clash/proxies",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 53,
+        "remarks": "proxies.bihai.cf/clash",
+        "site": "https://proxies.bihai.cf/clash",
+        "url": "https://proxies.bihai.cf/clash/proxies",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 54,
+        "remarks": "jikelonglie/meskell",
+        "site": "https://github.com/jikelonglie/meskell",
+        "url": "http://0.0.0.0:3333/get-base64?content=https://raw.githubusercontent.com/jikelonglie/meskell/main/meskell",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 55,
+        "remarks": "freebaipiao/freebaipiao",
+        "site": "https://github.com/freebaipiao/freebaipiao",
+        "url": "https://raw.githubusercontent.com/freebaipiao/freebaipiao/main/jiassweetoy3.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 56,
+        "remarks": "huwo1/proxy_nodes",
+        "site": "https://bitbucket.org/huwo1/proxy_nodes/src/main",
+        "url": "https://bitbucket.org/huwo1/proxy_nodes/raw/f31ca9ec67b84071515729ff45b011b6b09c10f2/proxy.md",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 57,
+        "remarks": "lisylva-lee/v2dyku",
+        "site": "https://github.com/lisylva-lee/v2dyku",
+        "url": "https://raw.githubusercontent.com/lisylva-lee/v2dyku/main/ssr",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 58,
+        "remarks": "budamu/clashconfig",
+        "site": "https://github.com/budamu/clashconfig",
+        "url": "http://0.0.0.0:3333/get-base64?content=https://raw.githubusercontent.com/budamu/clashconfig/main/v2ray2.txt",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 59,
+        "remarks": "MOnday9907/v2ray",
+        "site": "https://github.com/MOnday9907/v2ray",
+        "url": "http://0.0.0.0:3333/get-base64?content=https://raw.githubusercontent.com/MOnday9907/v2ray/main/v2ray.txt",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 60,
+        "remarks": "adminaliang/v2ray",
+        "site": "https://github.com/adminaliang/v2ray",
+        "url": "https://raw.githubusercontent.com/adminaliang/v2ray/main/v2ray",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 61,
+        "remarks": "Jia-Pingwa/free-v2ray-merge",
+        "site": "https://github.com/Jia-Pingwa/free-v2ray-merge",
+        "url": "http://0.0.0.0:3333/get-base64?content=https://raw.githubusercontent.com/Jia-Pingwa/free-v2ray-merge/main/output.txt",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 62,
+        "remarks": "Lewis-1217/FreeNodes",
+        "site": "https://github.com/Lewis-1217/FreeNodes",
+        "url": "https://raw.githubusercontent.com/Lewis-1217/FreeNodes/main/bpjzx2",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 63,
+        "remarks": "songtao1873/providers",
+        "site": "https://github.com/songtao1873/providers",
+        "url": "https://raw.githubusercontent.com/songtao1873/clash/main/subscription/others/base64",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 64,
+        "remarks": "Unknown",
+        "site": "https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3QvcyFBcnhoYkNPczBnMTloaXlKaEl2bUkwb040YUtHP2U9U2FNWURl",
+        "url": "https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3QvcyFBcnhoYkNPczBnMTloaXlKaEl2bUkwb040YUtHP2U9U2FNWURl",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 65,
+        "remarks": "youlianboshi.netlify.app",
+        "site": "https://youlianboshi.netlify.app",
+        "url": "https://youlianboshi.netlify.app",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 66,
+        "remarks": "jiang.netlify.app",
+        "site": "https://jiang.netlify.app",
+        "url": "https://jiang.netlify.app",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 67,
+        "remarks": "learnhard-cn/free_proxy_ss",
+        "site": "https://github.com/learnhard-cn/free_proxy_ss",
+        "url": "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/clash/providers/provider_netflix.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 68,
+        "remarks": "proxy.yiun.xyz/clash",
+        "site": "https://proxy.yiun.xyz/clash",
+        "url": "https://proxy.yiun.xyz/clash/proxies",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 69,
+        "remarks": "SnapdragonLee/SystemProxy",
+        "site": "https://github.com/SnapdragonLee/SystemProxy",
+        "url": "https://raw.githubusercontent.com/SnapdragonLee/SystemProxy/master/dist/clash_config_extra_US.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 70,
+        "remarks": "klausvpn.posyao.com/clash",
+        "site": "https://klausvpn.posyao.com/clash",
+        "url": "https://klausvpn.posyao.com/clash/proxies",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 71,
+        "remarks": "free.iam7.tk/clash",
+        "site": "https://free.iam7.tk/clash",
+        "url": "https://free.iam7.tk/clash/proxies",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 72,
+        "remarks": "pc.adlionvm.tk/clash",
+        "site": "https://pc.adlionvm.tk/clash",
+        "url": "https://pc.adlionvm.tk/clash/proxies",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 73,
+        "remarks": "clash.myvm.cc/clash",
+        "site": "https://clash.myvm.cc/clash",
+        "url": "https://clash.myvm.cc/clash/proxies",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 74,
+        "remarks": "sub.pmsub.me/base64",
+        "site": "https://sub.pmsub.me/base64",
+        "url": "https://sub.pmsub.me/base64",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 75,
+        "remarks": "proxies.haisto.cn/clash",
+        "site": "https://proxies.haisto.cn/clash",
+        "url": "https://proxies.haisto.cn/clash/proxies",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 76,
+        "remarks": "hermanb001/ProxyTest",
+        "site": "https://github.com/hermanb001/ProxyTest",
+        "url": "https://raw.githubusercontent.com/hermanb001/ProxyTest/main/subscribe/3wking",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 77,
+        "remarks": "proxypool.laowang.me/clash",
+        "site": "https://proxypool.laowang.me/clash",
+        "url": "https://proxypool.laowang.me/clash/proxies",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 78,
+        "remarks": "mahdibland/vpn.fail",
+        "site": "https://github.com/mahdibland/get_v2",
+        "url": "https://raw.githubusercontent.com/mahdibland/get_v2/main/pub/vpn.fail",
+        "update_method": "auto",
+        "update_mark": null
+    },
+    {
+        "id": 79,
+        "remarks": "LonUp/NodeList",
+        "site": "https://github.com/LonUp/NodeList",
+        "url": "https://raw.githubusercontent.com/LonUp/NodeList/main/Clash/Node/Latest.yaml",
+        "update_method": "auto",
+        "update_mark": null
+    }
+]

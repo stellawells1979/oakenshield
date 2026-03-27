@@ -1,0 +1,146 @@
+2026-03-21 19:17:42,758 - convert - ERROR - Check file content -- All type is not
+2026-03-21 19:33:00,939 - convert - ERROR - Check file content -- All type is not
+2026-03-21 19:58:35,976 - convert - ERROR - Check file content -- All type is not
+2026-03-21 20:51:26,459 - Assemble - ERROR - 【download file】: HTTPSConnectionPool(host='raw.githubusercontent.com', port=443): Read timed out.，URL: https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/v.txt
+2026-03-21 20:51:32,141 - convert - ERROR - Check file content -- All type is not
+2026-03-21 22:29:40,427 - convert - ERROR - Check file content -- All type is not
+2026-03-21 22:52:03,053 - convert - ERROR - Check file content -- All type is not
+2026-03-22 13:46:39,031 - convert - ERROR - Check file content -- All type is not
+2026-03-22 14:02:03,609 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: ssr
+2026-03-22 14:06:47,640 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,640 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,640 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,640 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,640 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,640 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,640 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,641 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,641 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,641 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,641 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,641 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,641 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,641 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,641 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,641 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,641 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,641 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,641 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,642 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,642 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,642 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,642 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,642 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,642 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,642 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,642 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,643 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,643 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,643 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,643 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,643 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,643 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,643 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-22 14:06:47,643 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 13:18:58,653 - TestNode -- TestNode - ERROR - Error writing config file: [Errno 22] Invalid argument: 'D:\\PycharmProjects\\SpecialNetwork\\v2ray\\TestConfigs\\20001|20000.json'
+2026-03-24 13:18:58,656 - TestNode -- TestNode - ERROR - Error writing config file: [Errno 22] Invalid argument: 'D:\\PycharmProjects\\SpecialNetwork\\v2ray\\TestConfigs\\20003|20002.json'
+2026-03-24 13:18:58,658 - TestNode -- TestNode - ERROR - Error writing config file: [Errno 22] Invalid argument: 'D:\\PycharmProjects\\SpecialNetwork\\v2ray\\TestConfigs\\20005|20004.json'
+2026-03-24 13:18:58,669 - TestNode -- TestNode - ERROR - Error writing config file: [Errno 22] Invalid argument: 'D:\\PycharmProjects\\SpecialNetwork\\v2ray\\TestConfigs\\20007|20006.json'
+2026-03-24 13:18:58,669 - TestNode -- TestNode - ERROR - Error writing config file: [Errno 22] Invalid argument: 'D:\\PycharmProjects\\SpecialNetwork\\v2ray\\TestConfigs\\20009|20008.json'
+2026-03-24 13:19:09,811 - TestNode -- TestNode - ERROR - Error writing config file: [Errno 22] Invalid argument: 'D:\\PycharmProjects\\SpecialNetwork\\v2ray\\TestConfigs\\20011|20010.json'
+2026-03-24 13:19:09,819 - TestNode -- TestNode - ERROR - Error writing config file: [Errno 22] Invalid argument: 'D:\\PycharmProjects\\SpecialNetwork\\v2ray\\TestConfigs\\20015|20014.json'
+2026-03-24 13:19:09,819 - TestNode -- TestNode - ERROR - Error writing config file: [Errno 22] Invalid argument: 'D:\\PycharmProjects\\SpecialNetwork\\v2ray\\TestConfigs\\20017|20016.json'
+2026-03-24 13:19:09,819 - TestNode -- TestNode - ERROR - Error writing config file: [Errno 22] Invalid argument: 'D:\\PycharmProjects\\SpecialNetwork\\v2ray\\TestConfigs\\20013|20012.json'
+2026-03-24 13:19:09,821 - TestNode -- TestNode - ERROR - Error writing config file: [Errno 22] Invalid argument: 'D:\\PycharmProjects\\SpecialNetwork\\v2ray\\TestConfigs\\20019|20018.json'
+2026-03-24 17:58:52,839 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: ssr
+2026-03-24 18:07:27,209 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,209 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,209 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,209 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,209 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,209 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,209 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,209 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,209 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,209 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,209 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,209 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,209 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,209 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,209 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,210 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,211 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:07:27,211 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 18:54:11,359 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: ssr
+2026-03-24 19:02:49,246 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,246 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,246 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,246 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,246 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,246 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,246 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,246 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,246 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,246 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,246 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,246 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,246 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,246 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,247 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,248 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:02:49,248 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 19:18:49,446 - convert - ERROR - Check file content -- All type is not
+2026-03-24 19:53:48,482 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: ssr
+2026-03-24 20:03:58,792 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 20:03:58,792 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 20:03:58,792 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 20:03:58,792 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 20:03:58,792 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 20:03:58,792 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 20:03:58,792 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 20:03:58,792 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: hysteria2
+2026-03-24 20:54:42,216 - TestNode -- ParseNode - ERROR - 【Analysis Vmess Error】: Incorrect padding
+2026-03-24 20:55:00,949 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20010
+2026-03-24 20:55:02,984 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20016
+2026-03-26 16:38:37,839 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20010
+2026-03-26 16:38:37,839 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20008
+2026-03-26 16:38:49,067 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20022
+2026-03-26 16:39:25,060 - convert - ERROR - Check file content -- All type is not
+2026-03-26 16:40:26,906 - Assemble - ERROR - 【download file】: HTTPSConnectionPool(host='raw.githubusercontent.com', port=443): Read timed out. (read timeout=10)，URL: https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity
+2026-03-26 16:50:24,231 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20058
+2026-03-26 16:50:39,407 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20094
