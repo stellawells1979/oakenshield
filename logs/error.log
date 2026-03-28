@@ -144,3 +144,20 @@
 2026-03-26 16:40:26,906 - Assemble - ERROR - 【download file】: HTTPSConnectionPool(host='raw.githubusercontent.com', port=443): Read timed out. (read timeout=10)，URL: https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity
 2026-03-26 16:50:24,231 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20058
 2026-03-26 16:50:39,407 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20094
+2026-03-27 22:14:21,131 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20010
+2026-03-27 22:14:21,378 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20017
+2026-03-28 14:47:36,655 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20010
+2026-03-28 14:47:51,545 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20040
+2026-03-28 14:49:54,696 - Assemble - ERROR - 【download file】: HTTPSConnectionPool(host='raw.githubusercontent.com', port=443): Read timed out.，URL: https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/v.txt
+2026-03-28 14:50:20,310 - convert - ERROR - Check file content -- All type is not
+2026-03-28 14:58:02,938 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20224
+2026-03-28 14:59:13,980 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20280
+2026-03-28 14:59:13,981 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20276
+2026-03-28 14:59:13,995 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20282
+2026-03-28 14:59:43,182 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20292
+2026-03-28 15:00:12,182 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20318
+2026-03-28 15:01:28,506 - TestNode -- ParseNode - ERROR - parse: Unkown protocol: ssr
+2026-03-28 16:03:37,383 - convert - ERROR - Check file content -- All type is not
+2026-03-28 16:12:12,305 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 20000
+2026-03-28 18:48:15,234 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 10000
+2026-03-28 18:48:15,244 - TestNode -- TestNode - ERROR - Failed to listen TCP on port 10006

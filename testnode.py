@@ -126,7 +126,7 @@ def is_port_in_use(port):
     return False
 
 
-port_pool = ThreadSafePortManager(20000, 30000)
+port_pool = ThreadSafePortManager(*config.test_port_range)
 
 
 class ParseNode:
@@ -576,6 +576,9 @@ class TestNode(ParseNode):
             if 'failed to listen TCP' in stderr:
                 log_Test.error(f'Failed to listen TCP on port {local_http_port}')
             result = 'Failed to start'
+
+        port_pool.release_port(local_socks_port)
+        port_pool.release_port(local_http_port)
 
         return result
 

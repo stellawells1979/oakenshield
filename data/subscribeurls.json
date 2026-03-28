@@ -66,7 +66,7 @@
     },
     {
         "id": 7,
-        "level": 11,
+        "level": 12,
         "remarks": "vpei/Free-Node-Merge",
         "site": "https://github.com/vpei/Free-Node-Merge",
         "url": "https://raw.githubusercontent.com/vpei/Free-Node-Merge/main/res/nod-5.txt",
@@ -81,12 +81,12 @@
         "url": "https://bitbucket.org/huwo1/proxy_nodes/raw/f31ca9ec67b84071515729ff45b011b6b09c10f2/clash.yaml",
         "update_method": "auto",
         "update_mark": {
-            "modified": "Tue, 25 Oct 2022 00:03:07 GMT"
+            "etag": "\"4a429127bbac54b46e36d9010a5b0dd7\""
         }
     },
     {
         "id": 9,
-        "level": 10,
+        "level": 11,
         "remarks": "oslook/clash-freenode",
         "site": "https://github.com/oslook/clash-freenode",
         "url": "https://raw.githubusercontent.com/openrunner/clash-freenode/main/clash.yaml",
@@ -95,7 +95,7 @@
     },
     {
         "id": 10,
-        "level": 10,
+        "level": 11,
         "remarks": "ssrsub/ssr",
         "site": "https://github.com/ssrsub/ssr",
         "url": "https://raw.githubusercontent.com/ssrsub/ssr/master/Clash.yml",
@@ -104,7 +104,7 @@
     },
     {
         "id": 11,
-        "level": 10,
+        "level": 11,
         "remarks": "Leon406/SubCrawler",
         "site": "https://github.com/Leon406/SubCrawler",
         "url": "https://raw.githubusercontent.com/Leon406/SubCrawler/main/sub/share/all",
@@ -113,7 +113,7 @@
     },
     {
         "id": 12,
-        "level": 10,
+        "level": 11,
         "remarks": "yu-steven/openit",
         "site": "https://github.com/yu-steven/openit",
         "url": "https://raw.githubusercontent.com/yu-steven/openit/main/Clash.yaml",
@@ -128,12 +128,12 @@
         "url": "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity",
         "update_method": "auto",
         "update_mark": {
-            "etag": "W/\"1536df57e215dc09e7557b004b54e5abccfe18b9d22648fba37875f45b637cd8\""
+            "etag": "W/\"2f7b9987b5a5a71f3e39248f24a564f2c6c9f11bb9dc9c338c03c9f5b381c375\""
         }
     },
     {
         "id": 14,
-        "level": 8,
+        "level": 9,
         "remarks": "iwxf/free-v2ray",
         "site": "https://github.com/iwxf/free-v2ray",
         "url": "https://iwxf.netlify.app",
@@ -144,7 +144,7 @@
     },
     {
         "id": 15,
-        "level": 8,
+        "level": 9,
         "remarks": "DoveBoy/Vmess-Actions",
         "site": "https://github.com/ldir92664/Vmess-Actions",
         "url": "https://raw.githubusercontent.com/DoveBoy/Vmess-Actions/main/subscribe/clash.yaml",
@@ -155,7 +155,7 @@
     },
     {
         "id": 16,
-        "level": 10,
+        "level": 11,
         "remarks": "gooooooooooooogle/Clash-Config",
         "site": "https://github.com/gooooooooooooogle/Clash-Config",
         "url": "https://raw.githubusercontent.com/gooooooooooooogle/Clash-Config/main/Clash.yaml",
@@ -166,7 +166,7 @@
     },
     {
         "id": 17,
-        "level": 0,
+        "level": 1,
         "remarks": "Jsnzkpg/Jsnzkpg",
         "site": "https://github.com/Jsnzkpg/Jsnzkpg",
         "url": "https://raw.githubusercontent.com/Jsnzkpg/Jsnzkpg/Jsnzkpg/Jsnzkpg",
@@ -177,7 +177,7 @@
     },
     {
         "id": 18,
-        "level": 8,
+        "level": 9,
         "remarks": "ermaozi/get_subscribe",
         "site": "https://github.com/ermaozi/get_subscribe",
         "url": "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml",
@@ -188,7 +188,7 @@
     },
     {
         "id": 19,
-        "level": 8,
+        "level": 9,
         "remarks": "wrfree/free",
         "site": "https://github.com/wrfree/free",
         "url": "https://raw.githubusercontent.com/wrfree/free/main/v2",
@@ -199,7 +199,7 @@
     },
     {
         "id": 20,
-        "level": 10,
+        "level": 11,
         "remarks": "GreenFishStudio/GreenFish",
         "site": "https://github.com/GreenFishStudio/GreenFish",
         "url": "https://raw.gitslow.tk/yu-steven/openit/main/Clash.yaml",
@@ -208,7 +208,7 @@
     },
     {
         "id": 21,
-        "level": 8,
+        "level": 9,
         "remarks": "anaer/Sub",
         "site": "https://github.com/anaer/Sub",
         "url": "https://raw.githubusercontent.com/anaer/Sub/main/clash.yaml",
@@ -219,7 +219,7 @@
     },
     {
         "id": 22,
-        "level": 10,
+        "level": 11,
         "remarks": "xrayfree/free-ssr-ss-v2ray-vpn-clash",
         "site": "https://github.com/xrayfree/free-ssr-ss-v2ray-vpn-clash",
         "url": "https://freefq.neocities.org/free.txt",
@@ -228,7 +228,7 @@
     },
     {
         "id": 23,
-        "level": 10,
+        "level": 11,
         "remarks": "mhmhone/shadowrocket-free-subscribe",
         "site": "https://github.com/mhmhone/shadowrocket-free-subscribe",
         "url": "https://bulink.me/sub/m5aep/cl",
@@ -237,7 +237,7 @@
     },
     {
         "id": 24,
-        "level": 10,
+        "level": 11,
         "remarks": "aiboboxx/v2rayfree",
         "site": "https://github.com/aiboboxx/v2rayfree",
         "url": "https://raw.githubusercontent.com/aiboboxx/v2rayfree/main/v2",
@@ -246,7 +246,7 @@
     },
     {
         "id": 25,
-        "level": 1,
+        "level": 2,
         "remarks": "Pawdroid/Free-servers",
         "site": "https://github.com/Pawdroid/Free-servers",
         "url": "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub",
@@ -257,7 +257,7 @@
     },
     {
         "id": 26,
-        "level": 10,
+        "level": 11,
         "remarks": "kxswa/k",
         "site": "https://github.com/kxswa/k",
         "url": "https://raw.githubusercontent.com/kxswa/k/k/base64",
@@ -266,7 +266,7 @@
     },
     {
         "id": 27,
-        "level": 10,
+        "level": 11,
         "remarks": "Rokate/Proxy-Sub",
         "site": "https://github.com/Rokate/Proxy-Sub",
         "url": "https://raw.githubusercontent.com/Rokate/Proxy-Sub/main/clash/clash_trojan.yml",
@@ -275,7 +275,7 @@
     },
     {
         "id": 28,
-        "level": 10,
+        "level": 11,
         "remarks": "misersun/config003-002",
         "site": "https://github.com/misersun/config003",
         "url": "https://raw.githubusercontent.com/misersun/config003/main/config_all.yaml",
@@ -286,7 +286,7 @@
     },
     {
         "id": 29,
-        "level": 10,
+        "level": 11,
         "remarks": "vveg26/SubAutoConv",
         "site": "https://github.com/vveg26/SubAutoConv",
         "url": "https://raw.githubusercontent.com/vveg26/SubAutoConv/main/sub/clash/url4.yaml",
@@ -295,7 +295,7 @@
     },
     {
         "id": 30,
-        "level": 10,
+        "level": 11,
         "remarks": "clash.221207.xyz/pubclashyaml",
         "site": "https://clash.221207.xyz/pubclashyaml",
         "url": "https://clash.221207.xyz/pubclashyaml",
@@ -304,7 +304,7 @@
     },
     {
         "id": 31,
-        "level": 10,
+        "level": 11,
         "remarks": "proxypool.toshiki.top/clash",
         "site": "https://proxypool.toshiki.top/clash/proxies",
         "url": "https://proxypool.toshiki.top/clash/proxies",
@@ -313,7 +313,7 @@
     },
     {
         "id": 32,
-        "level": 10,
+        "level": 11,
         "remarks": "tbbatbb/Proxy",
         "site": "https://github.com/tbbatbb/Proxy",
         "url": "https://raw.githubusercontent.com/tbbatbb/Proxy/master/dist/clash.config.yaml",
@@ -322,7 +322,7 @@
     },
     {
         "id": 33,
-        "level": 8,
+        "level": 9,
         "remarks": "mfuu/v2ray",
         "site": "https://github.com/mfuu/v2ray",
         "url": "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
@@ -333,7 +333,7 @@
     },
     {
         "id": 34,
-        "level": 10,
+        "level": 11,
         "remarks": "paimonhub/Paimonnode",
         "site": "https://github.com/paimonhub/Paimonnode",
         "url": "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml",
@@ -342,7 +342,7 @@
     },
     {
         "id": 35,
-        "level": 8,
+        "level": 9,
         "remarks": "webdao/v2ray",
         "site": "https://github.com/webdao/v2ray",
         "url": "https://raw.githubusercontent.com/webdao/v2ray/master/nodes.txt",
@@ -353,7 +353,7 @@
     },
     {
         "id": 36,
-        "level": 10,
+        "level": 11,
         "remarks": "openRunner/clash-freenode",
         "site": "https://github.com/openRunner/clash-freenode",
         "url": "https://raw.githubusercontent.com/openRunner/clash-freenode/main/clash.yaml",
@@ -362,7 +362,7 @@
     },
     {
         "id": 37,
-        "level": 8,
+        "level": 9,
         "remarks": "freefq/free",
         "site": "https://github.com/freefq/free",
         "url": "https://raw.githubusercontent.com/freefq/free/master/v2",
@@ -373,7 +373,7 @@
     },
     {
         "id": 38,
-        "level": 10,
+        "level": 11,
         "remarks": "free886.herokuapp.com/clash",
         "site": "https://free886.herokuapp.com/clash/proxies",
         "url": "https://free886.herokuapp.com/clash/proxies",
@@ -382,7 +382,7 @@
     },
     {
         "id": 39,
-        "level": 8,
+        "level": 9,
         "remarks": "xiyaowong/freeFQ",
         "site": "https://github.com/xiyaowong/freeFQ",
         "url": "https://raw.githubusercontent.com/xiyaowong/freeFQ/main/v2ray",
@@ -393,7 +393,7 @@
     },
     {
         "id": 40,
-        "level": 10,
+        "level": 11,
         "remarks": "yaney01/Yaney01",
         "site": "https://github.com/yaney01/Yaney01",
         "url": "https://ghproxy.com//raw.githubusercontent.com/yaney01/Yaney01/main/yaney_01",
@@ -402,7 +402,7 @@
     },
     {
         "id": 41,
-        "level": 8,
+        "level": 9,
         "remarks": "YasserDivaR/pr0xy",
         "site": "https://github.com/YasserDivaR/pr0xy",
         "url": "https://raw.githubusercontent.com/YasserDivaR/pr0xy/main/winformClash.yaml",
@@ -413,18 +413,18 @@
     },
     {
         "id": 42,
-        "level": 1,
+        "level": 0,
         "remarks": "peasoft/NoMoreWalls",
         "site": "https://github.com/peasoft/NoMoreWalls",
         "url": "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
         "update_method": "auto",
         "update_mark": {
-            "etag": "W/\"fcaf7793e4d5a0cb6bada3fb9ffc0094d3538b733fb4b0b5e06c8f752cc08949\""
+            "etag": "W/\"f13acab56e6dd46dccd1765d0817c72ab9d10d1bb9c7fd2fa4df67360e977202\""
         }
     },
     {
         "id": 43,
-        "level": 8,
+        "level": 9,
         "remarks": "mahdibland/get_v2",
         "site": "https://github.com/mahdibland/get_v2",
         "url": "https://raw.githubusercontent.com/mahdibland/get_v2/main/pub/dswang.yaml",
@@ -435,7 +435,7 @@
     },
     {
         "id": 44,
-        "level": 10,
+        "level": 11,
         "remarks": "vveg26/get_proxy",
         "site": "https://github.com/vveg26/get_proxy",
         "url": "https://raw.githubusercontent.com/vveg26/get_proxy/main/dist/clash.config.yaml",
@@ -444,7 +444,7 @@
     },
     {
         "id": 45,
-        "level": 10,
+        "level": 11,
         "remarks": "ripaojiedian/freenode",
         "site": "https://gitlab.com/ripaojiedian/freenode",
         "url": "https://gitlab.com/ripaojiedian/freenode/-/raw/main/sub",
@@ -453,7 +453,7 @@
     },
     {
         "id": 46,
-        "level": 10,
+        "level": 11,
         "remarks": "free.dswang.ga/clash",
         "site": "https://free.dswang.ga/clash",
         "url": "https://free.dswang.ga/clash/proxies",
@@ -462,7 +462,7 @@
     },
     {
         "id": 47,
-        "level": 10,
+        "level": 11,
         "remarks": "hellopool.herokuapp.com/clash",
         "site": "https://hellopool.herokuapp.com/clash",
         "url": "https://hellopool.herokuapp.com/clash/proxies",
@@ -471,7 +471,7 @@
     },
     {
         "id": 48,
-        "level": 10,
+        "level": 11,
         "remarks": "free.jingfu.cf/clash",
         "site": "https://free.jingfu.cf/clash",
         "url": "https://free.jingfu.cf/clash/proxies",
@@ -480,7 +480,7 @@
     },
     {
         "id": 49,
-        "level": 10,
+        "level": 11,
         "remarks": "sspool.herokuapp.com/clash",
         "site": "https://sspool.herokuapp.com/clash",
         "url": "https://sspool.herokuapp.com/clash/proxies",
@@ -489,7 +489,7 @@
     },
     {
         "id": 50,
-        "level": 10,
+        "level": 11,
         "remarks": "ew732e8d8h1hi/q832yqwdu21u",
         "site": "https://github.com/ew732e8d8h1hi/q832yqwdu21u",
         "url": "https://raw.githubusercontent.com/ew732e8d8h1hi/q832yqwdu21u/main/out.txt",
@@ -498,7 +498,7 @@
     },
     {
         "id": 51,
-        "level": 10,
+        "level": 11,
         "remarks": "AzadNetCH/Clash",
         "site": "https://github.com/AzadNetCH/Clash",
         "url": "https://raw.githubusercontent.com/AzadNetCH/Clash/main/AzadNet_IRAN-Direct2.yml",
@@ -507,7 +507,7 @@
     },
     {
         "id": 52,
-        "level": 10,
+        "level": 11,
         "remarks": "proxy.yugogo.xyz/clash",
         "site": "https://proxy.yugogo.xyz/clash",
         "url": "https://proxy.yugogo.xyz/clash/proxies",
@@ -516,7 +516,7 @@
     },
     {
         "id": 53,
-        "level": 10,
+        "level": 11,
         "remarks": "proxies.bihai.cf/clash",
         "site": "https://proxies.bihai.cf/clash",
         "url": "https://proxies.bihai.cf/clash/proxies",
@@ -525,7 +525,7 @@
     },
     {
         "id": 54,
-        "level": 10,
+        "level": 11,
         "remarks": "jikelonglie/meskell",
         "site": "https://github.com/jikelonglie/meskell",
         "url": "http://0.0.0.0:3333/get-base64?content=https://raw.githubusercontent.com/jikelonglie/meskell/main/meskell",
@@ -534,7 +534,7 @@
     },
     {
         "id": 55,
-        "level": 8,
+        "level": 9,
         "remarks": "freebaipiao/freebaipiao",
         "site": "https://github.com/freebaipiao/freebaipiao",
         "url": "https://raw.githubusercontent.com/freebaipiao/freebaipiao/main/jiassweetoy3.yaml",
@@ -551,12 +551,12 @@
         "url": "https://bitbucket.org/huwo1/proxy_nodes/raw/f31ca9ec67b84071515729ff45b011b6b09c10f2/proxy.md",
         "update_method": "auto",
         "update_mark": {
-            "modified": "Tue, 25 Oct 2022 00:03:07 GMT"
+            "etag": "\"4a429127bbac54b46e36d9010a5b0dd7\""
         }
     },
     {
         "id": 57,
-        "level": 10,
+        "level": 11,
         "remarks": "lisylva-lee/v2dyku",
         "site": "https://github.com/lisylva-lee/v2dyku",
         "url": "https://raw.githubusercontent.com/lisylva-lee/v2dyku/main/ssr",
@@ -565,7 +565,7 @@
     },
     {
         "id": 58,
-        "level": 10,
+        "level": 11,
         "remarks": "budamu/clashconfig",
         "site": "https://github.com/budamu/clashconfig",
         "url": "http://0.0.0.0:3333/get-base64?content=https://raw.githubusercontent.com/budamu/clashconfig/main/v2ray2.txt",
@@ -574,7 +574,7 @@
     },
     {
         "id": 59,
-        "level": 10,
+        "level": 11,
         "remarks": "MOnday9907/v2ray",
         "site": "https://github.com/MOnday9907/v2ray",
         "url": "http://0.0.0.0:3333/get-base64?content=https://raw.githubusercontent.com/MOnday9907/v2ray/main/v2ray.txt",
@@ -583,7 +583,7 @@
     },
     {
         "id": 60,
-        "level": 8,
+        "level": 9,
         "remarks": "adminaliang/v2ray",
         "site": "https://github.com/adminaliang/v2ray",
         "url": "https://raw.githubusercontent.com/adminaliang/v2ray/main/v2ray",
@@ -594,7 +594,7 @@
     },
     {
         "id": 61,
-        "level": 10,
+        "level": 11,
         "remarks": "Jia-Pingwa/free-v2ray-merge",
         "site": "https://github.com/Jia-Pingwa/free-v2ray-merge",
         "url": "http://0.0.0.0:3333/get-base64?content=https://raw.githubusercontent.com/Jia-Pingwa/free-v2ray-merge/main/output.txt",
@@ -603,7 +603,7 @@
     },
     {
         "id": 62,
-        "level": 8,
+        "level": 9,
         "remarks": "Lewis-1217/FreeNodes",
         "site": "https://github.com/Lewis-1217/FreeNodes",
         "url": "https://raw.githubusercontent.com/Lewis-1217/FreeNodes/main/bpjzx2",
@@ -614,7 +614,7 @@
     },
     {
         "id": 63,
-        "level": 10,
+        "level": 11,
         "remarks": "songtao1873/providers",
         "site": "https://github.com/songtao1873/providers",
         "url": "https://raw.githubusercontent.com/songtao1873/clash/main/subscription/others/base64",
@@ -623,7 +623,7 @@
     },
     {
         "id": 64,
-        "level": 10,
+        "level": 11,
         "remarks": "Unknown",
         "site": "https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3QvcyFBcnhoYkNPczBnMTloaXlKaEl2bUkwb040YUtHP2U9U2FNWURl",
         "url": "https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3QvcyFBcnhoYkNPczBnMTloaXlKaEl2bUkwb040YUtHP2U9U2FNWURl",
@@ -632,7 +632,7 @@
     },
     {
         "id": 65,
-        "level": 10,
+        "level": 11,
         "remarks": "youlianboshi.netlify.app",
         "site": "https://youlianboshi.netlify.app",
         "url": "https://youlianboshi.netlify.app",
@@ -641,7 +641,7 @@
     },
     {
         "id": 66,
-        "level": 0,
+        "level": 1,
         "remarks": "jiang.netlify.app",
         "site": "https://jiang.netlify.app",
         "url": "https://jiang.netlify.app",
@@ -652,7 +652,7 @@
     },
     {
         "id": 67,
-        "level": 10,
+        "level": 11,
         "remarks": "learnhard-cn/free_proxy_ss",
         "site": "https://github.com/learnhard-cn/free_proxy_ss",
         "url": "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/clash/providers/provider_netflix.yaml",
@@ -661,7 +661,7 @@
     },
     {
         "id": 68,
-        "level": 10,
+        "level": 11,
         "remarks": "proxy.yiun.xyz/clash",
         "site": "https://proxy.yiun.xyz/clash",
         "url": "https://proxy.yiun.xyz/clash/proxies",
@@ -670,18 +670,18 @@
     },
     {
         "id": 69,
-        "level": 1,
+        "level": 0,
         "remarks": "SnapdragonLee/SystemProxy",
         "site": "https://github.com/SnapdragonLee/SystemProxy",
         "url": "https://raw.githubusercontent.com/SnapdragonLee/SystemProxy/master/dist/clash_config_extra_US.yaml",
         "update_method": "auto",
         "update_mark": {
-            "etag": "W/\"d58fa0174773348102bd0c29be882c8e4c3956f8a4ac8220837612da21c29032\""
+            "etag": "W/\"8af0458af4d5b719e2ce105a584c570e05a6132211cf571a87e03754a21fbf04\""
         }
     },
     {
         "id": 70,
-        "level": 10,
+        "level": 11,
         "remarks": "klausvpn.posyao.com/clash",
         "site": "https://klausvpn.posyao.com/clash",
         "url": "https://klausvpn.posyao.com/clash/proxies",
@@ -690,7 +690,7 @@
     },
     {
         "id": 71,
-        "level": 10,
+        "level": 11,
         "remarks": "free.iam7.tk/clash",
         "site": "https://free.iam7.tk/clash",
         "url": "https://free.iam7.tk/clash/proxies",
@@ -699,7 +699,7 @@
     },
     {
         "id": 72,
-        "level": 10,
+        "level": 11,
         "remarks": "pc.adlionvm.tk/clash",
         "site": "https://pc.adlionvm.tk/clash",
         "url": "https://pc.adlionvm.tk/clash/proxies",
@@ -708,7 +708,7 @@
     },
     {
         "id": 73,
-        "level": 10,
+        "level": 11,
         "remarks": "clash.myvm.cc/clash",
         "site": "https://clash.myvm.cc/clash",
         "url": "https://clash.myvm.cc/clash/proxies",
@@ -717,7 +717,7 @@
     },
     {
         "id": 74,
-        "level": 10,
+        "level": 11,
         "remarks": "sub.pmsub.me/base64",
         "site": "https://sub.pmsub.me/base64",
         "url": "https://sub.pmsub.me/base64",
@@ -726,7 +726,7 @@
     },
     {
         "id": 75,
-        "level": 10,
+        "level": 11,
         "remarks": "proxies.haisto.cn/clash",
         "site": "https://proxies.haisto.cn/clash",
         "url": "https://proxies.haisto.cn/clash/proxies",
@@ -735,7 +735,7 @@
     },
     {
         "id": 76,
-        "level": 8,
+        "level": 9,
         "remarks": "hermanb001/ProxyTest",
         "site": "https://github.com/hermanb001/ProxyTest",
         "url": "https://raw.githubusercontent.com/hermanb001/ProxyTest/main/subscribe/3wking",
@@ -746,7 +746,7 @@
     },
     {
         "id": 77,
-        "level": 10,
+        "level": 11,
         "remarks": "proxypool.laowang.me/clash",
         "site": "https://proxypool.laowang.me/clash",
         "url": "https://proxypool.laowang.me/clash/proxies",
@@ -755,7 +755,7 @@
     },
     {
         "id": 78,
-        "level": 3,
+        "level": 4,
         "remarks": "mahdibland/vpn.fail",
         "site": "https://github.com/mahdibland/get_v2",
         "url": "https://raw.githubusercontent.com/mahdibland/get_v2/main/pub/vpn.fail",
@@ -766,7 +766,7 @@
     },
     {
         "id": 79,
-        "level": 8,
+        "level": 9,
         "remarks": "LonUp/NodeList",
         "site": "https://github.com/LonUp/NodeList",
         "url": "https://raw.githubusercontent.com/LonUp/NodeList/main/Clash/Node/Latest.yaml",

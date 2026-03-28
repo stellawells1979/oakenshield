@@ -78,7 +78,7 @@ class Main:
             content = file.read().splitlines()
 
         len_content = len(content)
-        result = test.parallel_execution(content, 10)
+        result = test.parallel_execution(content, config.test_thread)
         for row, tested in reversed(result):
             if tested is None:
                 del content[row]
@@ -95,17 +95,16 @@ if __name__ == '__main__':
     # 每四小时参节点进行维护
     aggregator.maintain_aggregator()
 
-    log.info('Aggregator update is complete, start to collect subscribe content.')
+    log.info('Aggregator update is complete')
     time.sleep(6)
 
     # 每天两次摘取订阅内容
-    if now_time in [13, 14, 15, 16, 2, 3, 4]:
+    if now_time in [13, 14, 15, 2, 3, 4]:
+        log.info('start to collect subscribe content.')
         aggregator.assemble_subscribe()
 
     # 清空配置文件夹
     test.clear_folder(config.test_configs_path)
-
-
 
 
 

@@ -41,8 +41,11 @@ class Config:
         # 测试用的配置文件路径，测试完成后会清空此文件夹
         self.test_configs_path = os.path.join(base_path, 'v2ray', 'TestConfigs')
 
+        # 测试端口范围
+        self.test_port_range = (10000, 10200)
 
-
+        # 测试线程数量
+        self.test_thread = 5
 
         # v2ray 版本信息 url
         self.v2ray_versions_url = 'https://api.github.com/repos/v2fly/v2ray-core/releases'
