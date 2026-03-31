@@ -63,7 +63,7 @@ logs/
 .env.local
 
 # Configuration files with sensitive data
-configs/telegram.json
+ubuntuhelp.text
 configs/mytest.json
 
 # OS-specific
