@@ -4,18 +4,24 @@
 处理 message 消息
 '''
 
+
 import json
 import time
 from utils.bots import bots
 from database import sql
+
 from utils.command import Command
+
 from utils.toolbox import toolbox
 from utils.rules import Rules
+
 from utils.register import register
 from utils.search import Search
+
 import run_config
 import logging
 from logmanage import DailyLogManager
+
 
 log = DailyLogManager('message', logging.ERROR, logging.INFO)
 
@@ -110,7 +116,6 @@ class Private(Message):
         主程序
         :return:
         '''
-
         if self.waitinput:
             if self.waitinput[0] == 'rules':
                 return Rules(
@@ -788,6 +793,7 @@ def message_filter(bot, datas):
     message_type = datas.get('message').get('chat').get('type')
     if message_type == 'private':
         telegram = Private(bot, datas['message'])
+
     else:
         telegram = SuperGroup(bot, datas['message'])
 
@@ -799,7 +805,7 @@ if __name__ == '__main__':
 
     from test import debugging
 
-    ty = message_filter('rules', debugging.message_example_7['result'][0])
+    ty = message_filter('rules', debugging.message_example_9['result'][0])
 
     print(ty)
 

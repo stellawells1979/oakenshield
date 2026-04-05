@@ -148,7 +148,8 @@ message_example_02 = {
                     'title': '搜索🔥🔥', 'username': 'psytss', 'type': 'supergroup'
                 },
                 'date': now_date,
-                'text': '日常'
+                'text': '/start',
+                'entities': [{'offset': 0, 'length': 6, 'type': 'bot_command'}]
             }
         }
     ]

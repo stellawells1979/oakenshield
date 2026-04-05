@@ -4,7 +4,7 @@
 处理规则机器人收到的所有更新
 并对更新做出必要的响应
 
-调用 communication 文件的 request 向 telegram bot api 轮旬方式获取更新
+调用 communication 文件的 crave 向 telegram bot api 轮旬方式获取更新
 获取更新的依据为专属于此机器人的更新标识符（update_id）,此标识符从 0 开始随你获取的更新次数
 递增，所以你必须实时更新并可靠保存此参数，以保证更新的唯一性
 
@@ -15,19 +15,19 @@ telegram bot api 的更新类型较多，为此你应该为第个更新类型创
 此程序的错误提示会以红色字体打印中运行状态栏
 '''
 
-from flask import Flask, request
-import threading
-import os
 import json
 import time
 import logging
+from flask import Flask
+from flask import request as flask_request
 import run_config
 from database import sql
 from utils.bots import bots
-from utils.TGrequest import request
+from utils.TGrequest import crave
 from message import message_filter
 from callbackquery import CallbackQuery
 from logmanage import DailyLogManager
+
 
 
 # 配置日志管理器
@@ -41,52 +41,6 @@ class Telegram:
     '''
     y
     '''
-    @staticmethod
-    def color_text(text, color_code):
-        """
-        根据颜色代码返回带颜色的文本。
-        :param text: 要显示的文本
-        :param color_code: 颜色代码
-        :return: 带颜色的文本
-        """
-        return f"\033[{color_code}m{text}\033[0m"
-
-    @staticmethod
-    def red(text):
-        '''
-        打印红色字体
-        :param text:
-        :return:
-        '''
-        return Telegram.color_text(text, 31)
-
-    @staticmethod
-    def blue(text):
-        '''
-        打印蓝色字体
-        :param text:
-        :return:
-        '''
-        return Telegram.color_text(text, 34)
-
-    @staticmethod
-    def green(text):
-        '''
-        打印绿色字体
-        :param text:
-        :return:
-        '''
-        return Telegram.color_text(text, 32)
-
-    @staticmethod
-    def cyan(text):
-        '''
-
-        :param text:
-        :return:
-        '''
-        return Telegram.color_text(text, 36)
-
     def __init__(self, bot):
         """
         初始化运行环境。
@@ -95,33 +49,33 @@ class Telegram:
         self.bot = bot
         self.bot_id = bots.attribute(bot, 'id')
         self.update_id = self.uphold_update_id()
-        self.request_data = []
+        self.send_data = []
 
     def telegram_requests(self):
         """
         处理队列中的 API 消息请求，并确保请求的时效性。
         """
         index = 0
-        while index < len(self.request_data):
-            data = self.request_data[index]
+        while index < len(self.send_data):
+            data = self.send_data[index]
             if data[2] and data[2].get('delay') and data[2].get('delay') > run_config.date:
                 log.info('telegram_requests: this message is delayed')
                 index += 1
                 continue
-            response = request.send_message(self.bot, data[0], data[1])
+            response = crave.send(self.bot, data[0], data[1])
             if response['ok']:
                 if data[2] and data[2].get('delete'):
                     message_id = response['result']['message_id']
-                    self.request_data.append([
+                    self.send_data.append([
                         'deleteMessage',
                         {'chat_id': data[1]['chat_id'], 'message_id': message_id},
                         {'delay': data[2]['delete']}
                     ])
-                del self.request_data[index]
+                del self.send_data[index]
             elif not response['ok']:
                 error_info = self.error(response.get('description'), response.get('error_code'))
                 log.info(f'telegram_requests: {error_info}')
-                del self.request_data[index]
+                del self.send_data[index]
             else:
                 index += 1
                 log.info(f" Request result: {response}")
@@ -139,28 +93,9 @@ class Telegram:
         elif 'callback_query' in update:
             result = CallbackQuery(self.bot, update).main()
 
-        self.request_data.extend(result)
+        self.send_data.extend(result)
 
-    def main(self):
-        """
-        主程序，持续轮询 Telegram 指定机器人的更新。
-        """
-        while True:
-            time.sleep(REQUEST_DELAY)
-            run_config.date = time.time()
-            run_config.now_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(run_config.date))
-            updates = request.send_message(self.bot, 'getUpdates', {'offset': self.update_id})
-            print(self.bot, self.cyan('收到的更新:'), updates)
-            if not updates['ok']:
-                continue
 
-            if self.bot == 'rules':
-                self.remove_expired_verifications()
-
-            for update in updates['result']:
-                self.process_update(update)
-
-            self.telegram_requests()
 
     def remove_expired_verifications(self):
         """
@@ -174,7 +109,7 @@ class Telegram:
                 verify = json.loads(verify_json)
                 expired_keys = [key for key, value in verify.items() if run_config.date > value]
                 for key in expired_keys:
-                    self.request_data.append(['kickChatMember', {'chat_id': chat_id, 'user_id': int(key)}])
+                    self.send_data.append(['kickChatMember', {'chat_id': chat_id, 'user_id': int(key)}])
                     del verify[key]
                 if expired_keys:
                     update_query = f'UPDATE `{sql.table_restriction}` SET verify=%s, edited=NOW() WHERE bot=%s AND chat=%s'
@@ -214,27 +149,27 @@ class Telegram:
         """
         if code == 503:
             return f"{code}： {description}"
-        return request.error(description)
-
+        return crave.error(description)
 
 app = Flask(__name__)
 
-@app.route('/telegram')
-def nginx_test():
-    return {
-        'ok': True,
-        'message': 'nginx is working'
-    }, 200
+@app.route('/telegram/<path:anything>', methods=['GET', 'POST'])
 
-@app.route('/', methods=['POST'])
-def flask_webhook():
+def route_all(anything):
     '''
 
+    :param anything:
     :return:
     '''
-    telegram = Telegram('rules')
-    telegram.process_update(request.json)
-    return 'ok'
+    environ_info = dict(flask_request.environ)
+    path_info = environ_info['PATH_INFO'].split('/')
+    updates = flask_request.get_json(silent=True) or {}
+
+    telegram = Telegram(path_info[1])
+    telegram.process_update(updates)
+
+    telegram.telegram_requests()
+
 
 
 
@@ -252,9 +187,11 @@ if __name__ == '__main__':
 
 
 
-    # log.info('Telegram 正在初始化运行环境')
 
-    # 创建运行函数
+
+    # log.info('Telegram 正在初始化运行环境')
+    #
+    # # 创建运行函数
     # def run_bot(use_bot):
     #     '''
     #
@@ -278,7 +215,7 @@ if __name__ == '__main__':
     # # 确保主线程等待所有子线程完成
     # for thread in threads:
     #     thread.join()
-
+    #
     # telegram = Telegram('rules')
     #
     # telegram.main()

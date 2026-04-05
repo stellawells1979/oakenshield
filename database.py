@@ -95,6 +95,7 @@ class MySql:
         self.table_interact = 'interact'
         self.table_restriction = 'restriction'
         self.table_register = 'register'
+        self.table_marketing = 'marketing'
 
         # 自定义转换器，将 TINYINT(1) 转为布尔值
         custom_converters = pymysql.converters.conversions.copy()
@@ -174,6 +175,7 @@ class MySql:
 
                     # 构建创建数据表的sql语句
                     create_table_sql = self.get_table_field(table)
+                    input(create_table_sql)
 
                     pointer.execute(f'USE {self.base_database}')
                     pointer.execute(create_table_sql)
@@ -329,7 +331,7 @@ class MySql:
         :param table_name:
         :return:
         '''
-        result = ''
+
         with open(self.structure_path, encoding='utf-8') as f:
             data = json.load(f)
 

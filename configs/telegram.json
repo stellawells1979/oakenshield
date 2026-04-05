@@ -632,5 +632,87 @@
             "Default": "CURRENT_TIMESTAMP",
             "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
         }
+    ],
+    "marketing": [
+        {
+            "Field": "uuid",
+            "Type": "int",
+            "Null": "NO",
+            "Key": "PRI",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "type",
+            "Type": "varchar(60)",
+            "Null": "NO",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "user",
+            "Type": "varchar(40)",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "accout",
+            "Type": "varchar(30)",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "password",
+            "Type": "varchar(30)",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "title",
+            "Type": "varchar(200)",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "display",
+            "Type": "varchar(60)",
+            "Null": "NO",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "url",
+            "Type": "varchar(100)",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "description",
+            "Type": "varchar(200)",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "priority",
+            "Type": "int",
+            "Null": "YES",
+            "Key": "",
+            "Default": "0",
+            "Extra": ""
+        }
     ]
 }

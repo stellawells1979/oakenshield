@@ -8,7 +8,7 @@
 import re
 import random
 import unicodedata
-from utils.TGrequest import request
+from utils.TGrequest import crave
 import logging
 from logmanage import DailyLogManager
 
@@ -160,7 +160,7 @@ class ToolBox:
         :param group:
         :return:
         '''
-        response = request.send_message(bot, 'getChatAdministrators', {'chat_id': group})
+        response = crave.send(bot, 'getChatAdministrators', {'chat_id': group})
         if response:
             return response['result']
         return []

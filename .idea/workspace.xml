@@ -5,37 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ef0ad20-3211-4191-a443-be10b0568f8d" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/telegrambots.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/callbackquery.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configs/nginx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/help.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/logmanage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run_config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/telegram.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/debugging.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/TGrequest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/bots.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/browsers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/command.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/jiebawords.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/marketing.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/register.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/rules.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/search.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/toolbox.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/telegram.json" beforeDir="false" afterPath="$PROJECT_DIR$/configs/telegram.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/message.py" beforeDir="false" afterPath="$PROJECT_DIR$/message.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/telegram.py" beforeDir="false" afterPath="$PROJECT_DIR$/telegram.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/debugging.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/debugging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/TGrequest.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/TGrequest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/command.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/command.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/toolbox.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/toolbox.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +21,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="48" />
+    <option name="cachedIndexableFilesCount" value="54" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -120,7 +98,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/PycharmProjects/potato_bot&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/PycharmProjects/telegrambots&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -140,7 +118,7 @@
       <recent name="D:\PycharmProjects\telegrambots\test" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.database">
+  <component name="RunManager" selected="Python.message">
     <configuration name="database" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="telegrambots" />
       <option name="ENV_FILES" value="" />
@@ -287,9 +265,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.database" />
         <item itemvalue="Python.telegram" />
         <item itemvalue="Python.message" />
+        <item itemvalue="Python.database" />
         <item itemvalue="Python.search" />
         <item itemvalue="Python.jiebawords" />
       </list>
@@ -327,6 +305,8 @@
       <workItem from="1774489499074" duration="62000" />
       <workItem from="1774489571425" duration="20245000" />
       <workItem from="1774625253177" duration="26542000" />
+      <workItem from="1775151766074" duration="3510000" />
+      <workItem from="1775235594507" duration="12338000" />
     </task>
     <servers />
   </component>
@@ -334,7 +314,8 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/telegrambots$telegram.coverage" NAME="telegram 覆盖结果" MODIFIED="1774582684309" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/telegrambots$telegram.coverage" NAME="telegram 覆盖结果" MODIFIED="1775397159915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/telegrambots$database.coverage" NAME="database 覆盖结果" MODIFIED="1774670529120" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/telegrambots$message.coverage" NAME="message 覆盖结果" MODIFIED="1775396825312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

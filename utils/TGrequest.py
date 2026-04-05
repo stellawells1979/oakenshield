@@ -13,13 +13,6 @@ from logmanage import DailyLogManager
 
 log = DailyLogManager('TGrequest', logging.ERROR, logging.INFO)
 
-
-def red(text):
-    """
-    打印红色错误信息
-    """
-    return f"\033[31m{text}\033[0m"
-
 class Request:
     '''
     m
@@ -79,7 +72,7 @@ class Request:
         }
 
 
-    def send_message(self, bot, method, body=None, file=None):
+    def send(self, bot, method, body=None, file=None):
         '''
         向 telegram bot api 请求任何响应
         :param bot: 机器人的唯一密钥，本实例被设计为调用多个机器人 token 获取相应的更新
@@ -115,7 +108,7 @@ class Request:
 
         return self.error_descriptions.get(description, description)
 
-request = Request()
+crave = Request()
 
 
 
