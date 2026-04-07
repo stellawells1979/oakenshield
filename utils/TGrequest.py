@@ -72,6 +72,7 @@ class Request:
         }
 
 
+
     def send(self, bot, method, body=None, file=None):
         '''
         向 telegram bot api 请求任何响应

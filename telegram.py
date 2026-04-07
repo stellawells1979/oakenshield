@@ -16,10 +16,10 @@ telegram bot api 的更新类型较多，为此你应该为第个更新类型创
 '''
 
 import json
-import time
 import logging
 from flask import Flask
 from flask import request as flask_request
+from threading import Thread
 import run_config
 from database import sql
 from utils.bots import bots
@@ -95,8 +95,6 @@ class Telegram:
 
         self.send_data.extend(result)
 
-
-
     def remove_expired_verifications(self):
         """
         移除超时的验证用户。
@@ -136,8 +134,23 @@ class Telegram:
                 return default_update_id
         query = f'UPDATE `{sql.table_manage}` SET update_id=%s, edited=NOW() WHERE id=%s'
         sql.querys(sql.base_database, query, [update_id, self.bot_id])
-        time.sleep(3)
         return update_id
+
+    def set_webhook(self, url):
+        '''
+        设置webhook
+        :param bot:
+        :param url:
+        :return:
+        '''
+        return crave.send(self.bot, 'setWebhook', {'url': url})
+
+    def check_webhook(self):
+        '''
+        查看机器人的webhook详情
+        :return:
+        '''
+        return crave.send(self.bot, 'getWebhookInfo')
 
     @classmethod
     def error(cls, description, code=None):
@@ -153,30 +166,67 @@ class Telegram:
 
 app = Flask(__name__)
 
-@app.route('/telegram/<path:anything>', methods=['GET', 'POST'])
+def handle_update(update):
+    """
+    后台处理单个 Telegram 更新。
 
-def route_all(anything):
-    '''
+    这里放真正耗时的业务逻辑：
+    1. 解析 update
+    2. 调用你的 Telegram 业务处理类
+    3. 执行发送消息、修改群组状态、数据库更新等操作
 
-    :param anything:
-    :return:
-    '''
-    environ_info = dict(flask_request.environ)
-    path_info = environ_info['PATH_INFO'].split('/')
-    updates = flask_request.get_json(silent=True) or {}
-
-    telegram = Telegram(path_info[1])
-    telegram.process_update(updates)
-
+    这样做的好处是：
+    - webhook 接口可以立刻返回 200
+    - Telegram 不会因为超时而重复投递同一个 update
+    - 业务逻辑与 HTTP 响应解耦
+    """
+    telegram = Telegram("rules")  # TODO: 改成你的实际 bot 名称，例如 rules / search
+    telegram.process_update(update)
     telegram.telegram_requests()
 
 
+@app.route("/telegram", methods=["POST"])
+@app.route("/telegram/<path:anything>", methods=["POST"])
+def telegram_webhook(anything=""):
+    """
+    Telegram webhook 入口。
+
+    这个接口只负责：
+    1. 接收 Telegram 推送过来的 update
+    2. 启动后台线程处理更新
+    3. 立即返回 200 给 Telegram
+
+    注意：
+    - 不要在这里做耗时逻辑
+    - 不要在这里 sleep
+    - 不要在这里执行大量数据库或网络请求
+    """
+    # 从请求体中读取 Telegram 发来的 JSON 更新数据
+    # silent=True 的意思是：如果不是合法 JSON，不抛异常，而是返回 None
+    update = flask_request.get_json(silent=True) or {}
+
+    # 创建后台线程，异步处理更新
+    # daemon=True 表示主程序退出时，这个线程也随之结束
+    # 适合 webhook 这种“短任务触发”的场景
+    t = Thread(target=handle_update, args=(update,))
+    t.daemon = True
+    t.start()
+
+    # 立刻返回 200，告诉 Telegram：我已经收到这条 update 了
+    # 这样 Telegram 就不会因为等待过久而重复重发
+    return "ok", 200
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
+
+    telegram = Telegram('rules')
+    info = telegram.check_webhook()
+    input(info)
 
 
-    app.run(host='0.0.0.0', port=5000)
+    # 监听 0.0.0.0 允许局域网/反代服务器访问
+    # port 要和你 Nginx 反代到的后端端口一致
+    app.run(host="0.0.0.0", port=5000)
 
 
 
