@@ -82,21 +82,21 @@ class Request:
         :param file: 此参数将携带一个文件上伟至客户端的某个聊天
         :return:
         '''
-        result = {'ok': False, 'result': []}
+
         token = self.tokens.get(bot)
         url = f'{self.base_url}{token}/{method}'
         try:
             if file:
-                response = requests.get(url, data=body, files=file, proxies=self.proxy, timeout=10)
+                response = requests.post(url, data=body, files=file, proxies=self.proxy, timeout=10)
             else:
                 response = requests.post(url, json=body, proxies=self.proxy, timeout=10)
             result = json.loads(response.text)
         except requests.exceptions.Timeout:
-            log.info('Request Timeout：')
+            result ={'ok': False, 'description': 'Request Timeout'}
         except requests.exceptions.ConnectionError as e:
-            log.info(f'Request ConnectionError: {e}')
+            result = {'ok': False, 'description': 'Request ConnectionError'}
         except Exception as e:
-            log.info(f'Request Exception: {e}')
+            result = {'ok': False, 'description': f'Unkown: {e}'}
 
         return result
 

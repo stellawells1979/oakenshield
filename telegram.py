@@ -15,11 +15,12 @@ telegram bot api 的更新类型较多，为此你应该为第个更新类型创
 '''
 
 import json
+import time
 import logging
 from flask import Flask
 from flask import request as flask_request
-from threading import Thread
-import run_config
+from threading import Thread, Event
+from queue import Queue, Empty
 from database import sql
 from utils.bots import bots
 from utils.TGrequest import crave
@@ -46,7 +47,6 @@ class Telegram:
         """
         self.bot = bot
         self.bot_id = bots.attribute(bot, 'id')
-        self.update_id = self.uphold_update_id()
         self.send_data = []
 
     def set_webhook(self, url):
@@ -65,93 +65,18 @@ class Telegram:
         '''
         return crave.send(self.bot, 'getWebhookInfo')
 
-    def telegram_requests(self):
-        """
-        处理队列中的 API 消息请求，并确保请求的时效性。
-        """
-        index = 0
-        while index < len(self.send_data):
-            data = self.send_data[index]
-            if data[2] and data[2].get('delay') and data[2].get('delay') > run_config.date:
-                log.info('telegram_requests: this message is delayed')
-                index += 1
-                continue
-            response = crave.send(self.bot, data[0], data[1])
-            if response['ok']:
-                if data[2] and data[2].get('delete'):
-                    message_id = response['result']['message_id']
-                    self.send_data.append([
-                        'deleteMessage',
-                        {'chat_id': data[1]['chat_id'], 'message_id': message_id},
-                        {'delay': data[2]['delete']}
-                    ])
-                del self.send_data[index]
-            elif not response['ok']:
-                error_info = self.error(response.get('description'), response.get('error_code'))
-                log.info(f'telegram_requests: {error_info}')
-                del self.send_data[index]
-            else:
-                index += 1
-                log.info(f" Request result: {response}")
-
     def process_update(self, update):
         """
         解析并处理单个更新。
         :param update: Telegram 更新 JSON 对象
         """
-
-        self.update_id = update['update_id'] + 1
-        self.uphold_update_id(self.update_id)  # 更新数据库中的消息偏移量
         result = []
         if 'message' in update:
             result = message_filter(self.bot, update)
         elif 'callback_query' in update:
             result = CallbackQuery(self.bot, update).main()
 
-        self.send_data.extend(result)
-
-        self.telegram_requests()
-
-    def remove_expired_verifications(self):
-        """
-        移除超时的验证用户。
-        数据表中储存这些用户的信息。
-        """
-        query = f'SELECT chat, verify FROM `{sql.table_restriction}` WHERE bot={self.bot_id} AND verify IS NOT NULL'
-        result = sql.query(sql.base_database, query)
-        if result:
-            for chat_id, verify_json in result:
-                verify = json.loads(verify_json)
-                expired_keys = [key for key, value in verify.items() if run_config.date > value]
-                for key in expired_keys:
-                    self.send_data.append(['kickChatMember', {'chat_id': chat_id, 'user_id': int(key)}])
-                    del verify[key]
-                if expired_keys:
-                    update_query = f'UPDATE `{sql.table_restriction}` SET verify=%s, edited=NOW() WHERE bot=%s AND chat=%s'
-                    sql.query(sql.base_database, update_query, [json.dumps(verify), self.bot_id, chat_id])
-                    log.warning('remove_expired_verifications: Kicked user for verification timeout')
-
-    def uphold_update_id(self, update_id=None):
-        """
-        维护当前机器人的 update_id 参数。
-        :param update_id: 默认传入的新值，如果为空，则查询数据库得到。
-        :return: 当前机器人保存的 update_id 参数
-        """
-
-        if update_id is None:
-            query = f'SELECT update_id FROM `{sql.table_manage}` WHERE id=%s'
-            result = sql.querys(sql.base_database, query, [self.bot_id])
-
-            if result and result[0]:
-                return result[0].get('update_id')
-            else:
-                default_update_id = -1
-                query = f'INSERT INTO `{sql.table_manage}` (id, name, update_id) VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE update_id=%s'
-                sql.querys(sql.base_database, query, [self.bot_id, self.bot, default_update_id, default_update_id])
-                return default_update_id
-        query = f'UPDATE `{sql.table_manage}` SET update_id=%s, edited=NOW() WHERE id=%s'
-        sql.querys(sql.base_database, query, [update_id, self.bot_id])
-        return update_id
+        return result
 
     @classmethod
     def error(cls, description, code=None):
@@ -166,20 +91,110 @@ class Telegram:
         return crave.error(description)
 
 
-def handle_update(route, update):
+class Main:
     '''
-    解析路由并向处理环节传递相应参数
+    主处理模式
+    :return:
     '''
-    if not update:
-        return []
-    if route == '/telegram/rules':
-        telegram = Telegram('rules')
-    elif route == '/telegram/search':
-        telegram = Telegram('search')
-    else:
-        return []
-    telegram.process_update(update)
+    def __init__(self):
 
+        self.send_data = Queue()
+
+        # 创建独立线程运行 telegram_requests()
+        self.stop_event = Event()
+        self.telegram_thread = Thread(target=self.telegram_requests, daemon=True)
+        self.telegram_thread.start()
+
+    def remove_expired_verifications(self):
+        """
+        移除超时的验证用户。
+        数据表中储存这些用户的信息。
+        """
+        query = f'SELECT bot, chat, verify FROM `{sql.table_restriction}` WHERE verify IS NOT NULL'
+        result = sql.querys(sql.base_database, query, None)
+        if not result:
+            return
+
+        now_date = time.time()
+        for item in result:
+            if not item:
+                continue
+            verify = json.loads(item.get('verify', {}))
+            expired_keys = []
+            for key, value in verify.items():
+                # 将验证超时用户移出聊天
+                if now_date > value:
+                    self.send_data.put([item.get('bot'), 'kickChatMember', {'chat_id': item.get('chat'), 'user_id': int(key)}, None])
+                    expired_keys.append(key)
+            if not expired_keys:
+                continue
+
+            for key in expired_keys:
+                del verify[key]
+            # 将最新的验证数据更新到数据表
+            update_query = f'UPDATE `{sql.table_restriction}` SET verify=%s, edited=NOW() WHERE bot=%s AND chat=%s'
+            sql.querys(sql.base_database, update_query, [json.dumps(verify), item.get('bot'), item.get('chat')])
+
+    def telegram_requests(self):
+        """
+        处理队列中的 API 消息请求，并确保请求的时效性。
+        """
+        while not self.stop_event.is_set():
+            try:
+                data = self.send_data.get(timeout=1)
+            except Empty:
+                continue
+
+            if data[3] and data[3].get('delay'):
+                now_date = time.time()
+                if data[3].get('delay') > now_date:
+                    # 如果消息被延迟，重新放入队列
+                    self.send_data.put(data)
+                    log.info('telegram_requests: this message is delayed')
+                    continue
+            response = crave.send(data[0], data[1], data[2])
+
+            if response['ok'] and data[3] and data[3].get('delete'):
+                message_id = response['result']['message_id']
+                self.send_data.put([
+                    data[0],
+                    'deleteMessage',
+                    {'chat_id': data[2]['chat_id'], 'message_id': message_id},
+                    {'delay': data[3]['delete']}
+                ])
+            elif not response['ok'] and response.get('description'):
+                error = response['description']
+                if error in ['Request Timeout', 'Request ConnectionError'] or error.startswith('Unkown:'):
+                    self.send_data.put(data)
+                log.info(f'telegram_requests: {response}')
+            else:
+                log.info(f" Request result: {response}")
+
+
+    def handle_update(self, route, update):
+        '''
+        解析路由并向处理环节传递相应参数
+        '''
+        if not update:
+            return []
+        if route == '/telegram/rules':
+            bot = 'rules'
+            telegram = Telegram('rules')
+        elif route == '/telegram/search':
+            bot = 'search'
+            telegram = Telegram('search')
+        else:
+            return []
+        result = telegram.process_update(update)
+
+        for item in result:
+            item.insert(0, bot)
+            self.send_data.put(item)
+        return False
+
+
+
+main = Main()
 
 app = Flask(__name__)
 
@@ -200,45 +215,17 @@ def route_all(anything):
     path_info = environ_info['PATH_INFO']
 
     # 创建线程处理更新
-    t = Thread(target=handle_update, args=(path_info, update))
+    t = Thread(target=main.handle_update, args=(path_info, update))
     t.daemon = True
     t.start()
     return 'ok', 200
 
 
 if __name__ == '__main__':
+
+
     app.run(host='0.0.0.0', port=5000)
 
-    # log.info('Telegram 正在初始化运行环境')
-    #
-    # # 创建运行函数
-    # def run_bot(use_bot):
-    #     '''
-    #
-    #     :param use_bot:
-    #     :return:
-    #     '''
-    #     telegram = Telegram(use_bot)
-    #     telegram.main()
-    #
-    #
-    # # 定义需要启动的机器人名称
-    # bot_names = ['rules', 'search']  # 两个机器人分别命名
-    #
-    # # 创建线程为每个机器人分别运行
-    # threads = []
-    # for bot_name in bot_names:
-    #     bot_thread = threading.Thread(target=run_bot, args=(bot_name,))
-    #     threads.append(bot_thread)
-    #     bot_thread.start()
-    #
-    # # 确保主线程等待所有子线程完成
-    # for thread in threads:
-    #     thread.join()
-    #
-    # telegram = Telegram('rules')
-    #
-    # telegram.main()
 
 
 

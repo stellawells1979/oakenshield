@@ -502,7 +502,7 @@ message_example_9 = {
                     'username': 'bigapple699',
                     'type': 'private'
                 },
-                'date': now_date,
+                'date': time.time(),
                 'text': '/start',
                 'entities': [
                     {'offset': 0, 'length': 6, 'type': 'bot_command'}
@@ -534,7 +534,7 @@ message_example_10 = {
                     'username': 'bigapple699',
                     'type': 'private'
                 },
-                'date': now_date,
+                'date': time.time(),
                 'text': 'D:\\PycharmProjects\\teleg'
             }
         }
@@ -561,7 +561,7 @@ message_example_11 = {
                     'title': 'Test',
                     'type': 'supergroup'
                 },
-                'date': now_date,
+                'date': time.time(),
                 'text': '1111111111 [\'editMessageText\', {\'chat_id\': 1120690440, \'message_id\': 203, \'text\': \'一个能'
                         '在你的群组中24小时不间断监视群组活动的机器人，它没有作息时间，你可以设置任意规则来管理你的群组\\n\\n点击【帮助'
                         '】了解如何使用本机器\', \'reply_markup\': {\'inline_keyboard\': [[{\'text\': \'机器人定制\', \'ur'
@@ -637,7 +637,7 @@ message_example_13 = {
                     'username': 'psytss',
                     'type': 'supergroup'
                 },
-                'date': now_date,
+                'date': time.time(),
                 'text': '全球'
             }
         }
@@ -663,7 +663,7 @@ message_example_14 = {
                  'title': 'Test',
                  'type': 'supergroup'
              },
-             'date': now_date,
+             'date': time.time(),
              'text': '签到ffffff'
          }
          }
@@ -693,7 +693,7 @@ callbackquery_example_1 = {
                     'chat_title': '我的群组',
                     'type': 'supergroup'
                 },
-                'date': now_date,
+                'date': time.time(),
                 'edit_date': 1747408389,
                 'text': '搬砖套利中文群池质押中心矿池官方社区',
                 'entities': [
@@ -750,7 +750,7 @@ callbackquery_example_2 = {
                         'username': 'bigapple699',
                         'type': 'private'
                     },
-                    'date': now_date,
+                    'date': time.time(),
                     'edit_date': 1771585893,
                     'text': '规则机器人\n\n\n\n🔔 当前为你找到以下群组，点击可查看群组的规则详情，如果没有你期望的群组，请点击【帮助】按钮查看解决方案',
                     'entities': [
@@ -810,7 +810,7 @@ callbackquery_example_3 = {
                         'username': 'bigapple699',
                         'type': 'private'
                     },
-                    'date': now_date,
+                    'date': time.time(),
                     'edit_date': 1771584198,
                     'text': '一个能在你的群组中24小时不间断监视群组活动的机器人，它没有作息时间，你可以设置任意规则'
                             '来管理你的群组\n\n点击【帮助】了解如何使用本机器',
@@ -857,7 +857,7 @@ callbackquery_example_4 = {
                         'id': 1120690440, 'first_name': '大', 'last_name': '苹果',
                         'username': 'bigapple699', 'type': 'private'
                     },
-                    'date': now_date,
+                    'date': time.time(),
                     'edit_date': 1771986084,
                     'text': '百搜机器人\n\n搜群组,搜频道,搜影视,搜资讯,搜遍TG的搜索小能手',
                     'entities': [
@@ -912,7 +912,7 @@ callbackquery_example_5 = {
                     'chat': {
                         'id': -1002798527828, 'title': '搜索🔥🔥', 'username': 'psytss', 'type': 'supergroup'
                     },
-                    'date': now_date,
+                    'date': time.time(),
                     'message_thread_id': 225,
                     'reply_to_message': {
                         'message_id': 225,
@@ -1004,7 +1004,7 @@ callbackquery_example_6 = {
                         'username': 'bigapple699',
                         'type': 'private'
                     },
-                    'date': now_date,
+                    'date': time.time(),
                     'edit_date': 1772162753,
                     'text': '百搜机器人\n\n搜群组,搜频道,搜影视,搜资讯,搜遍TG的搜索小能手',
                     'entities': [
@@ -1063,7 +1063,7 @@ callbackquery_example_7 = {
                         'username': 'bigapple699',
                         'type': 'private'
                     },
-                    'date': now_date,
+                    'date': time.time(),
                     'edit_date': 1772374687,
                     'text': '规则机器人\n\n\n\n🔔 当前为你找到以下群组，点击可查看群组的规则详情，如果没有你期望的群组，'
                             '请点击【帮助】按钮查看解决方案',
@@ -1115,7 +1115,7 @@ callbackquery_example_8 = {
                         'username': 'psytss',
                         'type': 'supergroup'
                     },
-                    'date': now_date,
+                    'date': time.time(),
                     'message_thread_id': 249,
                     'reply_to_message': {
                         'message_id': 249,
@@ -1220,7 +1220,7 @@ callbackquery_example_9 = {
                         'username': 'bigapple699',
                         'type': 'private'
                     },
-                    'date': now_date,
+                    'date': time.time(),
                     'edit_date': 1772755473,
                     'text': '规则机器人 >> Test >> 签到管理\n\n签到管理，为群组设置一个签到规则，帮你统计群组的活跃程度，'
                             '点击相应按钮可设置签到规则，设置好后会弹出【启动签到按钮】，只能运行一个签到规则，启动后无法'
