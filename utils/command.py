@@ -133,10 +133,10 @@ class Command:
                     text += f'{url} 不是一个合法的 telegram 群组链接\n'
                     continue
 
-                query = f'SELECT `render`, `create_time` FROM `{sql.table_groups}` WHERE `url`={url}'
-                query = sql.query(sql.base_database, query)
+                query = f'SELECT `render`, `create_time` FROM `{sql.table_groups}` WHERE `url`=%s'
+                query = sql.querys(sql.base_database, query, [url])
 
-                text = f'{text}{url} 收录成功\n' if query else f'{text}{url} 已由 {query[0][0]}  于 {query[0][1]} 添加\n'
+                text = f"{text}{url} 收录成功\n' if query else f'{text}{url} 已由 {query[0]['render']}  于 {query[0]['create_time']} 添加\n"
         else:
             text = '请输入你的群组链接'
 

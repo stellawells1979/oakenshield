@@ -215,33 +215,6 @@ class MySql:
             self.pool.put(conn)
         return result
 
-    def query(self, database_name, sql_query, data=None):
-
-        '''
-        执行自定义的SQL查询语句
-        :param database_name: type(str), 数据库名
-        :param sql_query: type(str), SQL查询语句
-        :param data: type(tuple), 查询参数
-        :return: type(bool)
-        '''
-        result = []
-        conn = self.pool_get()
-        try:
-            pointer = conn.cursor()
-            pointer.execute(f"USE {database_name}")
-            pointer.execute(sql_query, data)
-            if sql_query.startswith("SELECT") or sql_query.startswith("SHOW"):
-                result = pointer.fetchall()
-            else:
-                result = True
-        except SyntaxError:
-            log.error(f'SQL语法错误，请检查查询语句: {sql_query}')
-        except Exception as e:
-            log.error(f'执行SQL查询失败-- {e}')
-        finally:
-            self.pool.put(conn)
-        return result
-
     def querys(self, database_name, sql_query, data, extra=None):
         '''
         执行自定义的SQL查询语句

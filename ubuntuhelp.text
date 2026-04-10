@@ -9,6 +9,7 @@
 
 
 git clone -b master https://github.com/stellawells1979/Oakenshield.git      # 克隆仓库的某个分支
+git clone -b master https://github.com/stellawells1979/oakenshield.git /home/ubuntu/oakenshield
 
 
 
@@ -16,7 +17,7 @@ git clone -b master https://github.com/stellawells1979/Oakenshield.git      # �
 
 
 
-
+================================================================
 
 
 git branch		查看分支名

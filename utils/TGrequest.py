@@ -7,6 +7,8 @@
 
 import requests
 import json
+
+import run_config
 from utils.bots import bots
 import logging
 from logmanage import DailyLogManager
@@ -24,15 +26,11 @@ class Request:
         :var self.error_descriptions 收集中的 api 错误信息，
         '''
         self.base_url = 'https://api.telegram.org/bot'
-        self.proxy = {
-            'http': 'http://127.0.0.1:10809',
-            'https': 'socks5://127.0.0.1:10808'
-        }
+        self.proxy = run_config.proxy
         self.tokens = {
             'rules': bots.attribute('rules', 'token'),
             'search': bots.attribute('search', 'token')
         }
-
 
         self.error_descriptions = {
             'Bad Request: chat not found': '无法找到指定的聊天，(chat_id)',
@@ -70,8 +68,6 @@ class Request:
             ' content and reply markup of the message': '与上一条消息高度一致'
 
         }
-
-
 
     def send(self, bot, method, body=None, file=None):
         '''

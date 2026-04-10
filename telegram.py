@@ -139,6 +139,7 @@ class Main:
         """
         处理队列中的 API 消息请求，并确保请求的时效性。
         """
+        self.remove_expired_verifications()
         while not self.stop_event.is_set():
             try:
                 data = self.send_data.get(timeout=1)

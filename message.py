@@ -165,11 +165,10 @@ class Private(Message):
         获取机器人与用户的交互信息
         :return:
         '''
-        query = f"SELECT waitinput FROM interact WHERE user={user} AND bot={bot}"
-        query = sql.query(sql.base_database, query)
+        query = f"SELECT `waitinput` FROM `interact` WHERE `user`=%s AND `bot`=%s"
+        query = sql.querys(sql.base_database, query, [user, bot])
         if query and query[0]:
-            if query[0][0]:
-                return query[0][0].split('|')
+            return query[0]['waitinput'].split('|')
         return []
 
 
@@ -606,10 +605,10 @@ class SuperGroup(Message):
 
         # 从受限制数据表（restriction）中获取当前群组违规用户的违规详情，并反序列化为 python 对象
         query = f'SELECT rules_limit FROM {sql.table_restriction} WHERE chat=%s AND bot=%s AND rules_limit IS NOT NULL'
-        value = [self.chat_id, self.bot_id]
-        rules_limit = sql.query(sql.base_database, query, value)
+        rules_limit = sql.querys(sql.base_database, query, [self.chat_id, self.bot_id])
+
         if rules_limit and rules_limit[0]:
-            rules_limit = json.loads(rules_limit[0][0])
+            rules_limit = json.loads(rules_limit[0]['rules_limit'])
         else:
             rules_limit = {}
         limit_count = rules_limit.get(rules_option, {}).get(str(self.user_id))  # 获取当前用户的违规次数，此值可能为空

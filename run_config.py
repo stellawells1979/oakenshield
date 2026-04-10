@@ -35,6 +35,11 @@ city_path = os.path.join(base_path, 'data', 'city.txt')
 # 设置日志保留时间
 retention_days = 7
 
+proxy = {
+    'http': 'http://127.0.0.1:10809',
+    'https': 'socks5://127.0.0.1:10808'
+}
+
 
 rules_example = {
         # 这是个默认的规则实例

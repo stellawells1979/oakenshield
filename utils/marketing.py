@@ -42,17 +42,11 @@ class Marketing:
         :return:
         '''
 
-        files = ['url', 'title', 'description', 'priority']
-        query = f"SELECT {','.join(files)} FROM marketing"
-        query = sql.query(sql.base_database, query)
 
-        result = []
-        for row in query:
-            rows = {}
-            for index, filed in enumerate(files):
-                rows.update({filed: row[index]})
-            result.append(rows)
-        return result
+        query = f"SELECT `url`, `title`, `description`, `priority` FROM marketing"
+        query = sql.querys(sql.base_database, query, None)
+
+        return query
 
 marketing = Marketing()
 
