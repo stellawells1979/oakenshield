@@ -556,12 +556,13 @@ class Rules(FormulateRules):
         query = sql.query(sql.base_database, query, [self.group])
 
         # 构建机器人消息的标题，如果群组标题超长则截取前面部分字符
-        self.group_title = query[0][0] if len(query[0][0]) < 15 else query[0][0][:12] + '...'
+        title = query[0]['title']
+        self.group_title = title if len(title) < 15 else title[:12] + '...'
         self.bot_title = f'{self.bot_title} >> {self.group_title}'
 
 
-        if len(query[0]) > 1 and query[0][1]:
-            query = json.loads(query[0][1])
+        if len(query[0]) > 1 and query[0][self.option]:
+            query = json.loads(query[0][self.option])
             for key in run_config.rules_example[self.option].keys():
                 result.update({key: query[key]})
         elif not result:
