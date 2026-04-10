@@ -28,7 +28,7 @@ class Register:
         '''
         self.table = register_table
         query = f'SHOW COLUMNS FROM {sql.base_database}.{self.table}'
-        self.table_fileds = sql.querys(sql.base_database, query, None)
+        self.table_fileds = sql.query(sql.base_database, query, None)
 
 
 
@@ -53,7 +53,7 @@ class Register:
 
         fields = list(self.table_fileds.keys())
         query = f'INSERT INTO `{",".join(fields)}` VALUES ({",".join(["%s"]*len(fields))})'
-        return sql.querys(sql.base_database, query, values)
+        return sql.query(sql.base_database, query, values)
 
     def apply_register(self, chat, user, register_time):
         '''
@@ -69,7 +69,7 @@ class Register:
 
         try:
             query = f"SELECT * FROM `{self.table}` WHERE chat = %s"
-            query = sql.querys(sql.base_database, query, [chat])[0]
+            query = sql.query(sql.base_database, query, [chat])[0]
         except Exception as e:
             log.info(f'apply_register: {e}')
             return None
@@ -103,7 +103,7 @@ class Register:
 
         if register_data:
             query = f"UPDATE `{self.table}` SET `{register_file}`=%s,edited=%s WHERE id='{register_ID}'"
-            sql.querys(sql.base_database, query, [json.dumps(register_data), register_time])
+            sql.query(sql.base_database, query, [json.dumps(register_data), register_time])
 
         return text
 

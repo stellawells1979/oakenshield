@@ -181,7 +181,7 @@ class MySql:
                     pointer.execute(create_table_sql)
                 else:
                     query = f'SHOW COLUMNS FROM {table}'
-                    query = self.querys(self.base_database, query, data=None)
+                    query = self.query(self.base_database, query, data=None)
                     self.fields[table] = query
             if len(self.fields) == len(tables):
                 with open(self.structure_path, 'w', encoding='utf-8') as f:
@@ -215,7 +215,7 @@ class MySql:
             self.pool.put(conn)
         return result
 
-    def querys(self, database_name, sql_query, data, extra=None):
+    def query(self, database_name, sql_query, data, extra=None):
         '''
         执行自定义的SQL查询语句
         :param database_name: type(str), 数据库名

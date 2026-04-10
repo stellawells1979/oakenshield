@@ -44,7 +44,7 @@ class Marketing:
 
 
         query = f"SELECT `url`, `title`, `description`, `priority` FROM marketing"
-        query = sql.querys(sql.base_database, query, None)
+        query = sql.query(sql.base_database, query, None)
 
         return query
 

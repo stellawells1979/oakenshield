@@ -78,7 +78,7 @@ class Message:
 
         result = {}
         query = f"SELECT * FROM rules WHERE chat=%s"
-        query = sql.querys(sql.base_database, query, [self.chat_id])
+        query = sql.query(sql.base_database, query, [self.chat_id])
         if query:
             for key, value in query[0].items():
                 if value is None or key in ['chat', 'title', 'created', 'edited']:
@@ -166,7 +166,7 @@ class Private(Message):
         :return:
         '''
         query = f"SELECT `waitinput` FROM `interact` WHERE `user`=%s AND `bot`=%s"
-        query = sql.querys(sql.base_database, query, [user, bot])
+        query = sql.query(sql.base_database, query, [user, bot])
         if query and query[0]:
             return query[0]['waitinput'].split('|')
         return []
@@ -309,7 +309,7 @@ class SuperGroup(Message):
             query = (f'INSERT INTO {sql.table_rules} (`chat`, `title`, `administrators`) VALUES (%s,%s,%s) '
                      f'ON DUPLICATE KEY UPDATE `administrators`=%s, edited=NOW()')
             administrators = json.dumps(administrators, ensure_ascii=False)
-            sql.querys(sql.base_database, query, [self.chat_id, self.chat_title, administrators, administrators])
+            sql.query(sql.base_database, query, [self.chat_id, self.chat_title, administrators, administrators])
 
             text = f'{self.first_name}\n\n已为当前群组创建管理规则【点击此处编辑你的规则】'
 
@@ -331,7 +331,7 @@ class SuperGroup(Message):
 
             # 从用户与机器人的交互数据表（interact）中获取机器人与用户最后一次交互的信息，并从中提取出 message_id
             query = f'SELECT interact FROM {sql.table_interact} WHERE user=%s AND bot=%s'
-            query = sql.querys(sql.base_database, query, [self.user_id, self.bot_id])
+            query = sql.query(sql.base_database, query, [self.user_id, self.bot_id])
             try:
                 interact_message_id = query[0]['interact']
             except Exception:
@@ -374,7 +374,7 @@ class SuperGroup(Message):
 
             # 查询当前群组的成员验证数据
             query = f'SELECT verify FROM {sql.table_restriction} WHERE bot=%s and chat=%s'
-            query = sql.querys(sql.base_database, query, [self.bot_id, self.chat_id])
+            query = sql.query(sql.base_database, query, [self.bot_id, self.chat_id])
             verify_data = {}
             if query and query[0]:
                 verify_data = query[0].get('verify', {})
@@ -404,7 +404,7 @@ class SuperGroup(Message):
                 ])
             query = (f'INSERT INTO {sql.table_restriction} (bot,chat,verify) VALUES (%s,%s,%s) '
                      f'ON DUPLICATE KEY UPDATE verify=%s, edited=NOW()')
-            sql.querys(sql.base_database, query, [self.bot_id, self.chat_id, json.dumps(verify_data), json.dumps(verify_data)])
+            sql.query(sql.base_database, query, [self.bot_id, self.chat_id, json.dumps(verify_data), json.dumps(verify_data)])
 
         elif self.new_chat_members:
             members_names = ''
@@ -475,7 +475,7 @@ class SuperGroup(Message):
         intelligent = [[self.date, self.message_id, self.user_id, self.text if self.text else None]]
 
         query = f'SELECT intelligent FROM {sql.table_restriction} WHERE chat=%s AND bot=%s'
-        query = sql.querys(sql.base_database, query, [self.chat_id, self.bot_id])
+        query = sql.query(sql.base_database, query, [self.chat_id, self.bot_id])
         if query and query[0]:
             intelligent = json.loads(query[0]['intelligent']) + [intelligent]
 
@@ -514,7 +514,7 @@ class SuperGroup(Message):
         # 将最新的消息特征数据更新到 restriction 数据表
         query = (f'INSERT INTO {sql.table_restriction} (bot,chat,intelligent) VALUES (%s,%s,%s) ON DUPLICATE '
                  f'KEY UPDATE intelligent=%s, edited=NOW()')
-        sql.querys(sql.base_database, query, [self.bot_id, self.chat_id, json.dumps(intelligent), json.dumps(intelligent)])
+        sql.query(sql.base_database, query, [self.bot_id, self.chat_id, json.dumps(intelligent), json.dumps(intelligent)])
 
         return None
 
@@ -605,7 +605,7 @@ class SuperGroup(Message):
 
         # 从受限制数据表（restriction）中获取当前群组违规用户的违规详情，并反序列化为 python 对象
         query = f'SELECT rules_limit FROM {sql.table_restriction} WHERE chat=%s AND bot=%s AND rules_limit IS NOT NULL'
-        rules_limit = sql.querys(sql.base_database, query, [self.chat_id, self.bot_id])
+        rules_limit = sql.query(sql.base_database, query, [self.chat_id, self.bot_id])
 
         if rules_limit and rules_limit[0]:
             rules_limit = json.loads(rules_limit[0]['rules_limit'])
@@ -728,7 +728,7 @@ class SuperGroup(Message):
         query = (f'INSERT INTO {sql.table_restriction} (bot,chat,rules_limit) VALUES (%s,%s,%s) '
                  f'ON DUPLICATE KEY UPDATE rules_limit=%s')
         rules_limit = json.dumps(rules_limit)
-        sql.querys(sql.base_database, query, [self.bot_id, self.chat_id, rules_limit, rules_limit])
+        sql.query(sql.base_database, query, [self.bot_id, self.chat_id, rules_limit, rules_limit])
 
         return self.send_data + restrict_message
 

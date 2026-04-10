@@ -111,7 +111,7 @@ class Main:
         数据表中储存这些用户的信息。
         """
         query = f'SELECT bot, chat, verify FROM `{sql.table_restriction}` WHERE verify IS NOT NULL'
-        result = sql.querys(sql.base_database, query, None)
+        result = sql.query(sql.base_database, query, None)
         if not result:
             return
 
@@ -133,7 +133,7 @@ class Main:
                 del verify[key]
             # 将最新的验证数据更新到数据表
             update_query = f'UPDATE `{sql.table_restriction}` SET verify=%s, edited=NOW() WHERE bot=%s AND chat=%s'
-            sql.querys(sql.base_database, update_query, [json.dumps(verify), item.get('bot'), item.get('chat')])
+            sql.query(sql.base_database, update_query, [json.dumps(verify), item.get('bot'), item.get('chat')])
 
     def telegram_requests(self):
         """

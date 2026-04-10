@@ -206,7 +206,7 @@ class Search:
         where = where.rstrip(' OR')
 
         query = f"SELECT * FROM `{sql.table_groups}` WHERE {where}"
-        query = sql.querys(sql.base_database, query, values)
+        query = sql.query(sql.base_database, query, values)
 
         all_option = []
         count = 0
