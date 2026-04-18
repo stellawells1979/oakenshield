@@ -28,11 +28,8 @@ class Register:
         '''
         self.table = register_table
         query = f'SHOW COLUMNS FROM {sql.base_database}.{self.table}'
-        self.table_fileds = sql.query(sql.base_database, query, None)
-
-
-
-
+        query = sql.query(sql.base_database, query, None)
+        self.table_fileds = [filed.get('Field') for filed in query]
 
     def create_register(self, affiliated, crator, kwargs):
         '''
@@ -44,15 +41,13 @@ class Register:
         '''
 
         values = [uuid.uuid4(), affiliated, crator, *kwargs]
-        for row in self.table_fileds:
-            field = row.get('Field')
+        for field in self.table_fileds:
             if field in ['created', 'edited']:
                 values.append(run_config.now_time)
             elif field not in ['id', 'chat', 'creator', 'period', 'explains', 'status']:
                 values.append(None)
 
-        fields = list(self.table_fileds.keys())
-        query = f'INSERT INTO `{",".join(fields)}` VALUES ({",".join(["%s"]*len(fields))})'
+        query = f'INSERT INTO `{self.table}` VALUES ({",".join(["%s"]*len(self.table_fileds))})'
         return sql.query(sql.base_database, query, values)
 
     def apply_register(self, chat, user, register_time):

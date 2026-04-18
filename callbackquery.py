@@ -105,7 +105,6 @@ class CallbackQuery:
                     query = f'UPDATE {sql.table_restriction} SET verify=%s,edited=NOW() WHERE bot=%s and chat=%s'
                     sql.query(sql.base_database, query, [verify_data, self.bot_id, self.chat_id])
 
-
         elif self.callback_type in ['rules'] and self.bot == 'rules':
 
             return Rules(self.chat_id, self.user_id, self.callback_data, self.message_id).main()

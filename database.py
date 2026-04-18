@@ -45,7 +45,6 @@ import os
 import time
 import json
 import pymysql
-from pymysql.constants.FIELD_TYPE import TINY
 from queue import Queue
 import logging
 import run_config
@@ -97,10 +96,6 @@ class MySql:
         self.table_register = 'register'
         self.table_marketing = 'marketing'
 
-        # 自定义转换器，将 TINYINT(1) 转为布尔值
-        custom_converters = pymysql.converters.conversions.copy()
-        custom_converters[pymysql.constants.FIELD_TYPE.TINY] = self.tinyint_to_bool
-
         # 初始化查询指针池
         self.pool = Queue(maxsize=20)
         self.pool_size = 20
@@ -116,23 +111,11 @@ class MySql:
             )
             self.pool.put(connection)
 
-        self.error_codes = {
-            1146: '数据表不存在',
-            1136: '试插入或更新的值的数量与目标表的列数不匹配',
-            1064: 'mysql语句错误',
-            1054: '数据表中没有该字段',
-            1046: '未选择数据库',
-            1050: '数据表已存在'
-        }
-
         # 用于储存数据珍结果的文件路径
         self.structure_path = os.path.join(run_config.table_structure, f'{self.base_database}.json')
 
         # 用于储存数据表字段信息的容器，数据库初始化完成后会写入 self.structure_path
         self.fields = {}
-
-        # 初始化数据库
-        self.initialize()
 
     def pool_get(self):
         '''
@@ -148,9 +131,10 @@ class MySql:
 
     def initialize(self):
         '''
-        # 初始化数据库
+        连接数据库和初始化数据库依赖
         :return:
         '''
+
         result = None
         conn = self.pool_get()
         try:
@@ -269,22 +253,6 @@ class MySql:
             self.pool.put(conn)
         return  result
 
-    def error_message(self, message):
-        '''
-
-        :param message:
-        :return:
-        '''
-        try:
-            result = message[1:5]
-            if result.isdigit() and self.error_codes.get(int(result)):
-                return self.error_codes.get(int(result))
-        except KeyError as e:
-            log.info(f"发现KeyError异常: {e}")
-        except ValueError:
-            print("数值错误，需要检查输入")
-        return message
-
     @staticmethod
     def tinyint_to_bool(value):
         '''
@@ -363,7 +331,7 @@ class MySql:
         return full_sql
 
 
-sql = MySql('127.0.0.1', 3306, 'root', '', 'utf8mb4')
+sql = MySql(run_config.host, run_config.port, run_config.user, run_config.password, run_config.charset)
 
 if __name__ == '__main__':
     pass

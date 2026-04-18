@@ -35,6 +35,14 @@ city_path = os.path.join(base_path, 'data', 'city.txt')
 # 设置日志保留时间
 retention_days = 7
 
+# 数据库配置参数
+host = '127.0.0.1'
+port = 3306
+user = 'root'
+password = ''
+charset = 'utf8mb4',
+
+# 代理参数，你必须在地本地运行一个代理客户并配置正确大多数
 proxy = {
     'http': 'http://127.0.0.1:10809',
     'https': 'socks5://127.0.0.1:10808'
@@ -75,7 +83,7 @@ rules_example = {
         },
         'contact': {
             'allow': 0, 'level': None, 'restrict': '10分钟', 'clear': None
-        },
+          },
         'forward': {
             'allow': 0, 'level': None, 'restrict': '10分钟', 'clear': None
         },

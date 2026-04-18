@@ -233,8 +233,10 @@ class SuperGroup(Message):
                 ])
             if result:
                 text = f"{self.first_name} {result}！！"
+                input(self.rules['register'])
                 if result == '恭喜签到成功':
-                    text = f"{text}🎉🎉\n{self.rules['register']['explains']}"
+                    text = f"{text}🎉🎉\n{self.rules['register']['explain']}"
+                input(text)
                 self.send_data.append([
                     'sendMessage',
                     {

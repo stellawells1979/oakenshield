@@ -31,9 +31,6 @@ from logmanage import DailyLogManager
 # 配置日志管理器
 log = DailyLogManager('Telegram', logging.ERROR, logging.INFO)
 
-# 提取常量
-REQUEST_DELAY = 3  # 请求更新的时间间隔（秒）
-
 
 class Telegram:
     '''
@@ -52,7 +49,6 @@ class Telegram:
     def set_webhook(self, url):
         '''
         设置webhook
-        :param bot:
         :param url:
         :return:
         '''
@@ -97,9 +93,7 @@ class Main:
     :return:
     '''
     def __init__(self):
-
-        self.send_data = Queue()
-
+        self.send_data = Queue()    # 定义一个参数池，储存后续程序处理生成的请求对你
         # 创建独立线程运行 telegram_requests()
         self.stop_event = Event()
         self.telegram_thread = Thread(target=self.telegram_requests, daemon=True)
@@ -139,7 +133,8 @@ class Main:
         """
         处理队列中的 API 消息请求，并确保请求的时效性。
         """
-        self.remove_expired_verifications()
+        self.remove_expired_verifications()     # 从数据库提取验证过期的用户，并将其移出群聊
+
         while not self.stop_event.is_set():
             try:
                 data = self.send_data.get(timeout=1)
@@ -151,7 +146,6 @@ class Main:
                 if data[3].get('delay') > now_date:
                     # 如果消息被延迟，重新放入队列
                     self.send_data.put(data)
-                    log.info('telegram_requests: this message is delayed')
                     continue
             response = crave.send(data[0], data[1], data[2])
 
@@ -169,7 +163,7 @@ class Main:
                     self.send_data.put(data)
                 log.info(f'telegram_requests: {response}')
             else:
-                log.info(f" Request result: {response}")
+                print(f" Request result: {response}")
 
 
     def handle_update(self, route, update):
@@ -225,7 +219,7 @@ def route_all(anything):
 if __name__ == '__main__':
 
 
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='192.168.1.100', port=5000)
 
 
 

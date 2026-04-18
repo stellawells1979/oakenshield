@@ -1,5 +1,12 @@
 
 
+*******************************
+	43.160.218.250 主机的配置
+
+mysql 用户：ubuntu    密码：SeaKkSFUkM
+
+
+**************************************
 
 
 
@@ -7,18 +14,63 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+=====================
+--- mysql ---
+
+mysql -u root -p
+
+DROP DATABASE `<数据库名>`;		# 删除一个数据库文件
+
+CREATE USER 'ubuntu'@'%' IDENTIFIED BY 'SeaKkSFUkM';	# 创建一个mysql用户
+
+GRANT ALL PRIVILEGES ON *.* TO 'ubuntu'@'%';		# 授予用户全部的权限
+
+FLUSH PRIVILEGES;		# 刷新权限
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+========================================
+--- 远程 git 操作 ---
 
 git clone -b master https://github.com/stellawells1979/Oakenshield.git      # 克隆仓库的某个分支
-git clone -b master https://github.com/stellawells1979/oakenshield.git /home/ubuntu/oakenshield
-
-
-
-
-
-
+git clone -b master https://github.com/stellawells1979/oakenshield.git /home/ubuntu/oakenshield	# 克隆仓库的某个分支到指定路径
 
 ================================================================
-
+--- 本地 git 操作 ---
 
 git branch		查看分支名
 

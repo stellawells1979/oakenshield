@@ -1,3 +1,6 @@
+
+# 此文件标识的文件将不会上伟到 github
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -62,10 +65,12 @@ logs/
 .env
 .env.local
 
-# Configuration files with sensitive data
+# 一些包含账号信息的文件将不会上伟
 ubuntuhelp.text
 configs/mytest.json
+utils.bot
 
 # OS-specific
 .DS_Store
 Thumbs.db
+
