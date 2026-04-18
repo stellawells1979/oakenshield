@@ -335,9 +335,6 @@ class MySql:
 sql = MySql(account.host, account.port, account.user, account.password, account.charset)
 
 if __name__ == '__main__':
-    pass
-
-    # sql = MySql('42.194.237.208', 3306, 'telegram', 'AAE8TW4cmapxMqk', 'utf8mb4')
 
     rules = [
         {
