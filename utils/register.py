@@ -7,7 +7,7 @@ import uuid
 import json
 from datetime import datetime
 
-import run_config
+import config
 from database import sql
 import logging
 from logmanage import DailyLogManager
@@ -43,7 +43,7 @@ class Register:
         values = [uuid.uuid4(), affiliated, crator, *kwargs]
         for field in self.table_fileds:
             if field in ['created', 'edited']:
-                values.append(run_config.now_time)
+                values.append(config.now_time)
             elif field not in ['id', 'chat', 'creator', 'period', 'explains', 'status']:
                 values.append(None)
 
@@ -125,7 +125,7 @@ register = Register(sql.table_register)
 
 if __name__ == '__main__':
     register = Register('register')
-    temp = register.apply_register(-1003606614850, 8598030336, run_config.now_time)
+    temp = register.apply_register(-1003606614850, 8598030336, config.now_time)
     print(temp)
 
 

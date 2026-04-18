@@ -4,7 +4,7 @@ temp
 '''
 from utils.jiebawords import jiebas
 from database import sql
-import run_config
+import config
 from utils.toolbox import toolbox
 from utils.marketing import marketing
 import logging
@@ -31,7 +31,7 @@ class Search:
         :self.customize_keyboard (obj) 自定义键盘，就是想加什么就加什么，当然也可以不理会它
         :self.predefined_entities (obj) 一个容器，当你需要为某些文本添加富文本效果时，将富文本属性添加到些容器，这只是
             个草稿对象，最终需要调用 toolbox 工具箱中的 format_entities 方法将其格式化成合法的 telegram entitie 对象
-        :self.page_count (int) 第条消息显示和搜索数量，这是个全局参数，你可以地 run_config.py 文本中修改此参数
+        :self.page_count (int) 第条消息显示和搜索数量，这是个全局参数，你可以地 config.py 文本中修改此参数
         '''
 
         self.search_type = data[0]
@@ -48,7 +48,7 @@ class Search:
         self.turning_keyboard = []  # 翻页键盘
         self.customize_keyboard = []
 
-        self.page_count = run_config.page_count
+        self.page_count = config.page_count
 
         # 初始化发送文本为一个顶置的推广
         self.send_text, self.predefined_entities = marketing.search_head_marketing()
@@ -142,7 +142,7 @@ class Search:
             self.predefined_entities.append({'text': text, 'type': 'text_link', 'url': url})
 
         pages = (len(search_data) + self.page_count - 1) // self.page_count
-        option = run_config.translation.get(self.option, self.option)
+        option = config.translation.get(self.option, self.option)
         self.send_text = f'{self.send_text}\n当前显示【{option}】 {pages}/{self.page + 1}页'
 
         # 如果是个人聊天，你应该为当前消息添加一个返回我按钮

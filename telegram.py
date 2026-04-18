@@ -195,10 +195,8 @@ app = Flask(__name__)
 
 
 @app.route('/telegram/<path:anything>', methods=['GET', 'POST'])
-def route_all(anything):
+def route_all():
     '''
-
-    :param anything:
     :return:
     '''
     # 从请求体中读取 Telegram 发来的 JSON 更新数据

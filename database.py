@@ -47,7 +47,7 @@ import json
 import pymysql
 from queue import Queue
 import logging
-import run_config
+import config
 from utils.account import account
 from logmanage import DailyLogManager
 from utils.toolbox import toolbox
@@ -113,7 +113,7 @@ class MySql:
             self.pool.put(connection)
 
         # 用于储存数据珍结果的文件路径
-        self.structure_path = os.path.join(run_config.table_structure, f'{self.base_database}.json')
+        self.structure_path = os.path.join(config.table_structure, f'{self.base_database}.json')
 
         # 用于储存数据表字段信息的容器，数据库初始化完成后会写入 self.structure_path
         self.fields = {}

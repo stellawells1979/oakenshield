@@ -9,7 +9,7 @@ jieba语言处理模块
 import jieba
 import re
 import logging
-import run_config
+import config
 
 
 class JiebaWords:
@@ -24,7 +24,7 @@ class JiebaWords:
 
         logging.getLogger("jieba").setLevel(logging.WARNING)
 
-        stop_path = run_config.stop_words
+        stop_path = config.stop_words
 
         with open(stop_path, encoding='utf-8') as file:
             words = file.read()

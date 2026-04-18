@@ -13,7 +13,7 @@
 import copy
 
 from utils.register import Register
-import run_config
+import config
 from database import sql
 from utils.toolbox import toolbox
 from utils.account import account
@@ -313,7 +313,7 @@ class Rules(FormulateRules):
         # 响应用户清空规则选项
         elif self.details == 'clear':
 
-            self.rules = run_config.rules_example[self.option]
+            self.rules = config.rules_example[self.option]
             if self.option == 'register':
                 query = f'UPDATE {sql.table_register} SET `status`=%s WHERE `chat`=%s'
                 sql.query(sql.base_database, query, ['End', self.group])
@@ -344,7 +344,7 @@ class Rules(FormulateRules):
             self.change = True
 
             # 设置补充发送文本提示用户操作结果
-            self.send_supplement = f'{run_config.translation[self.details]}： 设置成功'
+            self.send_supplement = f'{config.translation[self.details]}： 设置成功'
             if recursive == 'restrictChatMember':
                 self.send_supplement = '点击【禁言时长】按钮设置禁言时长'
 
@@ -399,11 +399,11 @@ class Rules(FormulateRules):
                 # 针对按钮的显示规则，其中 disabled 的逻辑是不管任何按钮，只要是 disabled 就将该按钮隐藏
                 # RUN 的逻辑是当签到规则在运行状态是不会显示启动按钮
                 self.inline_keyboard.append({
-                    'text': f'{run_config.translation[key]}', 'callback_data': f'rules|{self.option}|{key}|0|{self.group}'
+                    'text': f'{config.translation[key]}', 'callback_data': f'rules|{self.option}|{key}|0|{self.group}'
                 })
 
             if display_param_text:
-                self.rules_param_text += f'{run_config.translation[key]}： {run_config.translation.get(value, value)}\n'
+                self.rules_param_text += f'{config.translation[key]}： {config.translation.get(value, value)}\n'
 
         # 在确保其它方法中没有设置导航按钮的情况下设置导航按钮
         if not self.guide_button:
@@ -414,7 +414,7 @@ class Rules(FormulateRules):
             self.send_text = self.rules_description[self.option]
 
         # 更新机器人标题文本
-        self.bot_title += f' >> {run_config.translation[self.option]}'
+        self.bot_title += f' >> {config.translation[self.option]}'
 
     def menu_main(self, group):
         '''
@@ -429,7 +429,7 @@ class Rules(FormulateRules):
         for key in self.rules:
 
             self.inline_keyboard.append({
-                'text': run_config.translation[key],      # 向用户展示翻译后的中文文本
+                'text': config.translation[key],      # 向用户展示翻译后的中文文本
                 'callback_data': f'rules|{key}|0|0|{group}'
             })
 
@@ -495,7 +495,7 @@ class Rules(FormulateRules):
 
 
             # 设置补充文本提示用户设置成功
-            self.send_supplement = f'{run_config.translation[self.details]}： 设置成功'
+            self.send_supplement = f'{config.translation[self.details]}： 设置成功'
 
 
         # 此参数在本方法中必须置 None 否则影响发送文本格式
@@ -550,7 +550,7 @@ class Rules(FormulateRules):
         filed = f'`title`, `{self.option}`'
         if self.option in ["0", 'administrators']:
             filed = f'`title`'
-            result = run_config.rules_example.keys()
+            result = config.rules_example.keys()
 
         query = f"SELECT {filed} FROM `{sql.table_rules}` WHERE `chat`=%s"
         query = sql.query(sql.base_database, query, [self.group])
@@ -563,10 +563,10 @@ class Rules(FormulateRules):
 
         if len(query[0]) > 1 and query[0][self.option]:
             query = json.loads(query[0][self.option])
-            for key in run_config.rules_example[self.option].keys():
+            for key in config.rules_example[self.option].keys():
                 result.update({key: query[key]})
         elif not result:
-            result = copy.deepcopy(run_config.rules_example[self.option])
+            result = copy.deepcopy(config.rules_example[self.option])
 
         return result
 

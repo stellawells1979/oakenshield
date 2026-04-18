@@ -8,7 +8,7 @@
 import requests
 import json
 
-import run_config
+import config
 from utils.account import account
 import logging
 from logmanage import DailyLogManager
@@ -26,7 +26,7 @@ class Request:
         :var self.error_descriptions 收集中的 api 错误信息，
         '''
         self.base_url = 'https://api.telegram.org/bot'
-        self.proxy = run_config.proxy
+        self.proxy = config.proxy
         self.tokens = {
             'rules': account.attribute('rules', 'token'),
             'search': account.attribute('search', 'token')

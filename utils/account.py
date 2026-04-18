@@ -32,6 +32,9 @@ bot_customize = {   # 机器人的自定义参数
 
 
 class Account:
+    '''
+    初始化个人账号信息
+    '''
 
     def __init__(self):
         '''

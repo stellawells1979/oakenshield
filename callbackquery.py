@@ -12,7 +12,7 @@ from database import sql
 from utils.account import account
 from utils.rules import Rules
 from utils.command import Command
-import run_config
+import config
 from utils.search import Search
 
 

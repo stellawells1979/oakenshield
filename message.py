@@ -18,7 +18,7 @@ from utils.rules import Rules
 from utils.register import register
 from utils.search import Search
 
-import run_config
+import config
 import logging
 from logmanage import DailyLogManager
 
