@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ef0ad20-3211-4191-a443-be10b0568f8d" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/callbackquery.py" beforeDir="false" afterPath="$PROJECT_DIR$/callbackquery.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/help.py" beforeDir="false" afterPath="$PROJECT_DIR$/help.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/message.py" beforeDir="false" afterPath="$PROJECT_DIR$/message.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/telegram.py" beforeDir="false" afterPath="$PROJECT_DIR$/telegram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/debugging.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/debugging.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntuhelp.text" beforeDir="false" afterPath="$PROJECT_DIR$/ubuntuhelp.text" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/register.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/register.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -293,7 +283,7 @@
       <workItem from="1776280424541" duration="1042000" />
       <workItem from="1776298711886" duration="7064000" />
       <workItem from="1776365710891" duration="2819000" />
-      <workItem from="1776455855258" duration="2022000" />
+      <workItem from="1776455855258" duration="3278000" />
     </task>
     <servers />
   </component>
