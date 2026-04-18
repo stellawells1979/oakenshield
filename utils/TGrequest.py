@@ -9,7 +9,7 @@ import requests
 import json
 
 import run_config
-from utils.bots import bots
+from utils.account import account
 import logging
 from logmanage import DailyLogManager
 
@@ -28,8 +28,8 @@ class Request:
         self.base_url = 'https://api.telegram.org/bot'
         self.proxy = run_config.proxy
         self.tokens = {
-            'rules': bots.attribute('rules', 'token'),
-            'search': bots.attribute('search', 'token')
+            'rules': account.attribute('rules', 'token'),
+            'search': account.attribute('search', 'token')
         }
 
         self.error_descriptions = {

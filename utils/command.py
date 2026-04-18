@@ -7,7 +7,7 @@ from database import sql
 
 from utils.toolbox import toolbox
 
-from utils.bots import bots
+from utils.account import account
 
 
 class Command:
@@ -22,8 +22,8 @@ class Command:
         '''
         旨中响应用户的命令消息和解析用户使用 ADD 命脉后输入的收藏信息
 
-        :var self.bots 机器有信息集，包含了机器人的全部信息，可能会由其它方法初始化
-        :var self.bot 机器人的别名，从 self.bots 属性提取
+        :var self.account 机器有信息集，包含了机器人的全部信息，可能会由其它方法初始化
+        :var self.bot 机器人的别名，从 self.account 属性提取
         :var self.command 机器人接收到的带 / 符号的命令，可能会由其它方法初始化
         :var self.user_id 用户 ID，通常是从某个消息中提取，可能会由其它方法初始化
         :var self.chat_id 聊天的标识答，可能会由其它方法初始化
@@ -35,7 +35,7 @@ class Command:
 
         '''
         self.bot = bot
-        self.bots = bots.attribute(bot)
+        self.bots = account.attribute(bot)
         self.send_text = ''
         self.inline_keyboard = []
         self.predefined_entities = []

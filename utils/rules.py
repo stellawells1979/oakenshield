@@ -16,7 +16,7 @@ from utils.register import Register
 import run_config
 from database import sql
 from utils.toolbox import toolbox
-from utils.bots import bots
+from utils.account import account
 import json
 import logging
 from logmanage import DailyLogManager
@@ -39,7 +39,7 @@ class FormulateRules:
               '\n叠加限制：一次警告二次禁言1小时三次禁言24小时四次移出或拉黑')
     rules_description = {
         # 基础规则描述，当向用户展示规则框架是将同时展示此段文本描述
-        'base_description': bots.attribute('rules', 'start_description')['text'],
+        'base_description': account.attribute('rules', 'start_description')['text'],
 
         'register': '签到管理，为群组设置一个签到规则，帮你统计群组的活跃程度，点击相应按钮可设置签到规则，'
                     '设置好后会弹出【启动签到按钮】，每个只能运行一个签到规则，启动后无法修改签到规则',
@@ -94,10 +94,10 @@ class FormulateRules:
         data 参数定义了用户操作规则设置的详细步骤
 
         '''
-        self.bot = bots.rules['byname']
-        self.bot_id = bots.rules['id']
-        self.bot_title = bots.rules['title']['text']
-        self.predefined_entities = bots.rules['title']['entities']
+        self.bot = account.rules['byname']
+        self.bot_id = account.rules['id']
+        self.bot_title = account.rules['title']['text']
+        self.predefined_entities = account.rules['title']['entities']
 
     @classmethod
     def recursive_switch(cls, details, recursive):

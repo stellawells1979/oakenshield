@@ -22,7 +22,7 @@ from flask import request as flask_request
 from threading import Thread, Event
 from queue import Queue, Empty
 from database import sql
-from utils.bots import bots
+from utils.account import account
 from utils.TGrequest import crave
 from message import message_filter
 from callbackquery import CallbackQuery
@@ -43,7 +43,7 @@ class Telegram:
         :var self.update_id 必须实时更新以确保唯一性。
         """
         self.bot = bot
-        self.bot_id = bots.attribute(bot, 'id')
+        self.bot_id = account.attribute(bot, 'id')
         self.send_data = []
 
     def set_webhook(self, url):

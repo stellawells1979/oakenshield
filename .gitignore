@@ -68,7 +68,8 @@ logs/
 # 一些包含账号信息的文件将不会上伟
 ubuntuhelp.text
 configs/mytest.json
-utils.bot
+utils.account.py
+
 
 # OS-specific
 .DS_Store

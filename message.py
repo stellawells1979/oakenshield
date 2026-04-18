@@ -7,7 +7,7 @@
 
 import json
 import time
-from utils.bots import bots
+from utils.account import account
 from database import sql
 
 from utils.command import Command
@@ -107,7 +107,7 @@ class Private(Message):
         '''
         super().__init__(data)
         self.bot = bot
-        self.bot_id = bots.attribute(bot, 'id')
+        self.bot_id = account.attribute(bot, 'id')
         self.waitinput = self.interact(self.chat_id, self.bot_id)   # 从交互数据表提取等待用户提交的信息
         self.send_data = []
 
@@ -186,8 +186,8 @@ class SuperGroup(Message):
         '''
         super().__init__(data)
         self.bot = bot
-        self.bot_id = bots.attribute(bot, 'id')
-        self.bot_url = bots.attribute(bot, 'url')
+        self.bot_id = account.attribute(bot, 'id')
+        self.bot_url = account.attribute(bot, 'url')
         self.rules = self.init_rules(self.bot)
         self.is_admin = self.is_administrator()
         self.send_data = []

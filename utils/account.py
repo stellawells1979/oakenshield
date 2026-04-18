@@ -26,15 +26,12 @@ bot_customize = {   # 机器人的自定义参数
     }
 }
 
-# 定义自定义异常类
-class BotInitializationError(Exception):
-    """在初始化机器人时发生错误"""
-    pass
 
 
 
 
-class Bots:
+
+class Account:
 
     def __init__(self):
         '''
@@ -109,6 +106,13 @@ class Bots:
             },
         }
 
+        # 数据库配置参数
+        self.host = '127.0.0.1'
+        self.port = 3306
+        self.user = 'root'
+        self.password = ''
+        self.charset = 'utf8mb4',
+
 
     def attribute(self, bot, option=None):
         '''
@@ -124,10 +128,9 @@ class Bots:
 
 
 
-
-bots = Bots()
+account = Account()
 
 if __name__ == '__main__':
 
-    print(bots.attribute('search', 'title'))
+    print(account.attribute('search', 'title'))
 

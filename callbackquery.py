@@ -9,7 +9,7 @@ y
 import time
 import json
 from database import sql
-from utils.bots import bots
+from utils.account import account
 from utils.rules import Rules
 from utils.command import Command
 import run_config
@@ -29,8 +29,8 @@ class CallbackQuery:
         :param bot:
         :param data:
         :var self.inline_keyboard 请求对象中的键盘
-        :var self.bots 机器有信息集，包含了机器人的全部信息，可能会由其它方法初始化
-        :var self.bot 机器人的别名，从 self.bots 属性提取
+        :var self.account 机器有信息集，包含了机器人的全部信息，可能会由其它方法初始化
+        :var self.bot 机器人的别名，从 self.account 属性提取
         :var self.bot_title 机器人标题，以粗体字显示在消息顶部（一般应用于个人聊天）
         :var self.user_id 用户 ID，通常是从某个消息中提取，可能会由其它方法初始化
         :var self.chat_id 聊天的标识答，可能会由其它方法初始化
@@ -43,8 +43,8 @@ class CallbackQuery:
         :var self.send_data list 一个负责收集请求对象的请求容器，由各方法生成的添加对象添加到此容器，最终返回这个容器
         '''
         self.bot = bot
-        self.bot_id = bots.attribute(bot, 'id')
-        self.bot_title = bots.attribute(bot, 'title')['text']
+        self.bot_id = account.attribute(bot, 'id')
+        self.bot_title = account.attribute(bot, 'title')['text']
 
         data = data.get('callback_query')
         self.callback_query_id = data.get('id')
@@ -70,7 +70,7 @@ class CallbackQuery:
         self.predefined_entities = []
 
 
-        self.predefined_entities = bots.attribute(bot, 'title')['entities']
+        self.predefined_entities = account.attribute(bot, 'title')['entities']
 
         self.callback_data = data.get('data').split("|")
 

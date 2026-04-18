@@ -48,6 +48,7 @@ import pymysql
 from queue import Queue
 import logging
 import run_config
+from utils.account import account
 from logmanage import DailyLogManager
 from utils.toolbox import toolbox
 
@@ -331,7 +332,7 @@ class MySql:
         return full_sql
 
 
-sql = MySql(run_config.host, run_config.port, run_config.user, run_config.password, run_config.charset)
+sql = MySql(account.host, account.port, account.user, account.password, account.charset)
 
 if __name__ == '__main__':
     pass
