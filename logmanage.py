@@ -20,8 +20,8 @@ class DailyLogManager:
         :param write_level: 写入日志文件的最低日志级别，例如：logging.ERROR 或 logging.INFO
         :param console_level: 打印到控制台的最低日志级别，例如：logging.INFO
         """
-        self.log_dir = run_config.logs_path
-        self.retention_days = run_config.retention_days
+        self.log_dir = config.logs_path
+        self.retention_days = config.retention_days
         self.current_date = None
         self.head = head
         self.file_log_level = write_level

@@ -105,7 +105,7 @@ class Main:
         数据表中储存这些用户的信息。
         """
         query = f'SELECT bot, chat, verify FROM `{sql.table_restriction}` WHERE verify IS NOT NULL'
-        result = sql.query(sql.base_database, query, None)
+        result = sql.query(sql.database, query, None)
         if not result:
             return
 
@@ -217,7 +217,7 @@ def route_all():
 if __name__ == '__main__':
 
 
-    app.run(host='192.168.1.100', port=5000)
+    app.run(host='192.168.1.103', port=5000)
 
 
 

@@ -21,7 +21,7 @@ base_path = os.path.dirname(os.path.abspath(__file__))
 logs_path = os.path.join(base_path, 'logs')
 
 # 数据表结构文件，用于创建数据表
-table_structure = os.path.join(base_path, 'configs')
+table_structure = os.path.join(base_path, 'data', 'tables_fields.json')
 
 # 自定义的停用词文件
 stop_words = os.path.join(base_path, 'data', 'stopwords.txt')

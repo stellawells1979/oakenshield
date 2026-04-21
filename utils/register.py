@@ -5,30 +5,30 @@
 '''
 import uuid
 import json
-from datetime import datetime
+import csv
+import os
+import logging
+from openpyxl import Workbook
+from datetime import datetime, timedelta
 
 import config
 from database import sql
-import logging
 from logmanage import DailyLogManager
 
 log = DailyLogManager('Register', logging.ERROR, logging.INFO)
 
-
 class Register:
-
     '''
-    r
+    签到模块
     '''
-
     def __init__(self, register_table):
         '''
 
         :param register_table: 目标签到数据表
         '''
         self.table = register_table
-        query = f'SHOW COLUMNS FROM {sql.base_database}.{self.table}'
-        query = sql.query(sql.base_database, query, None)
+        query = f'SHOW COLUMNS FROM {sql.database}.{self.table}'
+        query = sql.query(sql.database, query, None)
         self.table_fileds = [filed.get('Field') for filed in query]
 
     def create_register(self, affiliated, crator, kwargs):
@@ -102,6 +102,71 @@ class Register:
 
         return text
 
+    def view_register(self, chat, register_id=None):
+        '''
+
+        :param register_id:
+        :param chat:
+        :return:
+        '''
+
+        result = {}
+        query = f"SELECT * FROM `{self.table}` WHERE chat = %s"
+        query = sql.query(sql.base_database, query, [chat]) or []
+        for row in query:
+            create_date = row.get('created')
+            period = row.get('period')
+
+            if register_id and row.get('id') == register_id:
+                result = {}
+                for i in range(0, period):
+                    key = create_date + timedelta(days=i)
+                    result.update({key.strftime("%y-%m-%d"): row.get(f'RE_{i+1}')})
+                result = self.create_csv(result)
+                # 保存文件
+                result.save(os.path.join(config.base_path, 'data', f'{chat}.xlsx'))
+
+        return result
+
+    @classmethod
+    def create_csv(cls, data):
+        '''
+        创建csv文档
+        :param data:
+        :return:
+        '''
+        # 创建工作簿
+        wb = Workbook()
+        ws = wb.active
+        ws.title = "数据表"
+        headers = [
+            "日期", "00:00-04:00", "04:00-08:00","08:00-12:00",
+            "12:00-16:00", "16:00-20:00", "22:00-24:00"
+        ]
+        # 定义表头（第1行）
+        for col_index, header in enumerate(headers, start=1):
+
+            ws.cell(row=1, column=col_index, value=header)
+        result = []
+        for key, value in data.items():
+            lines = [None for _ in range(len(headers))]
+            lines[0] = key
+            value = json.loads(value) if value else {}
+            for k, v in value.items():
+                register_time = v[0][11:13]
+                for i, h in enumerate([4, 8, 12, 16, 20]):
+                    if int(register_time) < h:
+                        lines[i+1] = k
+                        break
+            result.append(lines)
+        for i, row_data in enumerate(result, start=2):
+            for j, value in enumerate(row_data, start=1):
+                ws.cell(row=i, column=j, value=value)
+
+        return wb
+
+
+
     @classmethod
     def calculate_date(cls, old_date, new_date):
         """
@@ -124,8 +189,9 @@ class Register:
 register = Register(sql.table_register)
 
 if __name__ == '__main__':
+
     register = Register('register')
-    temp = register.apply_register(-1003606614850, 8598030336, config.now_time)
+    temp = register.view_register(-1003606614850, '7a53fe99-a9de-4351-b7e7-0e0518ff082f')
     print(temp)
 
 
