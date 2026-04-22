@@ -17,6 +17,9 @@ page_count = 15
 # 基础文件路径
 base_path = os.path.dirname(os.path.abspath(__file__))
 
+# 账户信息
+account_path = os.path.join(base_path, 'data', 'myaccount.txt')
+
 # 日志文件路径
 logs_path = os.path.join(base_path, 'logs')
 

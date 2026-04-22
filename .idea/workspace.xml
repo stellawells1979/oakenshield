@@ -5,15 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ef0ad20-3211-4191-a443-be10b0568f8d" name="更改" comment="fg">
+      <change afterPath="$PROJECT_DIR$/data/myaccount.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/account.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/TableFields.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logmanage.py" beforeDir="false" afterPath="$PROJECT_DIR$/logmanage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/telegram.py" beforeDir="false" afterPath="$PROJECT_DIR$/telegram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntuhelp.text" beforeDir="false" afterPath="$PROJECT_DIR$/ubuntuhelp.text" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/marketing.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/marketing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/register.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/register.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/message.py" beforeDir="false" afterPath="$PROJECT_DIR$/message.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +76,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.account (1).executor": "Run",
     "Python.account.executor": "Run",
     "Python.bots.executor": "Run",
     "Python.callbackquery (1).executor": "Run",
@@ -133,8 +132,8 @@
       <recent name="D:\PycharmProjects\telegrambots\" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.telegram">
-    <configuration name="account" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.account">
+    <configuration name="account" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="telegrambots" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -256,11 +255,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.account" />
         <item itemvalue="Python.telegram" />
         <item itemvalue="Python.database (1)" />
         <item itemvalue="Python.database" />
         <item itemvalue="Python.register" />
-        <item itemvalue="Python.account" />
       </list>
     </recent_temporary>
   </component>
@@ -309,7 +308,7 @@
       <workItem from="1776608025214" duration="123000" />
       <workItem from="1776608170240" duration="4777000" />
       <workItem from="1776632728725" duration="600000" />
-      <workItem from="1776658292658" duration="4522000" />
+      <workItem from="1776658292658" duration="13850000" />
     </task>
     <task id="LOCAL-00001" summary="fg">
       <option name="closed" value="true" />
@@ -330,10 +329,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="fg" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/telegrambots$account__1_.coverage" NAME="account (1) 覆盖结果" MODIFIED="1776818871300" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/telegrambots$run_config.coverage" NAME="run_config 覆盖结果" MODIFIED="1776365049609" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/telegrambots$database__1_.coverage" NAME="database (1) 覆盖结果" MODIFIED="1776712300907" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/telegrambots$account.coverage" NAME="account 覆盖结果" MODIFIED="1776566121414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/telegrambots$telegram.coverage" NAME="telegram 覆盖结果" MODIFIED="1776733396818" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/telegrambots$telegram.coverage" NAME="telegram 覆盖结果" MODIFIED="1776733447845" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/telegrambots$register.coverage" NAME="register 覆盖结果" MODIFIED="1776658366765" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/telegrambots$database.coverage" NAME="database 覆盖结果" MODIFIED="1776711654455" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Desktop" />
     <SUITE FILE_PATH="coverage/telegrambots$message.coverage" NAME="message 覆盖结果" MODIFIED="1775932588210" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

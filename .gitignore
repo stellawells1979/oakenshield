@@ -67,8 +67,8 @@ logs/
 
 # 一些包含账号信息的文件将不会上伟
 ubuntuhelp.text
-configs/mytest.json
-utils/account.py
+data/myaccount.txt
+
 
 
 # OS-specific

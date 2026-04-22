@@ -18,7 +18,6 @@ from utils.rules import Rules
 from utils.register import register
 from utils.search import Search
 
-import config
 import logging
 from logmanage import DailyLogManager
 
@@ -247,7 +246,7 @@ class SuperGroup(Message):
                             [{'type': 'text_mention', 'text': self.first_name, 'user': self.users}]
                         )
                     },
-                    {'delete': run_config.date + 30}  # 此消息将在30秒后删除
+                    {'delete': time.localtime() + 30}  # 此消息将在30秒后删除
                 ])
 
         elif self.text == 'hello wellwen' and self.bot == 'rules':
@@ -723,7 +722,7 @@ class SuperGroup(Message):
                 'text': default_wan,
                 'entities': toolbox.format_entities(default_wan, [{'type': 'bold', 'text': self.first_name}])
             },
-            {'delete': run_config.date + 30}  # 此消息将在30秒后删除
+            {'delete': time.localtime().date + 30}  # 此消息将在30秒后删除
         ])
 
         # 将新的限制数据更新到 restriction 数据表
