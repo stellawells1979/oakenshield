@@ -7,7 +7,14 @@
 '''
 
 import config
+import requests
+import json
+import logging
+from logmanage import DailyLogManager
 
+
+
+log = DailyLogManager('Telegram', logging.ERROR, logging.INFO)
 
 class Account:
     '''
@@ -18,33 +25,28 @@ class Account:
         '''
         机器人的基本信息
         '''
-        with open(config.account_path, encoding='utf-8') as f:
-            account_data = f.readlines()
+        self.base_url = 'https://api.telegram.org/bot'
 
-        account_info = {}
-        for row in account_data:
-            if not row.strip():
-                continue
-            row = row.strip().split('=')
-            account_info.update({row[0].strip(): row[1].strip()})
+        account_info = self.init_account()
+        if not account_info:
+            raise '没有获取到机器人信息'
 
         # 数据库配置参数
         self.host = account_info.get('host')
-        self.port = account_info.get('port')
+        self.port = int(account_info.get('port'))
         self.user = account_info.get('user')
         self.password = account_info.get('password')
         self.charset = 'utf8mb4'
 
 
-        self.base_url = 'https://api.telegram.org/bot'
-        self.proxy = config.proxy
+
 
         self.search = {
-            'id': 7921354496,
-            'token': account_info.get('search_token'),
-            'url': 'https://t.me/baisc_bot     ',
-            'username': 'baisc_bot',
-            'byname': 'baisou',
+            'id': account_info.get('search').get('id'),
+            'token': account_info.get('search').get('token'),
+            'url': f"https://t.me/{account_info.get('search').get('username')}",
+            'username': account_info.get('search').get('username'),
+            'byname': account_info.get('search').get('by_name'),
             'title': {'text': '百搜机器人', 'entities': [{'type': 'bold', 'text': '百搜机器人'}, ]},
             'description': '百搜机器人，搜遍TG',
             'start_description': {
@@ -65,11 +67,11 @@ class Account:
         }
 
         self.rules = {
-            'id': 8598030336,
-            'token': account_info.get('rules_token'),
-            'url': f'https://t.me/wellwen_bot?startgroup=true',
-            'username': 'wellwen_bot',
-            'byname': 'rules',
+            'id': account_info.get('rules').get('id'),
+            'token': account_info.get('rules').get('token'),
+            'url': f"https://t.me/{account_info.get('rules').get('username')}",
+            'username': account_info.get('rules').get('username'),
+            'byname': account_info.get('rules').get('by_name'),
             'image': '',
             'title': {
                 'text': '规则机器人',
@@ -104,6 +106,44 @@ class Account:
                 ]
             },
         }
+
+    def init_account(self):
+        '''
+
+        :return:
+        '''
+        with open(config.account_path, encoding='utf-8') as f:
+            account_data = f.readlines()
+
+        account_info = {}
+        for row in account_data:
+            row = row.replace(' ', '').strip()
+            if not row:
+                continue
+            row = row.strip().split('=')
+            if not row:
+                continue
+
+            if row[0] in ['rules_token', 'search_token']:
+                url = f'{self.base_url}{row[1].strip()}/getMe'
+                try:
+                    response = requests.get(url, proxies=config.proxy, timeout=6)
+                    if response.status_code == 200:
+                        response = json.loads(response.text).get('result')
+                        account_info.update({
+                            row[0].split('_')[0]: {
+                                'id': response.get('id'),
+                                'username': response.get('username'),
+                                'by_name': row[0].split('_')[0],
+                                'last_name': response.get('last_name'),
+                                'token': row[1],
+                            }
+                        })
+                except Exception as e:
+                    log.error(e)
+            else:
+                account_info.update({row[0].strip(): row[1].strip()})
+        return account_info
 
     def attribute(self, bot, option=None):
         '''

@@ -220,7 +220,7 @@
         },
         {
             "Field": "image",
-            "Type": "varchar(400)",
+            "Type": "json",
             "Null": "YES",
             "Key": "",
             "Default": null,
