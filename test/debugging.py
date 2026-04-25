@@ -179,6 +179,7 @@ message_03 = {
     }
 }
 
+
 # 群组的管理员发生改变
 my_chat_member_01 = {
     'update_id': 63771297,
