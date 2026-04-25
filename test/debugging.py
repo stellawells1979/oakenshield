@@ -91,3 +91,146 @@ callablequery_06 = {        # 一条清空签到规则的消息
     }
 }
 
+message_01 = {
+    'update_id': 63771283,
+    'message': {
+        'message_id': 380,
+        'from': {
+            'id': 1120690440,
+            'is_bot': False,
+            'first_name': '大',
+            'last_name': '苹果',
+            'username': 'bigapple699',
+            'language_code': 'zh-hans'
+        },
+        'chat': {
+            'id': 1120690440,
+            'first_name': '大',
+            'last_name': '苹果',
+            'username': 'bigapple699',
+            'type': 'private'
+        }, 'date': 1777064272,
+        'text': '/start',
+        'entities': [
+            {'offset': 0, 'length': 6, 'type': 'bot_command'}
+        ]
+    }
+}
+
+# 机器人被添加到某个群组
+message_02 = {
+    'update_id': 63771288,
+    'message': {
+        'message_id': 279,
+        'from': {
+            'id': 1120690440,
+            'is_bot': False,
+            'first_name': '大',
+            'last_name': '苹果',
+            'username': 'bigapple699',
+            'language_code': 'zh-hans'
+        },
+        'chat': {
+            'id': -1003606614850,
+            'title': 'Test',
+            'type': 'supergroup'
+        },
+        'date': 1777089610,
+        'text': '/start@ADDBOT true',
+        'entities': [
+            {'offset': 0, 'length': 13, 'type': 'bot_command'}
+        ]
+    }
+}
+
+message_03 = {
+    'update_id': 63771296,
+    'message': {
+        'message_id': 286,
+        'from': {
+            'id': 1120690440,
+            'is_bot': False,
+            'first_name': '大',
+            'last_name': '苹果',
+            'username': 'bigapple699',
+            'language_code': 'zh-hans'
+        },
+        'chat': {
+            'id': -1003606614850,
+            'title': 'Test',
+            'type': 'supergroup'
+        },
+        'date': 1777145894,
+        'new_chat_participant': {
+            'id': 8598030336,
+            'is_bot': True,
+            'first_name': 'rulesbot',
+            'username': 'wellwen_bot'
+        },
+        'new_chat_member': {
+            'id': 8598030336,
+            'is_bot': True,
+            'first_name': 'rulesbot',
+            'username': 'wellwen_bot'
+        },
+        'new_chat_members': [
+            {'id': 8598030336, 'is_bot': True, 'first_name': 'rulesbot', 'username': 'wellwen_bot'}
+        ]
+    }
+}
+
+# 群组的管理员发生改变
+my_chat_member_01 = {
+    'update_id': 63771297,
+    'my_chat_member': {
+        'chat': {
+            'id': -1003606614850,
+            'title': 'Test',
+            'type': 'supergroup'
+        },
+        'from': {
+            'id': 1120690440,
+            'is_bot': False,
+            'first_name': '大',
+            'last_name': '苹果',
+            'username': 'bigapple699',
+            'language_code': 'zh-hans'
+        },
+        'date': 1777145986,
+        'old_chat_member': {
+            'user': {
+                'id': 8598030336,
+                'is_bot': True,
+                'first_name': 'rulesbot',
+                'username': 'wellwen_bot'
+            },
+            'status': 'administrator',
+            'can_be_edited': False,
+            'can_manage_chat': True,
+            'can_change_info': True,
+            'can_delete_messages': True,
+            'can_invite_users': True,
+            'can_restrict_members': True,
+            'can_pin_messages': True,
+            'can_manage_topics': False,
+            'can_promote_members': True,
+            'can_manage_video_chats': True,
+            'can_post_stories': False,
+            'can_edit_stories': False,
+            'can_delete_stories': False,
+            'can_manage_tags': False,
+            'is_anonymous': True,
+            'can_manage_voice_chats': True
+        },
+        'new_chat_member': {
+            'user': {
+                'id': 8598030336,
+                'is_bot': True,
+                'first_name': 'rulesbot',
+                'username': 'wellwen_bot'
+            },
+            'status': 'member'
+        }
+    }
+}
+

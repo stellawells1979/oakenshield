@@ -127,7 +127,7 @@ class Main:
                 del verify[key]
             # 将最新的验证数据更新到数据表
             update_query = f'UPDATE `{sql.table_restriction}` SET verify=%s, edited=NOW() WHERE bot=%s AND chat=%s'
-            sql.query(sql.base_database, update_query, [json.dumps(verify), item.get('bot'), item.get('chat')])
+            sql.query(sql.database, update_query, [json.dumps(verify), item.get('bot'), item.get('chat')])
 
     def telegram_requests(self):
         """
@@ -170,16 +170,18 @@ class Main:
         '''
         解析路由并向处理环节传递相应参数
         '''
+        print('收到更新')
+        print(update)
+        print('\n')
         if not update:
             return []
         if route == '/telegram/rules':
             bot = 'rules'
-            telegram = Telegram('rules')
         elif route == '/telegram/search':
             bot = 'search'
-            telegram = Telegram('search')
         else:
             return []
+        telegram = Telegram(bot)
         result = telegram.process_update(update)
 
         for item in result:
@@ -195,13 +197,14 @@ app = Flask(__name__)
 
 
 @app.route('/telegram/<path:anything>', methods=['GET', 'POST'])
-def route_all():
+def route_all(anything):
     '''
     :return:
     '''
     # 从请求体中读取 Telegram 发来的 JSON 更新数据
     # silent=True 的意思是：如果不是合法 JSON，不抛异常，而是返回 None
     update = flask_request.get_json(silent=True) or {}
+
 
     # 获取请求头并提取路由字段
     environ_info = dict(flask_request.environ)
@@ -216,8 +219,15 @@ def route_all():
 
 if __name__ == '__main__':
 
+    wk = 0
+    if wk == 0:
+        app.run(host='192.168.1.100', port=5000)
 
-    app.run(host='192.168.1.102', port=5000)
+    else:
+        from test import debugging
+        reps = Telegram('rules').process_update(debugging.message_01)
+        print(reps)
+
 
 
 

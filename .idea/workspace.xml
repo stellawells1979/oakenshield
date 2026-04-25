@@ -6,10 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="2ef0ad20-3211-4191-a443-be10b0568f8d" name="更改" comment="fg">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/myaccount.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/myaccount.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/tables_fields.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/tables_fields.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/callbackquery.py" beforeDir="false" afterPath="$PROJECT_DIR$/callbackquery.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/message.py" beforeDir="false" afterPath="$PROJECT_DIR$/message.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/telegram.py" beforeDir="false" afterPath="$PROJECT_DIR$/telegram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/account.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/account.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/debugging.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/debugging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/TGrequest.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/TGrequest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/command.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/command.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/register.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/register.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/rules.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/rules.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/search.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/search.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +23,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="68" />
+    <option name="cachedIndexableFilesCount" value="69" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -72,55 +78,56 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.account (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.account.executor&quot;: &quot;Run&quot;,
-    &quot;Python.bots.executor&quot;: &quot;Run&quot;,
-    &quot;Python.callbackquery (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.callbackquery.executor&quot;: &quot;Run&quot;,
-    &quot;Python.command.executor&quot;: &quot;Run&quot;,
-    &quot;Python.config.executor&quot;: &quot;Run&quot;,
-    &quot;Python.database (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.database.executor&quot;: &quot;Run&quot;,
-    &quot;Python.globals (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.globals.executor&quot;: &quot;Run&quot;,
-    &quot;Python.help.executor&quot;: &quot;Run&quot;,
-    &quot;Python.jiebawords.executor&quot;: &quot;Run&quot;,
-    &quot;Python.log.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main_rules (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.main_rules.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main_search.executor&quot;: &quot;Run&quot;,
-    &quot;Python.marketing.executor&quot;: &quot;Run&quot;,
-    &quot;Python.message (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.message.executor&quot;: &quot;Run&quot;,
-    &quot;Python.register.executor&quot;: &quot;Run&quot;,
-    &quot;Python.rules.executor&quot;: &quot;Run&quot;,
-    &quot;Python.run_config.executor&quot;: &quot;Run&quot;,
-    &quot;Python.search.executor&quot;: &quot;Run&quot;,
-    &quot;Python.telegram.executor&quot;: &quot;Run&quot;,
-    &quot;Python.toolbox.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/PycharmProjects/telegrambots&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;http.proxy&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.TGrequest.executor": "Run",
+    "Python.account (1).executor": "Run",
+    "Python.account.executor": "Run",
+    "Python.bots.executor": "Run",
+    "Python.callbackquery (1).executor": "Run",
+    "Python.callbackquery.executor": "Run",
+    "Python.command.executor": "Run",
+    "Python.config.executor": "Run",
+    "Python.database (1).executor": "Run",
+    "Python.database.executor": "Run",
+    "Python.globals (1).executor": "Run",
+    "Python.globals.executor": "Run",
+    "Python.help.executor": "Run",
+    "Python.jiebawords.executor": "Run",
+    "Python.log.executor": "Run",
+    "Python.main (1).executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.main_rules (1).executor": "Run",
+    "Python.main_rules.executor": "Run",
+    "Python.main_search.executor": "Run",
+    "Python.marketing.executor": "Run",
+    "Python.message (1).executor": "Run",
+    "Python.message.executor": "Run",
+    "Python.register.executor": "Run",
+    "Python.rules.executor": "Run",
+    "Python.run_config.executor": "Run",
+    "Python.search.executor": "Run",
+    "Python.telegram.executor": "Run",
+    "Python.toolbox.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "ai.playground.ignore.import.keys.banner.in.settings": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "D:/PycharmProjects/telegrambots",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "http.proxy",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\PycharmProjects\telegrambots\data" />
@@ -131,6 +138,30 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.telegram">
+    <configuration name="TGrequest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="telegrambots" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/TGrequest.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="account" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="telegrambots" />
       <option name="ENV_FILES" value="" />
@@ -203,30 +234,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="register" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="telegrambots" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/register.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="telegram" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="telegrambots" />
       <option name="ENV_FILES" value="" />
@@ -254,10 +261,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.telegram" />
+        <item itemvalue="Python.TGrequest" />
         <item itemvalue="Python.account" />
         <item itemvalue="Python.database (1)" />
         <item itemvalue="Python.database" />
-        <item itemvalue="Python.register" />
       </list>
     </recent_temporary>
   </component>
@@ -306,7 +313,7 @@
       <workItem from="1776608025214" duration="123000" />
       <workItem from="1776608170240" duration="4777000" />
       <workItem from="1776632728725" duration="600000" />
-      <workItem from="1776658292658" duration="30428000" />
+      <workItem from="1776658292658" duration="47118000" />
     </task>
     <task id="LOCAL-00001" summary="fg">
       <option name="closed" value="true" />
@@ -331,7 +338,8 @@
     <SUITE FILE_PATH="coverage/telegrambots$run_config.coverage" NAME="run_config 覆盖结果" MODIFIED="1776365049609" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/telegrambots$database__1_.coverage" NAME="database (1) 覆盖结果" MODIFIED="1776712300907" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/telegrambots$account.coverage" NAME="account 覆盖结果" MODIFIED="1776566121414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/telegrambots$telegram.coverage" NAME="telegram 覆盖结果" MODIFIED="1776892315593" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/telegrambots$telegram.coverage" NAME="telegram 覆盖结果" MODIFIED="1777145801109" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/telegrambots$TGrequest.coverage" NAME="TGrequest 覆盖结果" MODIFIED="1777063175317" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/telegrambots$register.coverage" NAME="register 覆盖结果" MODIFIED="1776658366765" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/telegrambots$database.coverage" NAME="database 覆盖结果" MODIFIED="1776711654455" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Desktop" />
     <SUITE FILE_PATH="coverage/telegrambots$message.coverage" NAME="message 覆盖结果" MODIFIED="1775932588210" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

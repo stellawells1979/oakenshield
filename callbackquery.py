@@ -97,13 +97,13 @@ class CallbackQuery:
 
             if self.analysis_verify():
                 query = f'SELECT verify FROM restriction WHERE bot=%s and chat=%s'
-                query = sql.query(sql.base_database, query, [self.bot_id, self.chat_id])
+                query = sql.query(sql.database, query, [self.bot_id, self.chat_id])
 
                 if query and query[0]:
                     verify_data = json.loads(query[0].get('verify'))
                     del verify_data[self.user_id]
                     query = f'UPDATE {sql.table_restriction} SET verify=%s,edited=NOW() WHERE bot=%s and chat=%s'
-                    sql.query(sql.base_database, query, [verify_data, self.bot_id, self.chat_id])
+                    sql.query(sql.database, query, [verify_data, self.bot_id, self.chat_id])
 
         elif self.callback_type in ['rules'] and self.bot == 'rules':
 

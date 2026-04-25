@@ -194,7 +194,7 @@ class Rules(FormulateRules):
             if self.reset == 1:
                 # 重置等待用户输入参数的交互信息为 None
                 query = f"UPDATE `{sql.table_interact}` SET waitinput=%s WHERE bot={self.bot_id} and user={self.user}"
-                sql.query(sql.base_database, query, [None])
+                sql.query(sql.database, query, [None])
 
         # 响应开始使用规则机器人按钮
         if self.option == 'prelude':
@@ -224,7 +224,7 @@ class Rules(FormulateRules):
         '''
         if self.change:
             query = f"UPDATE `{sql.table_rules}` SET {self.option}=%s,edited=NOW() WHERE `chat`=%s"
-            sql.query(sql.base_database, query, [json.dumps(self.rules), self.group])
+            sql.query(sql.database, query, [json.dumps(self.rules), self.group])
 
         # 对请求实体预处理（拼接请求文本，添加文本的美化效果等操作）
         self.send_text = f"{self.bot_title}\n\n{self.send_text}"
@@ -295,7 +295,7 @@ class Rules(FormulateRules):
             waitinput = f'rules|{self.option}|{self.details}|{self.group}|{self.message_id}'
             query = (f'INSERT INTO {sql.table_interact} (bot,user,waitinput) VALUES (%s,%s,%s) '
                      f'ON DUPLICATE KEY UPDATE waitinput=%s, edited=NOW()')
-            sql.query(sql.base_database, query, [self.bot_id, self.user, waitinput, waitinput])
+            sql.query(sql.database, query, [self.bot_id, self.user, waitinput, waitinput])
 
 
             # 设置补充发送文本提示用户输入参数，这些提示文本在父类中已经定义
@@ -316,7 +316,7 @@ class Rules(FormulateRules):
             self.rules = config.rules_example[self.option]
             if self.option == 'register':
                 query = f'UPDATE {sql.table_register} SET `status`=%s WHERE `chat`=%s'
-                sql.query(sql.base_database, query, ['End', self.group])
+                sql.query(sql.database, query, ['End', self.group])
 
             self.change = True
             # 设置补充发送文本提示用户操作结果
@@ -446,7 +446,7 @@ class Rules(FormulateRules):
             if admin:
                 # 如果获取到管理员参数则调用父类的 uphold_rules() 方法将管理员更新到 rules 数据表
                 query = f'UPDATE `{sql.table_rules}` SET administrators=%s WHERE `chat`=%s'
-                sql.query(sql.base_database, query, [json.dumps(admin), group])
+                sql.query(sql.database, query, [json.dumps(admin), group])
                 self.send_supplement = '更新管理员成功'
             else:
                 self.send_supplement = '更新管理员失败，请重试'
@@ -510,7 +510,7 @@ class Rules(FormulateRules):
         '''
         # 查询数据表是否储存当前用户的群组（在 rules 表中查询所有群组的管理员，看管理员列表中是否有当前用户）
         query = f"SELECT `chat`, `title`, `administrators` FROM rules"
-        groups = sql.query(sql.base_database, query, None)
+        groups = sql.query(sql.database, query, None)
 
 
         for group in groups:
@@ -553,7 +553,7 @@ class Rules(FormulateRules):
             result = config.rules_example.keys()
 
         query = f"SELECT {filed} FROM `{sql.table_rules}` WHERE `chat`=%s"
-        query = sql.query(sql.base_database, query, [self.group])
+        query = sql.query(sql.database, query, [self.group])
 
         # 构建机器人消息的标题，如果群组标题超长则截取前面部分字符
         title = query[0]['title']

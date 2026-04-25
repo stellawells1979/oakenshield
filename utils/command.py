@@ -47,6 +47,7 @@ class Command:
         :param bot_command: 机器人名
         :return:
         '''
+        result = {}
         if bot_command == '/start':
             self.start()
         if bot_command == '/help':
@@ -54,13 +55,14 @@ class Command:
         if bot_command == '/add':
             self.reply_collect()
 
-        result = {
-            'text': self.send_text,
-            'reply_markup': {'inline_keyboard': self.inline_keyboard},
-        }
-        if self.predefined_entities:
-            entities = toolbox.format_entities(self.send_text, self.predefined_entities)
-            result.update({'entities': entities})
+        if self.send_text:
+            result = {
+                'text': self.send_text,
+                'reply_markup': {'inline_keyboard': self.inline_keyboard},
+            }
+            if self.predefined_entities:
+                entities = toolbox.format_entities(self.send_text, self.predefined_entities)
+                result.update({'entities': entities})
 
         return result
 
@@ -134,7 +136,7 @@ class Command:
                     continue
 
                 query = f'SELECT `render`, `create_time` FROM `{sql.table_groups}` WHERE `url`=%s'
-                query = sql.query(sql.base_database, query, [url])
+                query = sql.query(sql.database, query, [url])
 
                 text = f"{text}{url} 收录成功\n' if query else f'{text}{url} 已由 {query[0]['render']}  于 {query[0]['create_time']} 添加\n"
         else:

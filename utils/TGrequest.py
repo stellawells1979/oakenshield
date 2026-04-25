@@ -96,6 +96,15 @@ class Request:
 
         return result
 
+    def get_webhook_info(self, bot):
+        '''
+        获取我的 webhook
+        :param bot:
+        :return:
+        '''
+        return self.send(bot, 'getWebhookInfo')
+
+
     def error(self, description):
         '''
 
@@ -112,6 +121,8 @@ crave = Request()
 if __name__ == '__main__':
 
     telegram = Request()
+    print(telegram.get_webhook_info('rules'))
+
 
 
 
