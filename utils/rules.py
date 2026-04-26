@@ -96,7 +96,9 @@ class FormulateRules:
         '''
         self.bot = account.rules['byname']
         self.bot_id = account.rules['id']
+        self.bot_url = account.rules['url']
         self.bot_title = account.rules['title']['text']
+
         self.predefined_entities = account.rules['title']['entities']
 
     @classmethod
@@ -168,10 +170,6 @@ class Rules(FormulateRules):
         self.send_supplement = ''
         self.send_text = ''
         self.rules_param_text = ''
-
-
-
-
 
     def main(self):
         '''
@@ -530,7 +528,7 @@ class Rules(FormulateRules):
             self.send_supplement = '当前为你找到以下群组，点击可查看群组的规则详情，如果没有你期望的群组，请点击【帮助】按钮查看解决方案'
 
         self.guide_button = [
-            {'text': '添加机器人到群组', 'url': 'https://t.me/addbot?startgroup=true'},
+            {'text': '添加机器人到群组', 'url': f'{self.bot_url}?startgroup=true'},
             {'text': '帮助', 'callback_data': 'help|0|0|0|0'},
             {'text': '返回', 'callback_data': 'start|0|0|0|0'}
         ]

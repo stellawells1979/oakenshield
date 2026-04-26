@@ -157,7 +157,130 @@ class Account:
 
         return self.__dict__.get(bot, {}).get(option)
 
-account = Account()
+
+class TestAccount:
+    '''
+    测试用的
+    '''
+
+    def __init__(self):
+        '''
+        机器人的基本信息
+        '''
+        self.base_url = 'https://api.telegram.org/bot'
+
+        account_info = self.init_account()
+        if not account_info:
+            raise '没有获取到机器人信息'
+
+        # 数据库配置参数
+        self.host = account_info.get('host')
+        self.port = int(account_info.get('port'))
+        self.user = account_info.get('user')
+        self.password = account_info.get('password')
+        self.charset = 'utf8mb4'
+
+        self.search = {
+            'id': 7921354496,
+            'token': '7921354496:AAFooa7EE6o3kixGiJLe_g3pgEAVBnDpfXw',
+            'url': 'https://t.me/baisc_bot',
+            'username': 'baisc_bot',
+            'byname': 'search',
+            'title': {'text': '百搜机器人', 'entities': [{'type': 'bold', 'text': '百搜机器人'}, ]},
+            'description': '百搜机器人，搜遍TG',
+            'start_description': {
+                'text': "搜群组,搜频道,搜影视,搜资讯,搜遍TG的搜索小能手",
+                'entities': [
+                    {'type': 'bold', 'text': '小能手'},
+                ]
+            },
+            'help_description': {
+                'text': '百搜机器人专注于收集和分享telegram群组链接，集百万个群组，可按你提供的关键字为你分享相关群组链'
+                        '接，点击下面的【添加收录】按钮分享你的群组链接，让你的群组暴光率成倍提升,你也可以将我添加到你的群组,分享更多搜索乐趣',
+                'entities': [
+                    {'type': 'bold', 'text': '百搜机器人'},
+                    {'type': 'bold', 'text': '添加收录'},
+                ]
+            },
+
+        }
+
+        self.rules = {
+            'id': 8598030336,
+            'token': '8598030336:AAE8TW4cmapxMqkgrvmOnhkXd8ei06Q7b_0',
+            'url': 'https://t.me/wellwen_bot',
+            'username': 'wellwen_bot',
+            'byname': 'rules',
+            'image': '',
+            'title': {
+                'text': '规则机器人',
+                'entities': [
+                    {'type': 'bold', 'text': '规则机器人'},
+                ]
+            },
+            'description': '监控群组的每一个动静，按规则做出响应',
+            'start_description': {
+                'text': f"一个能在你的群组中24小时不间断监视群组活动的机器人，它没有作息时间，你可以设置任意规则来管理你的群组\n\n"
+                        f"点击【帮助】了解如何使用本机器",
+                'entities': [
+                    {'type': 'bold', 'text': '帮助'},
+                ]
+            },
+            'rules_description': {
+                'text': f"欢迎使用规则机器人服务，在使用本服务前首先确认你是该群组的创建者或者管理员且拥有相应权限",
+                'entities': [
+                    {'type': 'bold', 'text': '帮助'},
+                ]
+            },
+            'help_description': {
+                'text': '1.首先确保你是某个群组的创建者或者管理员且有相应权限\n2.点击【添加机器人到群组】按钮并进入那个群'
+                        '组\n3.在群组的用户列表中搜索找到本机器人，将机器人设为管理员并赋以相应权限\n4.向群里发送【hello wellwen】让机器'
+                        '人找到你，稍等片刻机器人会回复一条信息把你带回本聊天或者你直接回到本聊天，即可进入规则设置界面',
+                'entities': [
+                    {'type': 'bold', 'text': '规则机器人'},
+                    {'type': 'bold', 'text': '创建者或者管理员'},
+                    {'type': 'bold', 'text': '添加机器人到群组'},
+                    {'type': 'bold', 'text': '管理员并赋以相应权限'},
+                    {'type': 'bold', 'text': 'hello wellwen'},
+                ]
+            },
+        }
+
+    def init_account(self):
+        '''
+
+        :return:
+        '''
+        with open(config.account_path, encoding='utf-8') as f:
+            account_data = f.readlines()
+
+        account_info = {}
+        for row in account_data:
+            row = row.replace(' ', '').strip()
+            if not row:
+                continue
+            row = row.strip().split('=')
+            if not row or row[0] in ['rules_token', 'search_token']:
+                continue
+            else:
+                account_info.update({row[0].strip(): row[1].strip()})
+        return account_info
+
+    def attribute(self, bot, option=None):
+        '''
+
+        :param bot:
+        :param option:
+        :return:
+        '''
+        if not option:
+            return self.__dict__.get(bot)
+
+        return self.__dict__.get(bot, {}).get(option)
+
+
+account = TestAccount()
+
 
 if __name__ == '__main__':
 

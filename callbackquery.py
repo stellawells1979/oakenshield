@@ -167,7 +167,7 @@ class CallbackQuery:
                     'chat_id': self.chat_id,
                     'text': f'{self.first_name} 你已通过人机验证，欢迎加入【{self.chat_title}】'
                 },
-                {'delete': run_config.date + 20}
+                {'delete': config.date + 20}
             ])
             self.send_data.append([
                 'restrictChatMember',
@@ -204,7 +204,7 @@ class CallbackQuery:
             self.send_data.append([
                 'kickChatMember',
                 {'chat_id': self.chat_id, 'user_id': self.user_id},
-                {'delay': run_config.date + 5}     # 此消息延迟5秒发送
+                {'delay': config.date + 5}     # 此消息延迟5秒发送
             ])
 
         return result

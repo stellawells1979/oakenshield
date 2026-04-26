@@ -219,13 +219,13 @@ def route_all(anything):
 
 if __name__ == '__main__':
 
-    wk = 0
+    wk = 1
     if wk == 0:
         app.run(host='192.168.1.100', port=5000)
 
     else:
         from test import debugging
-        reps = Telegram('rules').process_update(debugging.message_01)
+        reps = Telegram('rules').process_update(debugging.message_02)
         print(reps)
 
 
