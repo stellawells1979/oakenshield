@@ -1,0 +1,60 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# 以下文件夹将不会上传
+logs/
+model/
+test/
+TDLib/
+help/
+myaccount/
+
+
+
+# TDLib account data
+myaccount/*/db.sqlite
+myaccount/*/db.sqlite-shm
+myaccount/*/db.sqlite-wal
+myaccount/*/td.binlog
+myaccount/*/temp/
+myaccount/*/thumbnails/
+myaccount/*/profile_photos/
+
+# Sensitive configuration
+myaccount/key.txt
+
+# SQLite databases
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+
+
+GUI.py
+selenium_service.py
+help.py
+
+
+
+

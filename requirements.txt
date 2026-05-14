@@ -1,0 +1,6 @@
+requests
+lxml
+jieba
+scikit-learn
+joblib
+pymysql
