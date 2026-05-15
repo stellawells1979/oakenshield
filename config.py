@@ -20,10 +20,13 @@ structure_path = os.path.join(base_path, 'data', 'tables_fields.json')
 
 # TDLib库路径
 
-
+proxy = None
 system_name = platform.system().lower()
-
 if system_name == 'windows':
+    proxy = {
+        'http': 'http://127.0.0.1:10809',
+        'socks5': 'socks5h://127.0.0.1:10808'
+    }
     library_path = os.path.join(base_path, 'TDLib', 'bin', 'tdjson.dll')
 elif system_name == 'linux':
     library_path = os.path.join(base_path, 'TDLib', 'bin', 'libtdjson.so')
@@ -51,10 +54,7 @@ service_paths = [
 ]
 
 
-proxy = {
-    'http': 'http://127.0.0.1:10809',
-    'socks5': 'socks5h://127.0.0.1:10808'
-}
+
 
 # ====================================
 

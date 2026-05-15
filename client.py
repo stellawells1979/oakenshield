@@ -71,7 +71,8 @@ class TdlibClient:
         time.sleep(2)
 
         # 设置代理
-        self.setup_and_verify_proxy()
+        if config.proxy:
+            self.setup_and_verify_proxy()
 
     def send(self, datas):
         '''
