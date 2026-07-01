@@ -21,12 +21,12 @@ class ToolBox:
     '''
 
     @classmethod
-    def contains_uppercase(cls, str):
+    def contains_uppercase(cls, string):
         '''
         判断字符串是否包含大写字母
         :return:
         '''
-        return any(char.isupper() for char in str)
+        return any(char.isupper() for char in string)
 
     @classmethod
     def format_entities(cls, all_text, draft_entities):
@@ -35,33 +35,35 @@ class ToolBox:
         将 entities 草稿对象序列为合法的 telegram entities 对象
         :param all_text:
         :param draft_entities:
-        :return:
+        :return: list
         '''
-        entities_type = [
+        entities_type = {
             # 多行代码块
-            {'type': 'pre', 'offset': 0, 'length': 1, 'language': '指定编程语言，比如 python'},
+            'pre': {'offset': 0, 'length': 1, 'language': '指定编程语言，比如 python'},
             # “文本链接”(用于可点击的文本网址)
-            {'type': 'text_link', 'offset': 0, 'length': 1, 'url': '你希望跳转的目标网址'},
+            'text_link': {'offset': 0, 'length': 1, 'url': '你希望跳转的目标网址'},
             # “文本提及”( 用于没有用户名的用户)
-            {'type': 'text_mention', 'offset': 0, 'length': 1, 'user': {'字段': '当前user对象的所有可用字段'}},
+            'text_mention': {'offset': 0, 'length': 1, 'user': {'字段': '当前user对象的所有可用字段'}},
             # “自定义表情符号”( 用于内嵌自定义表情符号贴纸)。
-            {'type': 'custom_emoji', 'offset': 0, 'length': 1, 'custom_emoji_id': 'ID 参数'},
-            {'type': 'bold', 'offset': 0, 'length': 1},  # 粗体效果
-            {'type': 'italic', 'offset': 0, 'length': 1},  # 斜体效果
-            {'type': 'underline', 'offset': 0, 'length': 1},  # 下划线
-            {'type': 'strikethrough', 'offset': 0, 'length': 1},  # 删除线
-            {'type': 'spoiler', 'offset': 0, 'length': 1},  # 剧透，马赛克文本（隐藏内容，需要点击显示）
-            {'type': 'code', 'offset': 0, 'length': 1},  # 代码
-            {'type': 'mention', 'offset': 0, 'length': 1},  # 提及
-            {'type': 'hashtag', 'offset': 0, 'length': 1},  # “话题标签”(#hashtag或#hashtag@chatusername)
-            {'type': 'cashtag', 'offset': 0, 'length': 1},  # “金融标签”($USD或$USD@chatusername)
-            {'type': 'bot_command', 'offset': 0, 'length': 1},
-            {'type': 'phone_number', 'offset': 0, 'length': 1},
-            {'type': 'email', 'offset': 0, 'length': 1},
-            {'type': 'blockquote', 'offset': 0, 'length': 1},  # 块引用
-            {'type': 'expandable_blockquote', 'offset': 0, 'length': 1},  # 可扩展的块引用
-            {'type': 'url', 'offset': 0, 'length': 1},
-        ]
+            'custom_emoji': {'offset': 0, 'length': 1, 'custom_emoji_id': 'ID 参数'},
+            'bold': {'offset': 0, 'length': 1},  # 粗体效果
+            'italic': {'offset': 0, 'length': 1},  # 斜体效果
+            'underline': {'offset': 0, 'length': 1},  # 下划线
+            'strikethrough': {'offset': 0, 'length': 1},  # 删除线
+            'spoiler': {'offset': 0, 'length': 1},  # 剧透，马赛克文本（隐藏内容，需要点击显示）
+            'code': {'offset': 0, 'length': 1},  # 代码
+            'mention': {'offset': 0, 'length': 1},  # 提及
+            'hashtag': {'offset': 0, 'length': 1},  # “话题标签”(#hashtag或#hashtag@chatusername)
+            'cashtag': {'offset': 0, 'length': 1},  # “金融标签”($USD或$USD@chatusername)
+            'bot_command': {'offset': 0, 'length': 1},
+            'phone_number': {'offset': 0, 'length': 1},
+            'email': {'offset': 0, 'length': 1},
+            'blockquote': {'offset': 0, 'length': 1},  # 块引用
+            'expandable_blockquote': {'offset': 0, 'length': 1},  # 可扩展的块引用
+            'url': {'offset': 0, 'length': 1},
+        }
+
+        # 富文本中的其它字段，只会包含以下列表中的字段
         extra_fileds = ['language', 'user', 'url', 'custom_emoji_id']
         encoding = "utf-16"
 
@@ -71,6 +73,15 @@ class ToolBox:
         # 将文本编码为 UTF-16，并移除 BOM，实际上变成 \x00e\x00l\x00l\x00o 的样式
         all_text = all_text.encode(encoding)[2:]
         for entitie in draft_entities:
+            if not entitie.get('text'):
+                continue
+            if not entitie.get('type') in entities_type:
+                log.error(f'>> format_entities: 构建富文本出错，不支持的富文本类型-- {entitie}')
+                continue
+
+            if entitie['type'] in ['pre', 'text_link', 'text_mention', 'custom_emoji'] and len(entitie) < 3:
+                log.error(f'>> format_entities: 构建富文本出错，缺少参数，请检查参数-- {entitie}')
+                continue
 
             # 同样将字串编码为 UTF-16，并移除 BOM，
             text = entitie['text'].encode(encoding)[2:]

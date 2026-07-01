@@ -1,7 +1,7 @@
 
 
 '''
-管理算什么消息
+管理签到消息
 '''
 import uuid
 import json
@@ -15,7 +15,7 @@ import config
 from database import sql
 from logmanage import DailyLogManager
 
-log = DailyLogManager('Register', logging.ERROR, logging.INFO)
+log = DailyLogManager('Statement', logging.ERROR, logging.INFO)
 
 class Register:
     '''
@@ -31,21 +31,29 @@ class Register:
         query = sql.query(sql.database, query, None)
         self.table_fileds = [filed.get('Field') for filed in query]
 
-    def create_register(self, affiliated, crator, kwargs):
+    def create_register(self, group, crator, kwargs):
         '''
         在数据库中创建一个签到实例
-        :param affiliated:
+        :param group:
         :param crator:
         :param kwargs:
         :return:
         '''
+        period = kwargs[0]      # 签到周期
+        description = kwargs[1]     # 签到描述
+        status = kwargs[2]      # 当前状态
 
-        values = [uuid.uuid4(), affiliated, crator, *kwargs]
+        origin = datetime.now().date()  # 起始日期，也就是当前日期
+        expire = origin + timedelta(days=period)    # 终止日期，就是当前日期加上签到周期
+
+        values = [uuid.uuid4(), group, crator, description, origin, expire, status] # 这些是固定字段值
         for field in self.table_fileds:
             if field in ['created', 'edited']:
                 values.append(config.now_time)
-            elif field not in ['id', 'chat', 'creator', 'period', 'explains', 'status']:
-                values.append(None)
+                continue
+            elif field in ['id', 'group', 'creator', 'explains', 'origin', 'expire', 'status']:
+                continue
+            values.append(None)
 
         query = f'INSERT INTO `{self.table}` VALUES ({",".join(["%s"]*len(self.table_fileds))})'
         return sql.query(sql.database, query, values)
@@ -63,7 +71,7 @@ class Register:
         '''
 
         try:
-            query = f"SELECT * FROM `{self.table}` WHERE chat = %s"
+            query = f"SELECT * FROM `{self.table}` WHERE group = %s"
             query = sql.query(sql.database, query, [chat])[0]
         except Exception as e:
             log.info(f'apply_register: {e}')
@@ -128,6 +136,44 @@ class Register:
 
         return result
 
+    def check_update_status(self, chat):
+        '''
+        检查签到规则的状态状态,如果超过终止日期，则将状态改为终止,并返回当前群组的签到概况
+        :param chat:
+        :return:
+        '''
+        result = None
+        # 分别查询 id，描述，起始日期，结束日期，状态等字段
+        query = f"SELECT `id`,`description`,`origin`,`expire`,`status`, FROM `{self.table}` WHERE `group`=%s"
+        registers = sql.query(sql.database, query, [chat]) or []
+
+        currentTime = datetime.now().date()     # 当前日期
+        for register in registers:
+            if not register:
+                continue
+            if currentTime > register['expire']:
+                # 当前日期比签到项目的终止日期大时，将状态改为终止
+                self.update_status(register['id'], 'End')
+            else:
+                result = {
+                    'period': register['expire'] - register['origin'],   # 签到周期
+                    'description': register['description'],
+                    'status': register['status']
+                }
+
+
+        return [len(registers), result]
+
+    def update_status(self, re_id, status):
+        '''
+        更新签到规则的状态
+        :param re_id: 签到规则ID
+        :return:
+        '''
+        query = f"UPDATE `{self.table}` SET `status`='End' WHERE `id`=%s"
+        sql.query(sql.database, query, [re_id])
+
+
     @classmethod
     def create_csv(cls, data):
         '''
@@ -165,8 +211,6 @@ class Register:
 
         return wb
 
-
-
     @classmethod
     def calculate_date(cls, old_date, new_date):
         """
@@ -186,12 +230,12 @@ class Register:
         # 计算日期差值
         return (new_date.date() - old_date.date()).days + 1
 
-register = Register(sql.table_register)
+statement = Register(sql.table_statement)
 
 if __name__ == '__main__':
 
-    register = Register('register')
-    temp = register.view_register(-1003606614850, '7a53fe99-a9de-4351-b7e7-0e0518ff082f')
+    statement = Register('register')
+    temp = statement.view_register(-1003606614850, '7a53fe99-a9de-4351-b7e7-0e0518ff082f')
     print(temp)
 
 
