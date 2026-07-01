@@ -1,174 +1,4 @@
 {
-    "users": [
-        {
-            "Field": "id",
-            "Type": "bigint",
-            "Null": "NO",
-            "Key": "PRI",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "type",
-            "Type": "varchar(20)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "username",
-            "Type": "varchar(60)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "is_bot",
-            "Type": "tinyint(1)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "first_name",
-            "Type": "varchar(60)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "last_name",
-            "Type": "varchar(60)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "phone",
-            "Type": "varchar(20)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "image",
-            "Type": "json",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "description",
-            "Type": "json",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "status",
-            "Type": "json",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "called",
-            "Type": "tinyint(1)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "video_calls",
-            "Type": "tinyint(1)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "contact",
-            "Type": "tinyint(1)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "mutual",
-            "Type": "tinyint(1)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "premium",
-            "Type": "tinyint(1)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "new_chated",
-            "Type": "tinyint(1)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "access",
-            "Type": "tinyint(1)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "invite",
-            "Type": "tinyint(1)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "any_group",
-            "Type": "json",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "created",
-            "Type": "datetime",
-            "Null": "NO",
-            "Key": "",
-            "Default": "CURRENT_TIMESTAMP",
-            "Extra": "DEFAULT_GENERATED"
-        },
-        {
-            "Field": "edited",
-            "Type": "datetime",
-            "Null": "NO",
-            "Key": "",
-            "Default": "CURRENT_TIMESTAMP",
-            "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
-        }
-    ],
     "chats": [
         {
             "Field": "id",
@@ -243,9 +73,9 @@
             "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
         }
     ],
-    "supergroups": [
+    "search": [
         {
-            "Field": "id",
+            "Field": "chat",
             "Type": "bigint",
             "Null": "NO",
             "Key": "PRI",
@@ -253,39 +83,23 @@
             "Extra": ""
         },
         {
+            "Field": "title",
+            "Type": "varchar(100)",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
             "Field": "type",
-            "Type": "varchar(30)",
-            "Null": "NO",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "channel",
-            "Type": "tinyint(1)",
+            "Type": "varchar(40)",
             "Null": "YES",
             "Key": "",
             "Default": null,
             "Extra": ""
         },
         {
-            "Field": "status",
-            "Type": "json",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "description",
-            "Type": "varchar(600)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "member",
+            "Field": "number",
             "Type": "int",
             "Null": "YES",
             "Key": "",
@@ -294,31 +108,39 @@
         },
         {
             "Field": "administrators",
-            "Type": "int",
+            "Type": "json",
             "Null": "YES",
             "Key": "",
             "Default": null,
             "Extra": ""
         },
         {
-            "Field": "restricted",
-            "Type": "int",
+            "Field": "initiator",
+            "Type": "json",
             "Null": "YES",
             "Key": "",
             "Default": null,
             "Extra": ""
         },
         {
-            "Field": "banned",
-            "Type": "int",
+            "Field": "bot_status",
+            "Type": "json",
             "Null": "YES",
             "Key": "",
             "Default": null,
             "Extra": ""
         },
         {
-            "Field": "get_members",
-            "Type": "tinyint(1)",
+            "Field": "description",
+            "Type": "varchar(2066)",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "permission",
+            "Type": "json",
             "Null": "YES",
             "Key": "",
             "Default": null,
@@ -343,16 +165,48 @@
     ],
     "groups": [
         {
-            "Field": "id",
+            "Field": "url",
             "Type": "varchar(255)",
             "Null": "NO",
-            "Key": "",
+            "Key": "PRI",
             "Default": null,
             "Extra": ""
         },
         {
             "Field": "type",
+            "Type": "varchar(60)",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "chat_id",
+            "Type": "bigint",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "chat_type",
             "Type": "varchar(20)",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "group_id",
+            "Type": "bigint",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "group_type",
+            "Type": "varchar(30)",
             "Null": "YES",
             "Key": "",
             "Default": null,
@@ -361,16 +215,24 @@
         {
             "Field": "title",
             "Type": "varchar(255)",
-            "Null": "NO",
+            "Null": "YES",
             "Key": "",
             "Default": null,
             "Extra": ""
         },
         {
-            "Field": "url",
-            "Type": "varchar(255)",
-            "Null": "NO",
-            "Key": "PRI",
+            "Field": "name",
+            "Type": "varchar(80)",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "post_id",
+            "Type": "bigint",
+            "Null": "YES",
+            "Key": "",
             "Default": null,
             "Extra": ""
         },
@@ -431,34 +293,66 @@
             "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
         }
     ],
-    "manage": [
+    "shares": [
         {
-            "Field": "id",
-            "Type": "bigint",
+            "Field": "url",
+            "Type": "varchar(255)",
             "Null": "NO",
             "Key": "PRI",
             "Default": null,
             "Extra": ""
         },
         {
-            "Field": "name",
-            "Type": "varchar(20)",
-            "Null": "NO",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "update_id",
-            "Type": "bigint",
+            "Field": "type",
+            "Type": "varchar(30)",
             "Null": "YES",
             "Key": "",
             "Default": null,
             "Extra": ""
         },
         {
-            "Field": "type",
-            "Type": "bigint",
+            "Field": "title",
+            "Type": "text",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "description",
+            "Type": "text",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "members",
+            "Type": "int",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "tag",
+            "Type": "text",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "publish",
+            "Type": "int",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "render",
+            "Type": "varchar(30)",
             "Null": "YES",
             "Key": "",
             "Default": null,
@@ -507,7 +401,31 @@
             "Extra": ""
         },
         {
+            "Field": "number",
+            "Type": "int",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
             "Field": "administrators",
+            "Type": "json",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "bot_status",
+            "Type": "json",
+            "Null": "YES",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "initiator",
             "Type": "json",
             "Null": "YES",
             "Key": "",
@@ -638,7 +556,7 @@
     "interact": [
         {
             "Field": "bot",
-            "Type": "bigint",
+            "Type": "varchar(20)",
             "Null": "NO",
             "Key": "PRI",
             "Default": null,
@@ -661,7 +579,7 @@
             "Extra": ""
         },
         {
-            "Field": "interact",
+            "Field": "exchange",
             "Type": "varchar(40)",
             "Null": "YES",
             "Key": "",
@@ -685,7 +603,7 @@
             "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
         }
     ],
-    "restriction": [
+    "constra": [
         {
             "Field": "bot",
             "Type": "bigint",
@@ -769,16 +687,40 @@
             "Extra": ""
         },
         {
-            "Field": "period",
-            "Type": "int",
+            "Field": "name",
+            "Type": "varchar(100)",
             "Null": "NO",
             "Key": "",
             "Default": null,
             "Extra": ""
         },
         {
-            "Field": "explains",
+            "Field": "describe",
             "Type": "varchar(200)",
+            "Null": "NO",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "origin",
+            "Type": "date",
+            "Null": "NO",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "expired",
+            "Type": "date",
+            "Null": "NO",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "timing",
+            "Type": "int",
             "Null": "NO",
             "Key": "",
             "Default": null,
@@ -793,11 +735,11 @@
             "Extra": ""
         },
         {
-            "Field": "census",
-            "Type": "json",
-            "Null": "YES",
+            "Field": "scheme",
+            "Type": "bigint",
+            "Null": "NO",
             "Key": "",
-            "Default": null,
+            "Default": "0",
             "Extra": ""
         },
         {
@@ -1065,86 +1007,78 @@
             "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
         }
     ],
-    "marketing": [
+    "planning": [
         {
-            "Field": "uuid",
-            "Type": "int",
+            "Field": "id",
+            "Type": "varchar(20)",
             "Null": "NO",
             "Key": "PRI",
             "Default": null,
             "Extra": ""
         },
         {
-            "Field": "type",
-            "Type": "varchar(60)",
+            "Field": "inde_url",
+            "Type": "varchar(400)",
             "Null": "NO",
             "Key": "",
             "Default": null,
             "Extra": ""
         },
         {
-            "Field": "user",
-            "Type": "varchar(40)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "accout",
-            "Type": "varchar(30)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "password",
-            "Type": "varchar(30)",
-            "Null": "YES",
+            "Field": "only_url",
+            "Type": "varchar(400)",
+            "Null": "NO",
             "Key": "",
             "Default": null,
             "Extra": ""
         },
         {
             "Field": "title",
-            "Type": "varchar(200)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
-            "Field": "display",
-            "Type": "varchar(60)",
+            "Type": "varchar(400)",
             "Null": "NO",
             "Key": "",
             "Default": null,
             "Extra": ""
         },
         {
-            "Field": "url",
-            "Type": "varchar(100)",
-            "Null": "YES",
-            "Key": "",
-            "Default": null,
-            "Extra": ""
-        },
-        {
             "Field": "description",
-            "Type": "varchar(200)",
+            "Type": "varchar(600)",
+            "Null": "NO",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "promo",
+            "Type": "varchar(600)",
             "Null": "YES",
             "Key": "",
             "Default": null,
             "Extra": ""
         },
         {
-            "Field": "priority",
+            "Field": "level",
             "Type": "int",
-            "Null": "YES",
+            "Null": "NO",
             "Key": "",
-            "Default": "0",
+            "Default": null,
             "Extra": ""
+        },
+        {
+            "Field": "created",
+            "Type": "datetime",
+            "Null": "NO",
+            "Key": "",
+            "Default": null,
+            "Extra": ""
+        },
+        {
+            "Field": "edited",
+            "Type": "datetime",
+            "Null": "NO",
+            "Key": "",
+            "Default": "CURRENT_TIMESTAMP",
+            "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
         }
     ]
 }

@@ -1,13 +1,32 @@
-
 '''
 h
 '''
 
 import os
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import config
+from utils import timestand
 
+
+PROJECT_TZ = timezone(timedelta(hours=8))
+
+
+class ProjectTimezoneFormatter(logging.Formatter):
+    '''
+    自定义日志格式化器，使用项目时区
+    '''
+    def formatTime(self, record, datefmt=None):
+        '''
+
+        :param record:
+        :param datefmt:
+        :return:
+        '''
+        dt = datetime.fromtimestamp(record.created, PROJECT_TZ)
+        if datefmt:
+            return dt.strftime(datefmt)
+        return dt.strftime("%Y-%m-%d %H:%M:%S")
 
 class DailyLogManager:
     '''
@@ -32,16 +51,18 @@ class DailyLogManager:
             os.makedirs(self.log_dir)
 
         # 配置日志记录器，确保每个实例都有唯一名称
-        self.logger = logging.getLogger(f"{head}_Logger")  # 使用唯一名称，避免冲突
+        self.logger = logging.getLogger(f"{head}_Logger")
         self.logger.setLevel(logging.DEBUG)
 
         # 自定义日志格式
         self.log_format = f"%(asctime)s [{self.head}] [%(levelname)s] %(message)s"
 
-        # 避免重复添加处理器（每次实例化时检查处理器）
+
+        # 避免重复添加处理器
         if not self.logger.handlers:
             # 添加控制台输出
             self._setup_console_handler()
+
             # 初始化日志文件处理器
             self._update_log_file(force=True)
 
@@ -50,13 +71,13 @@ class DailyLogManager:
 
     def _setup_console_handler(self):
         """
-        配置控制台日志处理器（StreamHandler）
+        配置控制台日志处理器
         """
         console_handler = logging.StreamHandler()
         console_handler.setLevel(self.console_log_level)
         console_handler.setFormatter(logging.Formatter(self.log_format))
 
-        # 检查是否已存在相应的控制台处理器
+        # 检查是否已存在控制台处理器
         if not any(isinstance(handler, logging.StreamHandler) for handler in self.logger.handlers):
             self.logger.addHandler(console_handler)
 
@@ -65,18 +86,24 @@ class DailyLogManager:
         基于当前日期更新日志文件路径，并清理过期日志
         :param force: 是否强制更新
         """
-        today = datetime.now().strftime('%Y-%m-%d')
+        today = timestand.date_from_timestamp()
 
+        # 如果不是强制更新，并且日期没有变化，就不重复创建 FileHandler
         if not force and self.current_date == today:
             return
 
         self.current_date = today
+
+        # 在切换或初始化日志文件时，清理过期日志
+        self._cleanup_old_logs()
+
         log_file = os.path.join(self.log_dir, f"{today}.log")
 
         # 查找并移除已有的文件处理器
         for handler in self.logger.handlers[:]:
             if isinstance(handler, logging.FileHandler):
                 self.logger.removeHandler(handler)
+                handler.close()
 
         # 添加新的文件处理器
         file_handler = logging.FileHandler(log_file, encoding="utf-8")
@@ -84,6 +111,48 @@ class DailyLogManager:
         file_handler.setFormatter(logging.Formatter(self.log_format))
 
         self.logger.addHandler(file_handler)
+
+    def _cleanup_old_logs(self):
+        """
+        删除超过保留天数的日志文件。
+
+        例如：
+        config.retention_days = 7
+
+        那么会删除 logs 目录下早于 7 天前的日志文件。
+        只处理文件名格式为：YYYY-MM-DD.log 的日志文件。
+        """
+        if self.retention_days <= 0:
+            return
+
+        expire_date = datetime.now() - timedelta(days=self.retention_days)
+
+        for filename in os.listdir(self.log_dir):
+            # 只处理 .log 文件
+            if not filename.endswith(".log"):
+                continue
+
+            file_path = os.path.join(self.log_dir, filename)
+
+            # 跳过文件夹
+            if not os.path.isfile(file_path):
+                continue
+
+            # 去掉 .log，得到日期部分
+            file_date_text = filename.replace(".log", "")
+
+            try:
+                file_date = datetime.strptime(file_date_text, "%Y-%m-%d")
+            except ValueError:
+                # 文件名不是 2026-05-02.log 这种格式，就跳过
+                continue
+
+            # 如果日志日期早于过期日期，则删除
+            if file_date < expire_date:
+                try:
+                    os.remove(file_path)
+                except OSError as error:
+                    self.logger.warning(f"删除过期日志失败：{file_path}，原因：{error}")
 
     def info(self, message):
         """
@@ -126,14 +195,14 @@ if __name__ == "__main__":
     # 初始化日志管理器
     log = DailyLogManager('mylogs', logging.ERROR, logging.INFO)
 
-    # 写入控制台的 INFO（不会写入文件）
+    # 写入控制台的 INFO，不会写入文件
     log.info("这是一条普通信息，仅打印到控制台。")
 
-    # 写入日志文件的 ERROR（同时打印到控制台）
+    # 写入日志文件的 ERROR，同时打印到控制台
     log.error("这是一个错误信息，将写入日志文件以及打印到控制台。")
 
-    # 写入 CRITICAL 日志（严重错误）
+    # 写入 CRITICAL 日志
     log.critical("系统遇到了严重错误！快速定位文件来源")
 
-    # DEBUG 信息，仅在调试模式时可用
+    # DEBUG 信息
     log.debug("调试信息，仅适用于开发环境")

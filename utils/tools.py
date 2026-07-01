@@ -8,7 +8,7 @@
 import re
 import random
 import unicodedata
-from utils.TGrequest import crave
+import string
 import logging
 from logmanage import DailyLogManager
 
@@ -21,12 +21,12 @@ class ToolBox:
     '''
 
     @classmethod
-    def contains_uppercase(cls, string):
+    def contains_uppercase(cls, char):
         '''
         判断字符串是否包含大写字母
         :return:
         '''
-        return any(char.isupper() for char in string)
+        return any(char.isupper() for char in char)
 
     @classmethod
     def format_entities(cls, all_text, draft_entities):
@@ -164,19 +164,6 @@ class ToolBox:
         return {'text': text, 'reply_markup': {'inline_keyboard': [button]}, 'entities': entitles}
 
     @classmethod
-    def get_administrator(cls, bot, group):
-        '''
-        获取指定群组的管理员
-        :param bot:
-        :param group:
-        :return:
-        '''
-        response = crave.send(bot, 'getChatAdministrators', {'chat_id': group})
-        if response:
-            return response['result']
-        return []
-
-    @classmethod
     def get_display_width(cls, text, length):
         """
         判断单个字符的显示宽度
@@ -184,6 +171,10 @@ class ToolBox:
         - 英文字符返回 1
         - 中文字符或全角字符返回 2
         """
+        if not text:
+            return None
+        text = text.replace('\n', ' ').replace('\r', ' ').replace('\t', ' ')
+
         count = 0
         result = ''
         for index in [char for char in text]:
@@ -196,14 +187,37 @@ class ToolBox:
                 return result
         return text
 
+    @classmethod
+    def brief_uid(cls, length, use_secure=None):
+        """
+        生成指定长度的随机字符串
+        :param length: 字符串长度
+        :param use_secure: 是否使用加密安全随机数 (默认 False)
+        """
+        if length <= 0:
+            return ""
+
+        # 定义字符集：大小写字母 + 数字
+        characters = string.ascii_letters + string.digits
+
+        if use_secure:
+            import secrets
+            return ''.join(secrets.choice(characters) for _ in range(length))
+        else:
+            return ''.join(random.choice(characters) for _ in range(length))
 
 
-toolbox = ToolBox()
+
+
+
+
+tools = ToolBox()
 
 
 if __name__ == '__main__':
 
-    pass
+    temp = tools.brief_uid(6)
+    print(temp)
 
 
 

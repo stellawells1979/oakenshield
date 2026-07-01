@@ -3,6 +3,8 @@
 *******************************
 	43.160.218.250 主机的配置
 
+https://www.oakenshield.us.ci
+
 mysql 用户：ubuntu    密码：SeaKkSFUkM
 
 
@@ -59,6 +61,8 @@ git clone -b master https://github.com/stellawells1979/oakenshield.git /home/ubu
 git branch		查看分支名
 
 git commit -m "首次提交"		推送前先执行此代码，提交到本地仓库
+
+git rm --cached data/myaccount.txt	取消 git 对某个文件的跟踪
 
 git push -u origin <分支名>		推送到远程仓库
 

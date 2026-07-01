@@ -11,7 +11,7 @@ from logmanage import DailyLogManager
 
 
 
-log = DailyLogManager('Mylogs', logging.ERROR, logging.INFO)
+log = DailyLogManager('Mysql', logging.WARNING, logging.INFO)
 
 
 class MySql:
@@ -44,8 +44,6 @@ class MySql:
             connection = self._create_connection()
             self.pool.put(connection)
 
-
-
     def _create_connection(self):
         """
         创建一个新的数据库连接
@@ -56,7 +54,8 @@ class MySql:
             user=self.user,
             password=self.password,
             charset=self.charset,
-            autocommit=True  # 自动提交事务
+            autocommit=True,  # 自动提交事务
+            init_command = f"SET time_zone = '{config.database_time_zone}'"
         )
 
     @classmethod
@@ -147,7 +146,7 @@ class MySql:
         except SyntaxError:
             log.error(f'SQL语法错误，请检查查询语句: {sql_query}')
         except Exception as e:
-            log.error(f'执行SQL查询失败-- {e}')
+            log.error(f'执行SQL查询失败-- {e}--{sql_query}')
         finally:
             self.pool_release(conn)
         return result
@@ -177,21 +176,28 @@ class Sql(MySql):
     '''
     初始化项目数据库
     '''
-    def __init__(self, host, port, user, password, charset, database='telegram'):
+    def __init__(self, host, port, user, password, charset, extra=None):
+        '''
+        :param host:
+        :param port:
+        :param user:
+        :param password:
+        :param charset:
+        :param extra: 传递 True 表示初始化数据库结构
+        '''
         super().__init__(host, port, user, password, charset)
 
-        self.database = database
-        self.table_users = 'users'
-        self.table_chats = 'chats'
-        self.table_supergroups = 'supergroups'
-        self.table_groups = 'groups'
 
-        self.table_manage = 'manage'
+        self.database = 'telegram'
+        self.table_chats = 'chats'
+        self.table_search = 'search'
+        self.table_groups = 'groups'
+        self.table_shares = 'shares'
         self.table_rules = 'rules'
         self.table_interact = 'interact'
-        self.table_restriction = 'restriction'
+        self.table_constra = 'constra'
         self.table_register = 'register'
-        self.table_marketing = 'marketing'
+        self.table_planning = 'planning'
 
         # 收集数据表中的tinyint(1)类型字段,以便将这些字段的值转换为布尔值
         self.tinyint1 = {}
@@ -199,12 +205,11 @@ class Sql(MySql):
         # 储存数据表的字段信息
         self.all_tables_fields = {}
 
-        self.initialize()
+        if extra:
+            self.initialize()
 
         with open(config.table_structure, encoding='utf-8') as f:
             self.all_tables_fields = json.load(f)
-
-
 
     def query(self, database_name, sql_query, data, extra=None):
         '''
@@ -219,7 +224,7 @@ class Sql(MySql):
         if not result:
             return []
 
-        if result and sql_query.startswith("SELECT"):
+        if result and sql_query.startswith("SELECT") and 'FROM' in sql_query:
 
             sql_query = sql_query.replace('`', '')
 
@@ -383,14 +388,11 @@ class Sql(MySql):
             column_defs) + "\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
         return full_sql
 
-sql = Sql('127.0.0.1', 3306, 'root', '', 'utf8mb4')
+sql = Sql('127.0.0.1', 3306, 'root', '', 'utf8mb4', True)
 
 if __name__ == '__main__':
 
-    query = f"SELECT `video_calls`, `any_group` FROM `{sql.table_users}` WHERE `id`=5304501737"
-    query = sql.query(sql.database, query, data=None)
-    print(query)
-
+    pass
 
 
 

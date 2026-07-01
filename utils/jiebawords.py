@@ -17,6 +17,10 @@ class JiebaWords:
     '''
     一个高度自定义的利用 jieba 进行分词的模块
     '''
+    # 创建一个固定词汇表，一些网络歪词或谐音梗所描述的意思与实际词语的意思大径相庭，有时需要结合上下文来定义其实际指向的描述
+    special_words = {
+        'proxies': '翻墙,梯子,机场,科学上网,V2RAY,v2ray,小火箭,shadowrocket,免费节点,订阅节点,vpn,VPN,,,,,,,,,,,,,,',
+    }
 
     def __init__(self):
 

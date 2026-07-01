@@ -57,9 +57,12 @@ env/
 *.swo
 *~
 
-# Logs
+# 这些文件夹的内容不会上传
 logs/
+backup/
+test/
 *.log
+
 
 # Environment variables
 .env
@@ -67,7 +70,6 @@ logs/
 
 # 一些包含账号信息或调试数据的文件将不会上伟
 ubuntuhelp.txt
-test/debugging.py
 data/myaccount.txt
 
 

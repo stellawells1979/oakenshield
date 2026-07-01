@@ -157,7 +157,6 @@ class Account:
 
         return self.__dict__.get(bot, {}).get(option)
 
-
 class TestAccount:
     '''
     测试用的
@@ -202,6 +201,10 @@ class TestAccount:
                     {'type': 'bold', 'text': '添加收录'},
                 ]
             },
+            'add_description': {
+                'text': '致力于提供全方位的 telegram 搜索服务，为用户提供广泛的搜索内容，提交你的群组链接，同样能提高你的群组爆光率'
+
+            }
 
         }
 
@@ -221,7 +224,7 @@ class TestAccount:
             'description': '监控群组的每一个动静，按规则做出响应',
             'start_description': {
                 'text': f"一个能在你的群组中24小时不间断监视群组活动的机器人，它没有作息时间，你可以设置任意规则来管理你的群组\n\n"
-                        f"点击【帮助】了解如何使用本机器",
+                        f"点击【帮助】了解如何使用本机器人",
                 'entities': [
                     {'type': 'bold', 'text': '帮助'},
                 ]
@@ -234,7 +237,7 @@ class TestAccount:
             },
             'help_description': {
                 'text': '1.首先确保你是某个群组的创建者或者管理员且有相应权限\n2.点击【添加机器人到群组】按钮并进入那个群'
-                        '组\n3.在群组的用户列表中搜索找到本机器人，将机器人设为管理员并赋以相应权限\n4.向群里发送【hello wellwen】让机器'
+                        '组\n3.在群组的用户列表中搜索找到本机器人，将机器人设为管理员并赋以相应权限\n4.向群里发送【hello rules】让机器'
                         '人找到你，稍等片刻机器人会回复一条信息把你带回本聊天或者你直接回到本聊天，即可进入规则设置界面',
                 'entities': [
                     {'type': 'bold', 'text': '规则机器人'},
@@ -245,8 +248,8 @@ class TestAccount:
                 ]
             },
         }
-
-    def init_account(self):
+    @classmethod
+    def init_account(cls):
         '''
 
         :return:

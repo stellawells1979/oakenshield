@@ -83,7 +83,28 @@ class Request:
         url = f'{self.base_url}{token}/{method}'
         try:
             if file:
-                response = requests.post(url, data=body, files=file, proxies=self.proxy, timeout=10)
+                file_type = file.get('type')
+                file_path = file.get('path')
+                file_obj = file.get('file')
+                filename = file.get('filename')
+                if file_obj:
+                    file_obj.seek(0)
+                    response = requests.post(
+                        url,
+                        data=body,
+                        files={file_type: (filename, file_obj)},
+                        proxies=self.proxy,
+                        timeout=30
+                    )
+                else:
+                    with open(file_path, 'rb') as f:
+                        response = requests.post(
+                            url,
+                            data=body,
+                            files={file_type: f},
+                            proxies=self.proxy,
+                            timeout=30
+                        )
             else:
                 response = requests.post(url, json=body, proxies=self.proxy, timeout=10)
             result = json.loads(response.text)
@@ -95,6 +116,18 @@ class Request:
             result = {'ok': False, 'description': f'Unkown: {e}'}
 
         return result
+
+    def set_webhook(self, bot, url):
+        '''
+        设置 webhook
+        :param bot:
+        :param url:
+        :return:
+        '''
+        response = self.send(bot, 'setWebhook', {'url': url})
+        if response['ok']:
+            log.warning(f'Webhook set successfully for bot {bot}')
+        return response
 
     def get_webhook_info(self, bot):
         '''

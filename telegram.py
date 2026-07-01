@@ -26,10 +26,13 @@ from utils.account import account
 from utils.TGrequest import crave
 from message import message_filter
 from callbackquery import CallbackQuery
+from member import MychatMember
+from utils import timestand
+from utils.timingtask import scheduled
 from logmanage import DailyLogManager
 
 # 配置日志管理器
-log = DailyLogManager('Telegram', logging.ERROR, logging.INFO)
+log = DailyLogManager('Telegram', logging.WARNING, logging.INFO)
 
 
 class Telegram:
@@ -44,7 +47,7 @@ class Telegram:
         """
         self.bot = bot
         self.bot_id = account.attribute(bot, 'id')
-        self.send_data = []
+
 
     def set_webhook(self, url):
         '''
@@ -70,7 +73,9 @@ class Telegram:
         if 'message' in update:
             result = message_filter(self.bot, update)
         elif 'callback_query' in update:
-            result = CallbackQuery(self.bot, update).main()
+            result = CallbackQuery(self.bot, update).callback_message()
+        elif 'my_chat_member' in update:
+            result = MychatMember(self.bot, update).main()
 
         return result
 
@@ -93,7 +98,9 @@ class Main:
     :return:
     '''
     def __init__(self):
-        self.send_data = Queue()    # 定义一个参数池，储存后续程序处理生成的请求对你
+
+        self.send_data = Queue()    # 定义一个参数池，储存后续程序处理生成的请求对象
+
         # 创建独立线程运行 telegram_requests()
         self.stop_event = Event()
         self.telegram_thread = Thread(target=self.telegram_requests, daemon=True)
@@ -104,12 +111,12 @@ class Main:
         移除超时的验证用户。
         数据表中储存这些用户的信息。
         """
-        query = f'SELECT bot, chat, verify FROM `{sql.table_restriction}` WHERE verify IS NOT NULL'
+        query = f'SELECT bot, chat, verify FROM `{sql.table_constra}` WHERE verify IS NOT NULL'
         result = sql.query(sql.database, query, None)
         if not result:
             return
 
-        now_date = time.time()
+        now_time = timestand.unix()
         for item in result:
             if not item:
                 continue
@@ -117,7 +124,7 @@ class Main:
             expired_keys = []
             for key, value in verify.items():
                 # 将验证超时用户移出聊天
-                if now_date > value:
+                if now_time > value:
                     self.send_data.put([item.get('bot'), 'kickChatMember', {'chat_id': item.get('chat'), 'user_id': int(key)}, None])
                     expired_keys.append(key)
             if not expired_keys:
@@ -126,28 +133,45 @@ class Main:
             for key in expired_keys:
                 del verify[key]
             # 将最新的验证数据更新到数据表
-            update_query = f'UPDATE `{sql.table_restriction}` SET verify=%s, edited=NOW() WHERE bot=%s AND chat=%s'
+            update_query = f'UPDATE `{sql.table_constra}` SET verify=%s, edited=NOW() WHERE bot=%s AND chat=%s'
             sql.query(sql.database, update_query, [json.dumps(verify), item.get('bot'), item.get('chat')])
 
     def telegram_requests(self):
         """
         处理队列中的 API 消息请求，并确保请求的时效性。
         """
-        self.remove_expired_verifications()     # 从数据库提取验证过期的用户，并将其移出群聊
-
+        scan_verifications = 0    # 扫描过期的验证用户时间间隔
         while not self.stop_event.is_set():
+
+            now_time = timestand.unix()
+
+            # 每间隔一分钟扫描一次过期的验证用户
+            if now_time > scan_verifications:
+                self.remove_expired_verifications()
+                scan_verifications = now_time + 60
+
+            # 扫描签到数据表中的计划任务
+            register_task = scheduled.get_register_task()
+            if register_task:
+                for row in register_task:
+                    self.send_data.put(row)
+
             try:
                 data = self.send_data.get(timeout=1)
             except Empty:
+                time.sleep(3)
                 continue
 
             if data[3] and data[3].get('delay'):
-                now_date = time.time()
-                if data[3].get('delay') > now_date:
+                if data[3].get('delay') > now_time:
                     # 如果消息被延迟，重新放入队列
                     self.send_data.put(data)
                     continue
-            response = crave.send(data[0], data[1], data[2])
+            file = None
+            if data[3] and data[3].get('file'):
+                file = data[3].get('file')
+
+            response = crave.send(data[0], data[1], data[2], file)
 
             if response['ok'] and data[3] and data[3].get('delete'):
                 message_id = response['result']['message_id']
@@ -159,18 +183,17 @@ class Main:
                 ])
             elif not response['ok'] and response.get('description'):
                 error = response['description']
-                if error in ['Request Timeout', 'Request ConnectionError'] or error.startswith('Unkown:'):
+                if error in ['Request Timeout', 'Request ConnectionError']:
                     self.send_data.put(data)
                 log.info(f'telegram_requests: {response}')
             else:
                 print(f" Request result: {response}")
 
-
     def handle_update(self, route, update):
         '''
         解析路由并向处理环节传递相应参数
         '''
-        print('收到更新')
+        print('收到更新', route)
         print(update)
         print('\n')
         if not update:
@@ -188,8 +211,6 @@ class Main:
             item.insert(0, bot)
             self.send_data.put(item)
         return False
-
-
 
 main = Main()
 
@@ -219,13 +240,13 @@ def route_all(anything):
 
 if __name__ == '__main__':
 
-    wk = 1
+    wk = 0
     if wk == 0:
-        app.run(host='192.168.1.100', port=5000)
+        app.run(host='0.0.0.0', port=5002)
 
     else:
         from test import debugging
-        reps = Telegram('rules').process_update(debugging.message_02)
+        reps = Telegram('rules').process_update(debugging.my_chat_member_06)
         print(reps)
 
 
