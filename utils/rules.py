@@ -392,7 +392,7 @@ class Rules:
             self.change = False
         else:
 
-            result = register.set_register(self.group, self.message_id, self.rules, self.details)
+            result = register.set_register(self.user, self.group, self.message_id, self.rules, self.details)
             # 返回更新后的规则和额外的说明文本
             self.rules, self.extra_text = result
 
@@ -454,7 +454,7 @@ class Rules:
         '''
         params = self.check_rules_params(params)
 
-        if params:
+        if params is not None:
             # 更新相应规则选项参数
             if self.option == 'register':
                 # 签到规则的设置需要与签到项目的的参数一致，所有要走独立的设置逻辑
@@ -470,7 +470,7 @@ class Rules:
         # 此参数在本方法中必须置 None 否则影响发送文本格式
         self.details = None
 
-        # 返回 apply_rules 方法生成的消息参数，此结果是返回给message类的
+        # 返回 maintenance 方法生成的消息参数，此结果是返回给message类的
         return self.maintenance()
 
     def check_rules_params(self, params):

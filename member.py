@@ -23,6 +23,14 @@ class ChatMember:
         self.bot = bot
         self.chat_id = data.get('chat', {}).get('id')
 
+    def parse_chat_members(self, data):
+        '''
+        解析聊天成员数据
+        :param data:
+        :return:
+        '''
+
+
 
 class MychatMember:
     '''

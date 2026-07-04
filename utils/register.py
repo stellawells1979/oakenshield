@@ -95,8 +95,6 @@ class Register:
         rules.update({'regi_count': rules.get('regi_count') + 1})
         rules.update({'regi_id': regi_id})
         rules.update({'status': 'Run'})
-        if not rules.get('timing'):
-            rules.update({'timing': 30})
 
         return rules
 

@@ -53,7 +53,7 @@ rules_example = {
     'administrators': [],
     'register': {
         'regi_count': 0, 'regi_id': None, 'regi_name': None, 'describe': None,
-        'origin': None, 'expired': None, 'timing': None, 'status': None
+        'origin': None, 'expired': None, 'timing': 0, 'status': None
     },
     'newcomer': {'welcome': None, 'tip_join': False, 'tip_leave': False, 'verify_join': False},
     'text': {'len': 0, 'high': 0, 'key': None, 'allow': 0, 'level': None, 'mute_time': 0},

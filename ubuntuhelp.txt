@@ -12,16 +12,14 @@ mysql 用户：ubuntu    密码：SeaKkSFUkM
 
 
 
+sudo systemctl atart TDLib.service	启动一个服务
+
+sudo systemctl stop TDLib.service	信止一个服务
 
 
 
 
-
-
-
-
-
-
+journalctl -u TDBot.service -f		将后台运行的服务的运行状态实时输出到控制台
 
 
 
@@ -71,7 +69,7 @@ git push -u origin master --force	强制推送到远程仓库
 git remote -v		查看当前远程仓库地址
 
 
-
+========================================================================
 
 
 

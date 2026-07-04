@@ -23,7 +23,7 @@ from threading import Thread, Event
 from queue import Queue, Empty
 from database import sql
 from utils.account import account
-from utils.TGrequest import crave
+from utils.TGrequest import request
 from message import message_filter
 from callbackquery import CallbackQuery
 from member import MychatMember
@@ -55,14 +55,14 @@ class Telegram:
         :param url:
         :return:
         '''
-        return crave.send(self.bot, 'setWebhook', {'url': url})
+        return request.send(self.bot, 'setWebhook', {'url': url})
 
     def check_webhook(self):
         '''
         查看机器人的webhook详情
         :return:
         '''
-        return crave.send(self.bot, 'getWebhookInfo')
+        return request.send(self.bot, 'getWebhookInfo')
 
     def process_update(self, update):
         """
@@ -89,7 +89,7 @@ class Telegram:
         """
         if code == 503:
             return f"{code}： {description}"
-        return crave.error(description)
+        return request.error(description)
 
 
 class Main:
@@ -171,7 +171,7 @@ class Main:
             if data[3] and data[3].get('file'):
                 file = data[3].get('file')
 
-            response = crave.send(data[0], data[1], data[2], file)
+            response = request.send(data[0], data[1], data[2], file)
 
             if response['ok'] and data[3] and data[3].get('delete'):
                 message_id = response['result']['message_id']

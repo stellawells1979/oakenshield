@@ -38,7 +38,7 @@ class TimingTask:
                 sql.query(sql.database, query, ['Exp', row.get('id')])
                 continue
 
-            if now_time < row.get('scheme'):
+            if row.get('timing') == 0 or now_time < row.get('scheme'):
                 continue
 
             query = f"UPDATE {sql.table_register} SET `scheme`=%s WHERE `id`=%s"

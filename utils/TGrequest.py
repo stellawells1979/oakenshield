@@ -7,13 +7,20 @@
 
 import requests
 import json
-
+import platform
 import config
 from utils.account import account
 import logging
 from logmanage import DailyLogManager
 
 log = DailyLogManager('TGrequest', logging.ERROR, logging.INFO)
+
+session = requests.Session()
+system_name = platform.system().lower()
+
+if system_name == 'windows':
+    session.proxies.update(config.proxy)
+
 
 class Request:
     '''
@@ -26,7 +33,6 @@ class Request:
         :var self.error_descriptions 收集中的 api 错误信息，
         '''
         self.base_url = 'https://api.telegram.org/bot'
-        self.proxy = config.proxy
         self.tokens = {
             'rules': account.attribute('rules', 'token'),
             'search': account.attribute('search', 'token')
@@ -93,20 +99,18 @@ class Request:
                         url,
                         data=body,
                         files={file_type: (filename, file_obj)},
-                        proxies=self.proxy,
                         timeout=30
                     )
                 else:
                     with open(file_path, 'rb') as f:
-                        response = requests.post(
+                        response = session.post(
                             url,
                             data=body,
                             files={file_type: f},
-                            proxies=self.proxy,
                             timeout=30
                         )
             else:
-                response = requests.post(url, json=body, proxies=self.proxy, timeout=10)
+                response = session.post(url, json=body, timeout=10)
             result = json.loads(response.text)
         except requests.exceptions.Timeout:
             result ={'ok': False, 'description': 'Request Timeout'}
@@ -137,7 +141,6 @@ class Request:
         '''
         return self.send(bot, 'getWebhookInfo')
 
-
     def error(self, description):
         '''
 
@@ -147,7 +150,7 @@ class Request:
 
         return self.error_descriptions.get(description, description)
 
-crave = Request()
+request = Request()
 
 
 

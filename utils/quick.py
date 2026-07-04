@@ -2,7 +2,7 @@
 此类集成了获取聊天信息的工具函数
 '''
 import json
-from utils.TGrequest import crave
+from utils.TGrequest import request
 from database import sql
 import logging
 from logmanage import DailyLogManager
@@ -116,7 +116,7 @@ class Quick:
         :param group:
         :return:
         '''
-        response = crave.send(bot, 'getChatAdministrators', {'chat_id': group})
+        response = request.send(bot, 'getChatAdministrators', {'chat_id': group})
         if response and response['ok']:
             return response['result']
 
@@ -131,7 +131,7 @@ class Quick:
         :param user:
         :return:
         '''
-        response = crave.send(bot, 'getChatMember', {'chat_id': group, 'user_id': user})
+        response = request.send(bot, 'getChatMember', {'chat_id': group, 'user_id': user})
         if response and response['ok']:
             return response['result']
 
@@ -145,7 +145,7 @@ class Quick:
         :param group:
         :return:
         '''
-        response = crave.send(bot, 'getChat', {'chat_id': group})
+        response = request.send(bot, 'getChat', {'chat_id': group})
         if response:
             return response['result']
         return []
@@ -158,7 +158,7 @@ class Quick:
         :param group:
         :return: int
         '''
-        response = crave.send(bot, 'getChatMemberCount', {'chat_id': group})
+        response = request.send(bot, 'getChatMemberCount', {'chat_id': group})
         if response:
             return response['result']
 

@@ -468,6 +468,7 @@ class SuperGroup(Message):
         主程序
         :return:
         '''
+        print(111111111111111111111111111111111111, self.rules.get('newcomer'))
         if (self.new_chat_members or self.left_chat_member) and self.rules.get('newcomer'):
 
             # 响应群组中成员加入或离开的信息
@@ -576,12 +577,11 @@ class SuperGroup(Message):
         处理新成员加入群组的方法
         :return:
         '''
-
         if self.new_chat_members and rules['tip_join']:
             # 移除新人加入的系统消息
             self.send_data.append([
                 'deleteMessage',
-                {'chat_id': self.chat_id, 'message_ids': self.message_id},
+                {'chat_id': self.chat_id, 'message_id': self.message_id},
                 None
             ])
 
@@ -590,7 +590,7 @@ class SuperGroup(Message):
             # 删除用户离群的系统提示
             self.send_data.append([
                 'deleteMessage',
-                {'chat_id': self.chat_id, 'message_ids': self.message_id},
+                {'chat_id': self.chat_id, 'message_id': self.message_id},
                 None
             ])
 
@@ -641,24 +641,24 @@ class SuperGroup(Message):
                 entitle_pamrams.append({'type': 'text_mention', 'text': name, 'user': member})
 
             if members_names:
+                log.warning(f"【{self.chat_title}】{self.first_name} {self.last_name} 邀请了 {members_names}")
+
                 text = rules['welcome']
-                if not text:
-                    text = f"{members_names} 欢迎加入 {self.chat_title}"
-                elif text and text.find('@@') != -1:
+                if text and text.find('@@') != -1:
                     # 如果欢迎语中包含了 @@ 的点位符，则将其替换成用户的名字（self.first_name）
                     text.replace('@@', members_names, 1)
-                else:
+                elif text:
                     text = f"{members_names} {text}"
 
-                # 创建富文本对象
-                entitles = tools.format_entities(text, entitle_pamrams)
+                    # 创建富文本对象
+                    entitles = tools.format_entities(text, entitle_pamrams)
 
-                # 构建请求对象并添加到请求容器
-                self.send_data.append([
-                    'sendMessage',
-                    {'chat_id': self.chat_id, 'text': text, 'entities': entitles},
-                    None
-                ])
+                    # 构建请求对象并添加到请求容器
+                    self.send_data.append([
+                        'sendMessage',
+                        {'chat_id': self.chat_id, 'text': text, 'entities': entitles},
+                        None
+                    ])
 
     @rule_handler('intelligent', order=10)
     def parse_intelligent(self):
@@ -1024,7 +1024,7 @@ if __name__ == '__main__':
 
     from test import debugging
 
-    re = message_filter('rules', debugging.message_19)
+    re = message_filter('rules', debugging.message_21)
     print(6666666666666666, re)
 
 
