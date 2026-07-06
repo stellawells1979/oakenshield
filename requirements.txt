@@ -1,0 +1,9 @@
+requests
+lxml
+jieba
+scikit-learn
+joblib
+pymysql
+cryptography
+
+pytz

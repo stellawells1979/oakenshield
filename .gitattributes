@@ -1,0 +1,55 @@
+
+
+# Auto detect text files and normalize line endings
+* text=auto
+
+# Python source files
+*.py text eol=lf
+*.pyw text eol=lf
+
+# Config / data files
+*.json text eol=lf
+*.toml text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.ini text eol=lf
+*.cfg text eol=lf
+*.conf text eol=lf
+*.txt text eol=lf
+*.md text eol=lf
+*.sql text eol=lf
+
+# Shell scripts
+*.sh text eol=lf
+
+# Windows scripts
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Logs
+*.log text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.tar binary
+*.7z binary
+*.rar binary
+*.db binary
+*.sqlite binary
+*.sqlite3 binary
+
+# Python cache / compiled files
+*.pyc binary
+*.pyo binary
+*.pyd binary
+
+
