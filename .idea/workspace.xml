@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ef0ad20-3211-4191-a443-be10b0568f8d" name="更改" comment="fg">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="2ef0ad20-3211-4191-a443-be10b0568f8d" name="更改" comment="fg" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="85" />
+    <option name="cachedIndexableFilesCount" value="79" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -361,7 +359,7 @@
       <workItem from="1783846034566" duration="27754000" />
       <workItem from="1783906809721" duration="19626000" />
       <workItem from="1783992201624" duration="6927000" />
-      <workItem from="1784002766926" duration="125542000" />
+      <workItem from="1784002766926" duration="126046000" />
     </task>
     <task id="LOCAL-00001" summary="fg">
       <option name="closed" value="true" />

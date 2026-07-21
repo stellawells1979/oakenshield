@@ -44,7 +44,7 @@ class ProxiesAssemble:
         :return:
         '''
         if self.proxies_queue.empty():
-            raise "[Requestdrive] - <ProxiesAssemble> - get_proxy: 代理池是空的！"
+            return None
 
         return self.proxies_queue.get()
 
@@ -158,7 +158,7 @@ class ProxiesAssemble:
         :return:
         '''
 
-        url = 'https://www.911proxy.com/web_v1/free-proxy/list?page_size=60&page={}&protocol={}'
+        url = 'https://api.911proxy.com/web_v1/free-proxy/list?page_size=60&page={}&protocol={}'
 
         proxy_list = []
         protocols = {2: 'https', 8: 'socks5', }
@@ -274,15 +274,12 @@ class ProxiesAssemble:
         try:
             with open(path, "r", encoding="utf-8") as f:
                 local_data = json.loads(f.read())
-                if len(local_data) > 100:
-                    start = 100 - len(local_data)
-                    local_data = local_data[start:]
         except Exception as e:
             local_data = []
 
         local_proxies = [row.get('proxy') for row in local_data]
 
-        curr_unix = wholetime.unix()
+        curr_unix = wholetime.datetime(Mat="%Y-%m-%d %H:%M:%S")
         for row in data:
             if row.get('proxy') not in local_proxies:
                 local_data.append({
@@ -423,7 +420,7 @@ class SessionStore(ProxiesAssemble):
             print(f'正在创建 sessions 会话池 {index + 1}/{self.size}..........')
             self.create_sessions()
 
-    def create_sessions(self, DLid=None):
+    def create_sessions(self, remove=None):
         '''
         创建一个 session 会话记录，DLid 有效时会删除 DLid 指定的 session 会话记录。
         一个完整的 session 会话记录包含以下参数：
@@ -434,7 +431,7 @@ class SessionStore(ProxiesAssemble):
             5. busy：当前 session 是否正在使用，用于判断 session 是否可以被使用。
             6. product：健康指标，记录 session 会话在使用过程中的健康指标参数。
 
-        :param DLid: 如果指定 DLid，则会删除些 session 会话记录。
+        :param remove: 如果指定 remove，则会删除些 session 会话记录。
         :return:
         '''
 
@@ -446,21 +443,22 @@ class SessionStore(ProxiesAssemble):
             if not uid in uids:
                 break
 
-        record = self.create_session(self.get_proxy())
+        proxy = self.get_proxy()
+        record = self.create_session(proxy)
 
         with self.thread_lock:
             self.sessions.append({
                 "id": uid,
                 "session": record,
                 "created_at": time.time(),
-                "request_count": 0,
+                "request_count": 0 if proxy else self.max_requests // 2,    # 如果没有代理，则将请求次数设置为最大请求次数的一半
                 "busy": False,  # 当前 session 是否正在使用
                 'product': {'ErrorProxy': [0, 1], 'TimeOut': [0, 3], 'ErrorConnent': [0, 5]}  # 健康指标
             })
 
-        if DLid:
+        if remove:
             # 移除指定的会话记录
-            self.remove_sessions(DLid)
+            self.remove_sessions(remove)
 
         return record
 
@@ -528,25 +526,33 @@ class SessionStore(ProxiesAssemble):
         获取一个可用 session 记录。
         """
 
+        record = False  # 初始化一个会话记录
+
         while timeout > 0:
+
+            if record is None:
+                # 如果没有空闲的会话，则向会话池追加一个新的会话对象
+                self.create_sessions_pool(1)
+                record = False
 
             time.sleep(0.05)
             timeout = timeout - 0.1
+
             with self.thread_lock:
+
                 # 迭代 self.sessions 池，排除忙线记录，筛选出可用 session 对象
                 available = [record for record in self.sessions if not record["busy"]]
 
-            if not available:
-                log.warning(f"[SessionStore] - <acquire> : 当前没有 session 对象可用，正在尝试重建 session 池")
-                self.create_sessions_pool()
-                continue
-
-            # 随机获取一个 session
-            record = random.choice(available)
-
-            with self.thread_lock:
-                # 将当前 session 标记为忙线
-                record["busy"] = True
+                if not available:
+                    # 如果没有空闲的会话，则返回一个空 record，以便向会话池追加一个新的会话对象
+                    record = None
+                    log.warning(f"[SessionStore] - <acquire> : 当前没有 session 对象可用，正在尝试重建 session 池")
+                    continue
+                else:
+                    # 随机获取一个 session
+                    record = random.choice(available)
+                    # 将当前 session 标记为忙线
+                    record["busy"] = True
 
             if not self.is_valid(record):
                 # 检查 session 如果超时或者超量则将创建一个新会话并添加到代理池并移除当前 session 对象
@@ -584,7 +590,9 @@ class SessionStore(ProxiesAssemble):
 
         if product and product not in ['ErrorProxy', 'TimeOut', 'ErrorConnent']:
             # 确保接收到正确的 product 健康参数，否则不检查 sessions 的健康指标
-            log.warning(f"[SessionStore] - <release_sessions> : product 参数必须是 ['ErrorProxy', 'TimeOut', 'ErrorConnent']")
+            log.warning(
+                f"[SessionStore] - <release_sessions> : product 参数必须是 ['ErrorProxy', 'TimeOut', 'ErrorConnent']"
+            )
             product = None
 
         result = None
@@ -599,13 +607,15 @@ class SessionStore(ProxiesAssemble):
                         # 如果健康指标超标，将 result 设置为 False，以便稍后删除该会话
                         result = False
                     else:
-                        # 更新健康指标参数
+                        # 更新健康指标参数以及将会话状态设置为空闲
                         record_product[0] += 1
+                        record.update({"busy": False})
                         result = True
                     break
 
                 elif record["id"] == session_id:
                     record.update({"busy": False})
+                    record.update({'product': {'ErrorProxy': [0, 1], 'TimeOut': [0, 3], 'ErrorConnent': [0, 5]}})
                     result = True
                     break
 
@@ -662,9 +672,8 @@ class SessionStore(ProxiesAssemble):
 
 browser = SessionStore(
     size=5,
-    ttl=6000,
-    max_requests=100,
-    test=True
+    ttl=12000,
+    max_requests=300
 )
 
 if __name__ == "__main__":
