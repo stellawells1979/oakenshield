@@ -22,17 +22,18 @@ from flask import request as flask_request
 from threading import Thread, Event
 from queue import Queue, Empty
 from database import sql
-from utils.account import account
-from utils.TGrequest import request
+
 from message import message_filter
 from callbackquery import CallbackQuery
 from member import MychatMember
-from utils import timestand
+from utils.account import account
+from utils.TGrequest import request
 from utils.timingtask import scheduled
-from logmanage import DailyLogManager
+from utils.WholeTime import wholetime
+from logmanage import LogManager
 
 # 配置日志管理器
-log = DailyLogManager('Telegram', logging.WARNING, logging.INFO)
+log = LogManager('Telegram', logging.WARNING, logging.INFO)
 
 
 class Telegram:
@@ -75,7 +76,7 @@ class Telegram:
         elif 'callback_query' in update:
             result = CallbackQuery(self.bot, update).callback_message()
         elif 'my_chat_member' in update:
-            result = MychatMember(self.bot, update).main()
+            result = MychatMember(self.bot, update).parse_mystatus()
 
         return result
 
@@ -116,7 +117,7 @@ class Main:
         if not result:
             return
 
-        now_time = timestand.unix()
+        now_time = wholetime.unix()
         for item in result:
             if not item:
                 continue
@@ -143,7 +144,7 @@ class Main:
         scan_verifications = 0    # 扫描过期的验证用户时间间隔
         while not self.stop_event.is_set():
 
-            now_time = timestand.unix()
+            now_time = wholetime.unix()
 
             # 每间隔一分钟扫描一次过期的验证用户
             if now_time > scan_verifications:

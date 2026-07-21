@@ -5,10 +5,10 @@ import json
 from utils.TGrequest import request
 from database import sql
 import logging
-from logmanage import DailyLogManager
+from logmanage import LogManager
 from utils.account import account
 
-log = DailyLogManager('Quick', logging.WARNING, logging.INFO)
+log = LogManager('Quick', logging.WARNING, logging.INFO)
 
 class Quick:
     '''

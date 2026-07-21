@@ -2,7 +2,7 @@
 定时轮循任务
 '''
 from database import sql
-from utils import timestand
+from utils.WholeTime import wholetime
 
 class TimingTask:
     '''
@@ -20,14 +20,14 @@ class TimingTask:
         :return:
         '''
         result = []
-        now_time = timestand.unix()
+        now_time = wholetime.unix()
         if now_time < self.next_register:
             return result
 
         query = f'SELECT `id`,`chat`,`describe`,`expired`,`timing`,`status`,`scheme` FROM {sql.table_register} WHERE `status`=%s'
         register_task = sql.query(sql.database, query, 'Run') or []
 
-        now_date = timestand.date_from_timestamp(now_time)  # 当前日期
+        now_date = wholetime.today(Unix=now_time)  # 当前日期
         for row in register_task:
 
             if not row:
@@ -50,7 +50,7 @@ class TimingTask:
                 None
             ])
 
-        self.next_register = timestand.unix() + 600  # 下一次签到计划任务时间，默认5分钟轮循一次签到数据表
+        self.next_register = wholetime.unix() + 600  # 下一次签到计划任务时间，默认5分钟轮循一次签到数据表
         return result
 
 

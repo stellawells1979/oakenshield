@@ -61,6 +61,7 @@ env/
 logs/
 backup/
 test/
+myaccount/
 *.log
 
 
@@ -70,7 +71,7 @@ test/
 
 # 一些包含账号信息或调试数据的文件将不会上伟
 ubuntuhelp.txt
-data/myaccount.txt
+myaccount/myaccount.txt
 
 
 

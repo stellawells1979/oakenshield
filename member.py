@@ -4,13 +4,13 @@
 
 import logging
 from utils.quick import quick
-from utils import timestand
+from utils.WholeTime import wholetime
 
 
-from logmanage import DailyLogManager
+from logmanage import LogManager
 
 
-log = DailyLogManager('Member', logging.ERROR, logging.INFO)
+log = LogManager('Member', logging.ERROR, logging.INFO)
 
 
 class ChatMember:
@@ -57,12 +57,12 @@ class MychatMember:
 
         self.initiator = data.get('from')
         self.date = data.get('date')
-        self.message_time = timestand.format_datetime(self.date)
+        self.message_time = wholetime.datetime(Unix=self.date)
 
         self.origstatus = data.get('old_chat_member', {}).get('status')     # 机器人此前在群组中的状态
         self.bot_status = data.get('new_chat_member')     # 机器人当前在群组中的状态（管理员或成员）
 
-    def main(self):
+    def parse_mystatus(self):
         '''
 
         :param self:
@@ -80,4 +80,4 @@ class MychatMember:
 if __name__ == '__main__':
 
     from test import debugging
-    mychatmember = MychatMember('rules', debugging.my_chat_member_02).main()
+    mychatmember = MychatMember('rules', debugging.my_chat_member_02).parse_mystatus()

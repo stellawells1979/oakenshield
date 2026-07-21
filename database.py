@@ -1,33 +1,47 @@
+
 '''
-创建一个数据库通管局程序
+统筹数据库系统管理程序
 '''
-import time
+
+
+
 import json
 import pymysql
+from queue import Queue
 import logging
 import config
-from queue import Queue
-from logmanage import DailyLogManager
+from utils.tools import tools
+from logmanage import LogManager
 
+log = LogManager('Dabase', logging.WARNING, logging.INFO)
 
+'''
+# 主要异常类
+pymysql.err.Error                # 所有异常的基类
+pymysql.err.InterfaceError       # 接口错误（连接不可用等）
+pymysql.err.OperationalError     # 操作错误（连接失效、服务器断开等）
+pymysql.err.DatabaseError        # 数据库错误
+pymysql.err.DataError            # 数据错误
+pymysql.err.IntegrityError       # 完整性错误（主键冲突等）
+pymysql.err.ProgrammingError     # SQL 语法错误
+pymysql.err.InternalError        # 内部错误
+pymysql.err.NotSupportedError    # 不支持的操作
+'''
 
-log = DailyLogManager('Mysql', logging.WARNING, logging.INFO)
-
-
-class MySql:
+class Mysql:
     '''
-    初始化本地数据库，创建连接池，定义一些常用方法
+    初始化数据库系统，建立数据库连接池，管理连接池，
     '''
-
-    def __init__(self, host, port, user, password, charset):
-
+    def __init__(self, host, port, user, password, charset, size=3, timezone=None):
         '''
-        初始化数据库
-        :param host: 主机地址，应该是你的网络IP或者本地IP
-        :param port: 主机的通信端口，此参数应在 MySql 系统设置或者使用 MySql 的默认值
-        :param user: 用户名，连接数据库的依据
-        :param password: 密码，为了安全，你应该设置一个安全密码
+
+        :param host:
+        :param port:
+        :param user:
+        :param password:
         :param charset:
+        :param size: 链接池大小，默认3个
+        :param timezone: 时区，默认+08:00
         '''
 
         self.host = host
@@ -35,379 +49,395 @@ class MySql:
         self.user = user
         self.password = password
         self.charset = charset
+        self.size = size
+        self.timezone = timezone
+        if not self.timezone:
+            try:
+                self.timezone = config.project_timezone
+            except:
+                log.warning('你没有指定时区参数且在配置文件中也没有找到时区配置，将使用默认时区 +08:00')
+                self.timezone = '+08:00'
 
-        # 初始化查询指针池
-        self.pool = Queue(maxsize=20)
-        self.pool_size = 20
+        self.connect_queue = Queue(maxsize=self.size)    # 初始化链接池
 
-        for _ in range(self.pool_size):
-            connection = self._create_connection()
-            self.pool.put(connection)
+        for _ in range(self.size):
+            self.create_connect()
 
-    def _create_connection(self):
-        """
-        创建一个新的数据库连接
-        """
-        return pymysql.connect(
+    def create_connect(self):
+        '''
+        创建一个数据库连接
+        :return:
+        '''
+        result = pymysql.connect(
             host=self.host,
             port=self.port,
             user=self.user,
             password=self.password,
             charset=self.charset,
-            autocommit=True,  # 自动提交事务
-            init_command = f"SET time_zone = '{config.database_time_zone}'"
+            autocommit=True,        # 自动提交事务
+            init_command = f"SET time_zone = '{self.timezone}'"
         )
+        self.connect_queue.put(result)
 
-    @classmethod
-    def _is_connection_valid(cls, conn):
-        """
-        检查连接是否可用
-        """
-        if conn is None:
-            return False
-        try:
-            conn.ping(reconnect=True)
-            return True
-        except Exception as e:
-            log.warning(f"<MySql -- _is_connection_valid>: 连接失效 {e}")
-            return False
-
-    def pool_get(self):
+    def get_connect(self):
         '''
-        从连接池获取连接
+        获取一个数据库连接对象
+        :return: connect ID，connect object
+        '''
+        return self.connect_queue.get(timeout=10)
+
+    def release_connect(self, connect, remover=None):
+        '''
+        释放一个数据库连接对象，如果 remover 为 True，则关闭连接并重新创建一个连接
         :return:
         '''
-        try:
-            conn = self.pool.get(timeout=3)
-        except Exception as e:
-            log.error(f"<MySql -- pool_get>: 连接池已耗尽，无法获取新的数据库连接 {e}")
+        if remover:
+            # 尝试关闭当前连接
+            try:
+                connect.close()
+            except Exception:
+                pass
+            # 创建新连接并追加到连接池
+            return self.create_connect()
+
+        # 将当前连接重新放回连接池
+        self.connect_queue.put(connect)
+
+        return True
+
+    def close_all(self):
+        '''
+        关闭连接池中的所有连接。
+        '''
+        log.info('[MySql] - close_all: close all connect')
+        while not self.connect_queue.empty():
+            self.connect_queue.get().close()
+
+
+class Sql(Mysql):
+    '''
+    数据库应用类，提供数据库操作接口
+    '''
+
+    def __init__(self, host, port, user, password, charset, size=5, database=None):
+        '''
+        创建数据库应用接口
+        '''
+        super().__init__(host, port, user, password, charset, size)
+
+        self.database = database
+        if not self.database:
+            self.database = 'telegram'
+
+        self.table_users = 'users'
+        self.table_chats = 'chats'
+        self.table_shares = 'shares'
+
+        # 初始化数据库系统。只对本地数据库进行初始化
+        if self.host == '127.0.0.1':
+            self.init_database()
+
+    def query(self, database=None, quire=None, params=None, extra='dict'):
+        '''
+        执行数据库查询操作
+
+        :param database: 数据库名称
+        :param quire: 查询语句
+        :param params: 查询参数
+        :param extra: 额外参数
+        :return: 查询结果
+        '''
+
+        result = None
+
+        if not database:
+            database = self.database
+
+        if not quire:
+            log.warning(f"[database] <Sql> - query: 查询语句不能为空")
             return None
 
-        if not self._is_connection_valid(conn):
-            try:
-                conn.close()
-            except Exception as e:
-                pass
-            try:
-                conn = self._create_connection()
-            except Exception as e:
-                log.error(f"<MySql -- pool_get>: 重新创建连接失败 {e}")
-                return None
+        for _ in range(2):
+            # 获取一个查询连接
+            connect = self.get_connect()
 
-        return conn
+            if not connect:
+                self.create_connect()
+                continue
 
-    def pool_release(self, conn):
-        """
-        释放连接回连接池
-        """
-        if conn is None:
-            return
-
-        try:
-            if self._is_connection_valid(conn):
-                self.pool.put(conn)
+            # 创建查询游标
+            if extra == 'dict':
+                # 创建一个返回结果指向 dict 的专用游标
+                cursor = connect.cursor(cursor=pymysql.cursors.DictCursor)
             else:
-                conn.close()
-                # 池子缩水时，补一个新的有效连接进去
-                try:
-                    self.pool.put(self._create_connection())
-                except Exception as e:
-                    log.error(f"<MySql -- pool_release>: 补充连接失败 {e}")
-        except Exception as e:
-            log.error(f"<MySql -- pool_release>: 释放连接失败 {e}")
+                # 否则返回 Mysql 系统默认的 tuple
+                cursor = connect.cursor()
 
-    def sql_query(self, database_name, sql_query, data, extra=None):
-        '''
-        执行自定义的SQL查询语句
-        :param database_name: type(str), 数据库名
-        :param sql_query: type(str), SQL查询语句
-        :param data: type(tuple), 查询参数
-        :param extra: type(bool), 是否以列表格式返回结果
-        :return: type(list) 或 type(bool),此方法默认输出字典格式
-        '''
-        result = []
-        conn = self.pool_get()
-        try:
-            if conn is None:
+            # 执行查询语句
+            try:
+                if not quire.startswith('CREATE DATABASE'):
+                    cursor.execute(f"USE `{database}`")     # 选择数据库
+                cursor.execute(quire, params)
+
+                # fetchall() 对于非查询语句会返回空列表或抛出异常
+                if cursor.description:
+                    # 有结果集描述说明是查询语句
+                    result = cursor.fetchall()
+                    if extra == 'dict':
+                        result = self.transform_result(quire, result)
+                else:
+                    # 非查询语句
+                    result = True
+
                 return result
 
-            if extra:
-                # 输出列表格式的查询结果
-                pointer = conn.cursor()
-            else:
-                # 输出字典格式的查询结果
-                pointer = conn.cursor(cursor=pymysql.cursors.DictCursor)
-            pointer.execute(f"USE {database_name}")
-            pointer.execute(sql_query, data)
-            if sql_query.startswith("SELECT") or sql_query.startswith("SHOW"):
-                result = pointer.fetchall()
-            else:
-                result = True
-        except SyntaxError:
-            log.error(f'SQL语法错误，请检查查询语句: {sql_query}')
-        except Exception as e:
-            log.error(f'执行SQL查询失败-- {e}--{sql_query}')
-        finally:
-            self.pool_release(conn)
+            except pymysql.err.InterfaceError as e:
+                log.warning(f"<Sql> - query: 数据库连接不可用：{e}")
+                self.release_connect(connect, remover=True)
+                continue
+
+            except pymysql.err.OperationalError as e:
+                error_code = e.args[0] if e.args else None
+                log.warning(f"[database] <Sql> - query: 数据库操作错误：{e}")
+                if error_code in [2003, 2006, 2013]:
+                    self.release_connect(connect, remover=True)
+                    continue
+                return False
+
+            except pymysql.err.DataError as e:
+                log.warning(f"[database] <Sql> - query: 数据错误：{e}")
+                return False
+
+            except pymysql.err.IntegrityError as e:
+                log.warning(f"[database] <Sql> - query: 完整性错误：{e}")
+                return False
+
+            except pymysql.err.ProgrammingError as e:
+                log.warning(f"[database] <Sql> - query: SQL 语法错误：{quire}，错误：{e}")
+                return False
+
+            except pymysql.err.InternalError as e:
+                log.warning(f"[database] <Sql> - query: 数据库内部错误：{e}")
+                return False
+
+            except pymysql.err.NotSupportedError as e:
+                log.warning(f"[database] <Sql> - query: 不支持的操作：{quire}，错误：{e}")
+                return False
+
+            except pymysql.err.DatabaseError as e:
+                log.warning(f"[database] <Sql> - query: 数据库错误：{e}")
+                return False
+
+            except pymysql.err.Error as e:
+                log.warning(f"[database] <Sql> - query: 数据库其它错误：{quire}: {e}")
+                return False
+
+            finally:
+                if cursor:
+                    cursor.close()
+                self.release_connect(connect)
+
         return result
 
-    def create_database(self, database_name):
+    def transform_result(self, quire, data):
         '''
-        创建数据库文件
-        :param database_name: 数据库文件名
-        :return: type(bool)
-        '''
-        result = False
-        conn = self.pool_get()
-        try:
-            if conn is None:
-                return result
+        转换查询结果
 
-            pointer = conn.cursor()
-            pointer.execute("CREATE DATABASE " + database_name)
-            result = True
-        except Exception as e:
-            log.error(f'Error: 创建数据库文件出错 {e}')
-        finally:
-            self.pool_release(conn)
-        return result
-
-class Sql(MySql):
-    '''
-    初始化项目数据库
-    '''
-    def __init__(self, host, port, user, password, charset, extra=None):
-        '''
-        :param host:
-        :param port:
-        :param user:
-        :param password:
-        :param charset:
-        :param extra: 传递 True 表示初始化数据库结构
-        '''
-        super().__init__(host, port, user, password, charset)
-
-
-        self.database = 'telegram'
-        self.table_chats = 'chats'
-        self.table_search = 'search'
-        self.table_groups = 'groups'
-        self.table_shares = 'shares'
-        self.table_rules = 'rules'
-        self.table_interact = 'interact'
-        self.table_constra = 'constra'
-        self.table_register = 'register'
-        self.table_planning = 'planning'
-
-        # 收集数据表中的tinyint(1)类型字段,以便将这些字段的值转换为布尔值
-        self.tinyint1 = {}
-
-        # 储存数据表的字段信息
-        self.all_tables_fields = {}
-
-        if extra:
-            self.initialize()
-
-        with open(config.table_structure, encoding='utf-8') as f:
-            self.all_tables_fields = json.load(f)
-
-    def query(self, database_name, sql_query, data, extra=None):
-        '''
-        参查询的结果预处理,
-        :param database_name:
-        :param sql_query:
+        :param quire:
         :param data:
-        :param extra:
         :return:
         '''
-        result = self.sql_query(database_name, sql_query, data, extra)
-        if not result:
+
+        if not data:
             return []
 
-        if result and sql_query.startswith("SELECT") and 'FROM' in sql_query:
+        if not quire.startswith('SELECT'):
+            return data
 
-            sql_query = sql_query.replace('`', '')
+        try:
+            # 提取表名
+            curr_table = quire.split('FROM', 1)[1].strip().split(' ')[0].replace('`', '')
+        except Exception:
+            raise f"提取表名失败：{quire}"
 
-            # 截取查询语句中的数据表名
-            query_table = sql_query.split('FROM')[1].strip().split(' ')[0]
+        # 从表结构中提取 tinyint(1) 和 json 字段
+        all_fields = self.get_table_fields(curr_table)
+        bool_fields = [row.get('Field') for row in all_fields if row.get('Type') == 'tinyint(1)']   # bool 字段
+        json_fields = [row.get('Field') for row in all_fields if row.get('Type') == 'json']     # json 字段
 
-            tinyint1_field = self.tinyint1.get(query_table, [])
-            json_fileds = [field.get('Field') for field in self.all_tables_fields.get(query_table) if field.get('Type') == 'json']
-            for row in result:
-                for key, value in row.items():
-                    if key in tinyint1_field:
-                        row.update({key: bool(value)})
-                    if key in json_fileds and value:
-                        row.update({key: json.loads(value)})
-        return result
+        # 迭代查询结果，将 tinyint(1) 和 json 字段值转换为 Python 对象
+        for row in data:
+            for key, value in row.items():
+                if key in bool_fields:
+                    row.update({key: bool(value)})
+                if key in json_fields and value:
+                    row.update({key: json.loads(value)})
+        return data
 
-    def initialize(self):
+    def init_database(self):
         '''
-        # 初始化数据库,收集数据表结构信息,收集数据表中tinyint(1)字段
+        初始化数据库，检查所须数据表是否存在
         :return:
         '''
-        result = None
-        conn = self.pool_get()
-        try:
-            pointer = conn.cursor()
-            pointer.execute("SHOW DATABASES")  # 列出所有数据库文件名称
-            for database in pointer.fetchall():
-                if database[0] == self.database:
-                    result = True
-            if not result:
-                log.error(f'<MySql -- initialize>: {self.database} not found，try cerate it')
-                self.create_database(self.database)
-                time.sleep(2)
+        print('正在初始化数据库系统 .....................')
 
-            result = None
-            # 获取当前数据库中所有的数据表
-            data_tables = self.init_table(self.database)
+        # 创建数据库，执行此命令后，如果系统存在该数据库，则跳过创建步骤
+        self.query(quire=f"CREATE DATABASE IF NOT EXISTS `{self.database}`")
 
-            tables = [name for table, name in self.__dict__.items() if table.startswith('table_')]
-            for table in tables:
-                # 检查运行依赖数据表是否存在
-                if table not in data_tables:
-                    # 如果不存在则创建该数据表
-                    log.error(f'<MySql -- initialize>: {table} not found in the {self.database}，try cerate it')
+        # 提取数据库中所有表名
+        database_tables = self.get_database_tables(self.database)
 
-                    # 构建创建数据表的sql语句
-                    create_table_sql = self.get_table_field(table)
+        # 提取本类自定义的名（本类中以 table_ 开头的属性）
+        class_tables = [name for attr, name in self.__dict__.items() if attr.startswith('table_')]
 
-                    pointer.execute(f'USE {self.database}')
-                    pointer.execute(create_table_sql)
-                else:
-                    # 读取数据表的所有字段及字段属性
-                    query = f'SHOW COLUMNS FROM `{table}`'
-                    query = self.query(self.database, query, data=None)
-                    self.all_tables_fields[table] = query
+        all_tables_fields = {}      # 初始化一个储存所有表字段的容器
+        for table in class_tables:
+            if table not in database_tables:
+                # 如果数据不存在，则创建数据表
+                log.error(f'<Sql> - init_database: {table} not found in {self.database}，try create it')
+                self.create_table(table)
 
-            if len(self.all_tables_fields) == len(tables):
-                # 将所有数据表字段信息储存到本地
-                with open(config.table_structure, 'w', encoding='utf-8') as f:
-                    json.dump(self.all_tables_fields, f, ensure_ascii=False, indent=4)
-                log.info('<MySql -- initialize>: Table structure saved to file')
+            # 不管是已有表还是刚创建的表，都重新读取字段结构
+            all_tables_fields.update({table: self.get_table_fields(table)})
 
-                # 查询所有数据表的字段属性,将所有tinyint(1)字段名记录下来,以确保查询时能正确转换这些字段值成布尔值
-                for table, fields in self.all_tables_fields.items():
-                    tinyint1 = []
-                    for field in fields:
-                        if field.get('Type') == 'tinyint(1)':
-                            tinyint1.append(field.get('Field'))
-                    if tinyint1:
-                        self.tinyint1.update({table: tinyint1})
+        if len(all_tables_fields) == len(class_tables) and self.host == '127.0.0.1':
+            # 将表字段结构保存到本地，且仅对本地数据库才会执行这个操作
+            tools.write_json_content(config.table_structure, all_tables_fields)
 
-                result = True
-
-        except Exception as e:
-            log.warning(f'<MySql -- initialize>: error: {e}')
-        finally:
-            self.pool_release(conn)
-        return result
-
-    def init_table(self, database_name):
+    def create_table(self, table_name):
         '''
-        :param database_name:
-        :return: 当前数据库的所有数据表
-        '''
-        result = []
-        conn = self.pool_get()
-        try:
-            pointer = conn.cursor()
-            pointer.execute(f'USE {database_name}')
-            pointer.execute('SHOW TABLES')
-            for table in pointer.fetchall():
-                result.append(table[0])
-        except Exception as e:
-            log.warning(f'<MySql -- init_table>: Init table error: {e}')
-        finally:
-            self.pool.put(conn)
-        return result
-
-    def get_table_field(self, table_name):
-        '''
-
+        创建数据表
         :param table_name:
         :return:
         '''
+        # 从本地获取表的字段名
+        local_fields = self.get_local_tables_fields(table_name)
+        # 构建创建数据表的 SQL 语句
+        universal_sql = self.generate_universal_sql(table_name, local_fields)
 
+        return self.query(self.database, universal_sql)
+
+    @classmethod
+    def get_local_tables_fields(cls, table_name):
+        '''
+        提取储存在本地的数据表字段名
+        :param table_name:
+        :return:
+        '''
         with open(config.table_structure, encoding='utf-8') as f:
             data = json.load(f)
+            return data.get(table_name)
 
-        fields = self.generate_universal_sql(table_name, data.get(table_name))
-        return fields
+    def get_table_fields(self, table_name):
+        '''
+        提取指定数据表中所有字段名
+        :param table_name:
+        :return:
+        '''
+        return self.query(self.database, f"SHOW COLUMNS FROM `{table_name}`")
+
+    def get_database_tables(self, database):
+        '''
+        提取数据库中所有表名
+        :param database:
+        :return:
+        '''
+        result = []
+
+        all_tables = self.query(database, "SHOW TABLES", extra='list')
+
+        if all_tables and len(all_tables) > 0:
+            result = [row[0] for row in all_tables]
+
+        return result
 
     @classmethod
     def generate_universal_sql(cls, table_name, columns):
         '''
-        构建创建数据表的sql语句
+        构建创建数据表的 SQL 语句
         :param table_name:
         :param columns:
         :return:
         '''
+        if not columns:
+            raise ValueError(f'缺少数据表结构配置: {table_name}')
+
         column_defs = []
         primary_keys = []
 
         for col in columns:
-            # 1. Basic Identity & Type
             field_name = f"`{col['Field']}`"
             col_type = col['Type']
 
-            # 2. Nullability
             null_str = "NOT NULL" if col['Null'] == "NO" else "DEFAULT NULL"
 
-            # 3. Default Value (Smart handling for functions vs strings)
             default_str = ""
             raw_default = col.get('Default')
             if raw_default is not None:
-                # Check if it's a function (like CURRENT_TIMESTAMP or a sequence)
-                if "(" in str(raw_default) or str(raw_default).upper() == "CURRENT_TIMESTAMP":
+                raw_default_upper = str(raw_default).upper()
+
+                if "(" in str(raw_default) or raw_default_upper in ["CURRENT_TIMESTAMP", "NULL"]:
                     default_str = f"DEFAULT {raw_default}"
                 else:
                     default_str = f"DEFAULT '{raw_default}'"
 
-            # 4. Extra Features (Auto-increment, On Update, etc.)
-            # Strip MySQL metadata flags like 'DEFAULT_GENERATED'
             extra_str = col.get('Extra', "").replace("DEFAULT_GENERATED", "").strip()
 
-            # 5. Key Handling (Collect PKs for composite support)
             if col.get('Key') == 'PRI':
                 primary_keys.append(field_name)
             elif col.get('Key') == 'UNI':
-                extra_str += " UNIQUE"
+                extra_str = f"{extra_str} UNIQUE".strip()
 
-            # Assemble the column line
             parts = [field_name, col_type, null_str, default_str, extra_str]
             column_defs.append("  " + " ".join(p for p in parts if p))
 
-        # 6. Final Assembly (Handle Multi-column Primary Keys)
         if primary_keys:
             pk_stmt = f"  PRIMARY KEY ({', '.join(primary_keys)})"
             column_defs.append(pk_stmt)
 
-        full_sql = f"CREATE TABLE `{table_name}` (\n" + ",\n".join(
-            column_defs) + "\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
+        full_sql = (
+                f"CREATE TABLE `{table_name}` (\n"
+                + ",\n".join(column_defs)
+                + "\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;"
+        )
+
         return full_sql
 
-sql = Sql('127.0.0.1', 3306, 'root', '', 'utf8mb4', True)
+    @classmethod
+    def create_sql(cls, host, port, user, password, charset, database):
+        '''
+        可以使用此方法创建一个远程数据库服务
+        :return:
+        '''
+        return Sql(
+            host,
+            port,
+            user,
+            password,
+            charset
+        )
+
+
+sql = Sql(
+    host=config.database_account['host'],
+    port=config.database_account['port'],
+    user=config.database_account['user'],
+    password=config.database_account['password'],
+    charset=config.database_account['charset'],
+    database='telegram',
+)
+
 
 if __name__ == '__main__':
 
-    pass
+
+    query = f"SELECT * FROM `chats`"
+
+    datas = sql.query('telegram', query)
+    print(len(datas))
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    sql.close_all()
 
 
 

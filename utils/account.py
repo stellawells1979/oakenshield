@@ -10,11 +10,11 @@ import config
 import requests
 import json
 import logging
-from logmanage import DailyLogManager
+from logmanage import LogManager
 
 
 
-log = DailyLogManager('Telegram', logging.ERROR, logging.INFO)
+log = LogManager('Telegram', logging.ERROR, logging.INFO)
 
 class Account:
     '''

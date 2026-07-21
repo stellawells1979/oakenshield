@@ -4,22 +4,37 @@
 '''
 
 import os
+import platform
+from myaccount import account
+
 
 # 项目时区
 time_zone = 'UTC+8'
-time_offset = 8
-
-# 数据库时区
-database_time_zone = '+08:00'
-
-# 在回复用户的搜索结果消息中，每条消息显示的搜索条目数量
-page_count = 15
+project_timeoffset = 8
+project_timezone = '+08:00'
 
 # 基础文件路径
 base_path = os.path.dirname(os.path.abspath(__file__))
 
+# 识别当前系统信息,视系统是否配置代理
+system_name = platform.system().lower()
+
+# 根据系统匹配数据库账号
+if system_name == 'windows':
+    database_account = account.database_windows
+elif system_name == 'linux':
+    database_account = account.database_ubuntu
+else:
+    raise RuntimeError(f'Unsupported system: {platform.system()}')
+
+
 # 账户信息
-account_path = os.path.join(base_path, 'data', 'myaccount.txt')
+account_path = os.path.join(base_path, 'myaccount', 'myaccount.txt')
+
+if system_name == 'linux':
+    database_account = account.database_ubuntu
+elif not system_name == 'windows':
+    raise RuntimeError(f'Unsupported system: {platform.system()}')
 
 # 日志文件路径
 logs_path = os.path.join(base_path, 'logs')
@@ -39,11 +54,25 @@ city_path = os.path.join(base_path, 'data', 'city.txt')
 # 设置日志保留时间
 retention_days = 7
 
+# 在回复用户的搜索结果消息中，每条消息显示的搜索条目数量
+page_count = 15
+
 # 代理参数，你必须在地本地运行一个代理客户并配置正确代理参数
 proxy = {
     'http': 'http://127.0.0.1:10809',
     'https': 'socks5h://127.0.0.1:10808'
 }
+
+proxies = {
+    'http': 'http://127.0.0.1:10809',
+    'https': 'socks5h://127.0.0.1:10808'
+}
+
+# 本地代理池路径
+local_proxies_queue_path = os.path.join(base_path, 'data', 'HttpsProxies', 'ProxierQueue.json')
+
+# 用于储存临时下载代理数据的文件夹
+local_proxies_dir = os.path.join(base_path, 'data', 'HttpsProxies')
 
 
 rules_example = {
@@ -221,5 +250,6 @@ assort_emoji = {
     'text': '📄',
     'posts': '📝',
     '文档': '📂',
-    'document': '📂'
+    'document': '📂',
+    'planning': '🎉'
 }

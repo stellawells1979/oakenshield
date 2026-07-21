@@ -8,6 +8,16 @@ https://www.oakenshield.us.ci
 mysql 用户：ubuntu    密码：SeaKkSFUkM
 
 
+TDbot的账号配置参数
+rules_token = 8598030336:AAE8TW4cmapxMqkgrvmOnhkXd8ei06Q7b_0
+search_token = 7921354496:AAFooa7EE6o3kixGiJLe_g3pgEAVBnDpfXw
+host = 127.0.0.1
+port = 3306
+user = root
+password = AQADBQAD0ccxG3l3AAF
+charset = utf8mb4
+
+
 **************************************
 
 
@@ -15,6 +25,8 @@ mysql 用户：ubuntu    密码：SeaKkSFUkM
 sudo systemctl atart TDLib.service	启动一个服务
 
 sudo systemctl stop TDLib.service	信止一个服务
+
+sudo systemctl restart 服务名称.service
 
 
 journalctl -u TDBot.service -f		将后台运行的服务的运行状态实时输出到控制台
@@ -68,7 +80,6 @@ git remote -v		查看当前远程仓库地址
 
 
 ========================================================================
-
 
 
 

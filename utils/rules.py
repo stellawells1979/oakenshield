@@ -20,9 +20,9 @@ from utils.quick import quick
 from utils.account import account
 import json
 import logging
-from logmanage import DailyLogManager
+from logmanage import LogManager
 
-log = DailyLogManager('Rules', logging.ERROR, logging.INFO)
+log = LogManager('Rules', logging.ERROR, logging.INFO)
 
 
 class Rules:
@@ -140,7 +140,7 @@ class Rules:
         if self.change:
             log.info(f"更新rules中的 {self.option} 规则")
             query = f"UPDATE `{sql.table_rules}` SET {self.option}=%s,edited=NOW() WHERE `chat`=%s"
-            sql.query(sql.database, query, [json.dumps(self.rules), self.group])
+            sql.query(sql.database, query, [json.dumps(self.rules, ensure_ascii=False), self.group])
 
         text = self.title_text + '\n'
         if self.main_text:
@@ -510,11 +510,7 @@ class Rules:
         :return:
         '''
 
-        if self.option in ['0', 'prelude'] or not self.group:
-            # 如果是刷群组的操作，则无需执行往下的代码
-            return None
-
-        filed = '`title`' if self.option == '0' else f'`title`, `{self.option}`'
+        filed = '`title`' if self.option in ['0', 'prelude'] else f'`title`,`{self.option}`'
 
         # 按 filed 字段查询规则，
         query = f"SELECT {filed} FROM `{sql.table_rules}` WHERE `chat`=%s"
@@ -528,9 +524,13 @@ class Rules:
         # 构建机器人消息的标题，如果群组标题超长则截取前面部分字符
         title = result[0].get('title')
         self.title_text = f"{self.title_text}  >>  {title if len(title) < 15 else title[:12] + '...'}"
+
+
+        if self.option in ['0', 'prelude'] or not self.group:
+            # 如果是刷群组的操作，则无需执行往下的代码
+            return None
+
         self.title_text += f'  >>  {config.translation.get(self.option)}'
-
-
         result = result[0].get(self.option)
 
         if not result:
@@ -585,22 +585,4 @@ class Rules:
 if __name__ == '__main__':
 
     rules = Rules(123456789, 2182545792, ['rules' ,'register', '0', '0', -1003606614850])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

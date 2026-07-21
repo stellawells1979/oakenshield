@@ -6,9 +6,9 @@ from utils.jiebawords import jiebas
 from utils.tools import tools
 from database import sql
 import logging
-from logmanage import DailyLogManager
+from logmanage import LogManager
 
-log = DailyLogManager('Search', logging.ERROR, logging.INFO)
+log = LogManager('Search', logging.ERROR, logging.INFO)
 
 
 class Search:
@@ -62,6 +62,7 @@ class Search:
 
         share_data = self.create_share_link(self.keyword, self.option)
         if not share_data:
+            self.share_text = f'🔔 没有关于【{self.keyword}】的内容。为你推荐以下内容\n\n'
             share_data = self.customize_search()
 
         if self.page > 0:
@@ -233,15 +234,30 @@ class Search:
                 self.casual_entity.append({'text': row.get('promo'), 'type': 'text_link', 'url': row.get('only_url')})
                 break
 
-    def customize_search(self):
+    @classmethod
+    def customize_search(cls):
         '''
         自定义搜索结果。如果没有获取到用户搜索关键字和结果，则返回这个乍定义的内容
         :return:
         '''
+        result = []
+        query = f"SELECT `only_url`,`promo` FROM `{sql.table_planning}`"
+        share_links = sql.query(sql.database, query, None)
+        for row in share_links:
+            if not row.get('only_url') or not row.get('promo'):
+                continue
+            result.append({
+                'url': row.get('only_url'),
+                'type': 'planning',
+                'description': row.get('promo'),
+            })
+        return result
+
+
 
 
 if __name__ == '__main__':
 
     gt = 'SG|59|group|4|1120690440'
-    search = Search(123456789, ['SG', '59', 'photo', 4, 123456789])
+    search = Search(123456789, ['SG', '伊梨', 'all', 0, 123456789])
     print(search.search_main())

@@ -5,14 +5,18 @@
 '''
 一个工具箱，定义一些常用方法供调用
 '''
+import os
+import json
+import requests
 import re
 import random
 import unicodedata
 import string
 import logging
-from logmanage import DailyLogManager
+from urllib.parse import urlparse
+from logmanage import LogManager
 
-log = DailyLogManager('ToolBox', logging.ERROR, logging.INFO)
+log = LogManager('ToolBox', logging.ERROR, logging.INFO)
 
 
 class ToolBox:
@@ -206,7 +210,76 @@ class ToolBox:
         else:
             return ''.join(random.choice(characters) for _ in range(length))
 
+    @classmethod
+    def parse_tm_url(cls, url):
+        '''
+        解析t.me链接
+        :param url:
+        :return:
+        '''
+        parsed = urlparse(url)
 
+        parts = [part for part in parsed.path.split('/') if part]
+
+        if not parts:
+            return None
+
+        username = parts[0]
+        extra = None
+
+        if len(parts) >= 2:
+            extra = int(parts[1]) if parts[1].isdigit() else parts[1]
+
+        return [f'{parsed.scheme}://{parsed.netloc}', username, extra]
+
+    @classmethod
+    def download_file(cls, url, save_path, session=None, chunk_size=8192, timeout=(10, 30)):
+        """
+        下载文件到指定路径
+        :param url: 文件网络地址
+        :param save_path: 本地保存路径（含文件名）
+        :param session: requests.Session 对象，可选
+        :param chunk_size: 每次读取字节数，默认 8KB
+        :param timeout: (连接超时，读取超时) 秒
+        :return: 成功返回保存路径，失败返回 None
+        """
+        if not session:
+            session = requests.Session()
+
+        try:
+            # stream=True 关键：不立即加载全部内容到内存
+            content = session.get(url, stream=True, timeout=timeout)
+            content.raise_for_status()  # 检查 HTTP 状态码
+
+            # 确保目录存在
+            os.makedirs(os.path.dirname(save_path) or '.', exist_ok=True)
+
+            with open(save_path, 'wb') as f:
+                for chunk in content.iter_content(chunk_size=chunk_size):
+                    if chunk:  # 过滤 keep-alive 空块
+                        f.write(chunk)
+
+            return True
+
+        except requests.exceptions.RequestException as e:
+            log.info('[Tools] - <download_file> Error: 下载文件失败')
+
+        return False
+
+    @classmethod
+    def write_json_content(cls, data, path):
+        '''
+        写入 json 内容
+        :param data:
+        :param path:
+        :return:
+        '''
+        try:
+            with open(path, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=4)
+            return True
+        except Exception as e:
+            return False
 
 
 
@@ -216,7 +289,7 @@ tools = ToolBox()
 
 if __name__ == '__main__':
 
-    temp = tools.brief_uid(6)
+    temp = tools.parse_tm_url('https://t.me/Hotchigua')
     print(temp)
 
 

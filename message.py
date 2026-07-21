@@ -14,11 +14,11 @@ from utils.rules import Rules
 from utils.register import register
 from utils.search import Search
 from utils.quick import quick
+from utils.WholeTime import wholetime
 import logging
-from logmanage import DailyLogManager
-from utils import timestand
+from logmanage import LogManager
 
-log = DailyLogManager('Message', logging.WARNING, logging.INFO)
+log = LogManager('Message', logging.WARNING, logging.INFO)
 
 
 def rule_handler(rule_name, order=100, stop_on_hit=True):
@@ -109,7 +109,7 @@ class Message:
         self.last_name = data.get('from', {}).get('last_name', '')
 
         self.date = data.get('date')
-        self.message_time = timestand.format_datetime(self.date)
+        self.message_time = wholetime.datetime(Unix=self.date)
         self.text = data.get('text')
         self.caption = data.get('caption')
         self.photo = data.get('photo')
@@ -150,11 +150,14 @@ class Message:
 
             return result
 
+        current_rules = current_chat[0]
+        if self.chat_title != current_rules.get('title'):
+            query = f"UPDATE {table} SET `title`=%s WHERE `chat`=%s"
+            sql.query(sql.database, query, [self.chat_title, self.chat_id])
+
 
         if self.bot != 'rules':
             return result
-
-        current_rules = current_chat[0]
 
         bot_status = current_rules.get('bot_status')
 
@@ -468,7 +471,6 @@ class SuperGroup(Message):
         主程序
         :return:
         '''
-        print(111111111111111111111111111111111111, self.rules.get('newcomer'))
         if (self.new_chat_members or self.left_chat_member) and self.rules.get('newcomer'):
 
             # 响应群组中成员加入或离开的信息
@@ -883,15 +885,15 @@ class SuperGroup(Message):
                 rules_limit[rules_option].update({str(self.user_id): limit_count + 1})
 
                 # 设定禁言时长(Unix时间戳)
-                until_date = {1: self.date + 3600, 2: self.date + (24 * 3600)}[limit_count]
+                mute_unix = {1: self.date + 3600, 2: self.date + (24 * 3600)}[limit_count]
 
                 # 设定警告语告知用户将被禁言到 until_date (将until_date Unix时间戳转换成直观的日期时间格式，包含时区信息)
-                default_wan = f'{violator} {default_wan}，已被禁言至{timestand.format_datetime_tz(until_date)}'
+                default_wan = f'{violator} {default_wan}，已被禁言至{wholetime.datetime(Unix=mute_unix)}'
 
                 # 设定限制规则，将当前用户禁言到 until_date
                 restrict_message.append([
                     'restrictChatMember',
-                    {'chat_id': self.chat_id, 'user_id': self.user_id, 'permissions': quick.permissions(True), 'until_date': until_date},
+                    {'chat_id': self.chat_id, 'user_id': self.user_id, 'permissions': quick.permissions(True), 'until_date': mute_unix},
                     None
                 ])
 
@@ -910,6 +912,7 @@ class SuperGroup(Message):
             default_wan = f'{violator} {default_wan}，此消息已被删除'
 
         elif level == 'mute':
+
             if limit_count >= allow:
 
                 # 将当前用户违规记录删除
@@ -918,7 +921,7 @@ class SuperGroup(Message):
 
                 # 如果限制措施是禁言，则需要搂 mute_time 参数设置禁言时长，mute_time 是从群组的规则参数中提取
                 # mute_time 有5种状态，永久，10分钟，1小时，24小时和一周，你需要用上述状态计算出禁言终止的时间戳
-                until_date = {
+                mute_unix = {
                     '永久': 0,
                     '10分钟': self.date + 600,
                     '1小时': self.date + 3600,
@@ -927,13 +930,13 @@ class SuperGroup(Message):
                 }.get(mute_time)
 
                 # 设定警告语告知用户将被禁言到 until_date (将until_date Unix时间戳转换成直观的日期时间格式，包含时区信息)
-                until_time = timestand.format_datetime_tz(until_date)
-                default_wan = f'{violator} {default_wan}，且多次违规，已被{"禁言" if until_date == 0 else "禁言到" + until_time}'
+                until_time = wholetime.datetime(Unix=mute_unix)
+                default_wan = f'{violator} {default_wan}，且多次违规，已被{"禁言" if mute_unix == 0 else "禁言到" + until_time}'
 
                 # 对用户采取禁言的限制措施，
                 restrict_message.append([
                     level,
-                    {'chat_id': self.chat_id, 'user_id': self.user_id, 'permissions': quick.permissions(True), 'until_date': until_date}
+                    {'chat_id': self.chat_id, 'user_id': self.user_id, 'permissions': quick.permissions(True), 'until_date': mute_unix}
                 ])
             else:
                 # 如果未达到规则次数上限，则更新违规次数
@@ -966,7 +969,7 @@ class SuperGroup(Message):
                     ]
                 )
             },
-            {'delete': timestand.unix() + 30}  # 此消息将在30秒后删除，timezone.unix() 会返回当前Unix时间戳
+            {'delete': wholetime.unix() + 30}  # 此消息将在30秒后删除，timezone.unix() 会返回当前Unix时间戳
         ])
 
         # 将新的限制数据更新到 restriction 数据表

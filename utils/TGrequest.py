@@ -11,9 +11,9 @@ import platform
 import config
 from utils.account import account
 import logging
-from logmanage import DailyLogManager
+from logmanage import LogManager
 
-log = DailyLogManager('TGrequest', logging.ERROR, logging.INFO)
+log = LogManager('TGrequest', logging.ERROR, logging.INFO)
 
 session = requests.Session()
 system_name = platform.system().lower()

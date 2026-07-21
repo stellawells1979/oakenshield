@@ -12,12 +12,12 @@ from openpyxl.styles import Font, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 from datetime import timedelta
 import config
-from utils import timestand
+from utils.WholeTime import wholetime
 from utils.tools import tools
 from database import sql
-from logmanage import DailyLogManager
+from logmanage import LogManager
 from utils.quick import quick
-log = DailyLogManager('Register', logging.ERROR, logging.INFO)
+log = LogManager('Register', logging.ERROR, logging.INFO)
 
 class Register:
     '''
@@ -53,7 +53,7 @@ class Register:
 
             # 签到状态的三种，Run:进行中，Exp:已过期，End:强制关闭，
             status = row.get('status')
-            if status != 'End' and timestand.date_from_timestamp() > row.get('expired'):
+            if status != 'End' and wholetime.today() > row.get('expired'):
                 # 将签到数据表中的当前签到项目更新为过期状态
                 query = f"UPDATE `{sql.table_register}` SET `status`=%s WHERE `id`=%s"
                 sql.query(sql.database, query, ['Exp', row.get('id')])
@@ -121,8 +121,8 @@ class Register:
         if chat_register.get('status') != 'Run':
             return []
 
-        current_day = timestand.date_from_timestamp()     # 获取当前日期(基于项目指定的时区)
-        register_day = timestand.date_from_timestamp(reg_date)   # 获取签到日期，即消息日期(基于项目指定的时区)
+        current_day = wholetime.today()     # 获取当前日期(基于项目指定的时区)
+        register_day = wholetime.today(Unix=reg_date)   # 获取签到日期，即消息日期(基于项目指定的时区)
 
         if current_day != register_day:
 
@@ -164,7 +164,7 @@ class Register:
                     **({'username': users.get('username')} if users.get('username') else {}),
                     **({'first_name': users.get('first_name')} if users.get('first_name') else {}),
                     **({'last_name': users.get('last_name')} if users.get('last_name') else {}),
-                    'register': [str(timestand.format_datetime_tz(reg_date))]
+                    'register': [wholetime.datetime(Unix=reg_date, Mat='%Y-%m-%d %H:%M:%S')]
                 }
             })
 
@@ -185,7 +185,7 @@ class Register:
                 ])
             else:
                 send_text = '⚠️⚠️ 请勿重复签到'
-            register_count.append(str(timestand.format_datetime_tz(reg_date)))
+            register_count.append(wholetime.datetime(Unix=reg_date, Mat='%Y-%m-%d %H:%M:%S'))
 
         query = f"UPDATE `{self.table}` SET `{register_field}`=%s WHERE `id`=%s"
         sql.query(sql.database, query, [json.dumps(current_register, ensure_ascii=False), regi_id])
@@ -273,8 +273,8 @@ class Register:
         '''
 
         if details == 'period':
-            rules.update({'origin': str(timestand.today())})
-            rules.update({'expired': str(timestand.today() + timedelta(days=param))})
+            rules.update({'origin': str(wholetime.today())})
+            rules.update({'expired': str(wholetime.today() + timedelta(days=param))})
         else:
             rules.update({details: param})
 
@@ -624,7 +624,7 @@ def create_register_data(date, count, timezone='UTC+8'):
             "雾里看,雅芙（有课室,龙先生,雨泣,硬汉阿诺,夏总,阿迪耐克全球招代理,小钟3,龙冰语,多次拒绝卡戴珊,陈辰,Linh Phương,黑桃老K,Hải Nam,夜斗大弟壶,新手,"
             "王小美,查斯,,多多钱,一只小羊,,,天理,大大发,赛博终端,一路向钱,中午要睡觉,揽胜,婉晴,大雄引流,暖暖,专家打洞,多啦A梦,威龙,拜金女1 没登录,树形图设计者,"
             "luyang,发信,川普选妃,Makmadl,麻将胡了,杨厨,默默,雪梨")
-    curr_unix = timestand.format_unix(date, timezone)
+    curr_unix = wholetime.format_unix(DateTime=date, Zome=timezone)
     name = name.split(',')
     result = {}
     for i, user in enumerate(user_ids[:count]):
@@ -634,7 +634,7 @@ def create_register_data(date, count, timezone='UTC+8'):
         node_time = random.randint(curr_unix, curr_unix + 86400)
         result.update({
             user: {
-                'register': [timestand.format_datetime_tz(node_time)],
+                'register': [wholetime.datetime(Unix=node_time, Mat='%Y-%m-%d %H:%M:%S')],
                 'first_name': name[i]
             }
         })
@@ -645,8 +645,6 @@ def create_register_data(date, count, timezone='UTC+8'):
 register = Register()
 
 if __name__ == '__main__':
-
-
 
     pass
 

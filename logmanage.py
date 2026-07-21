@@ -6,7 +6,7 @@ import os
 import logging
 from datetime import datetime, timedelta, timezone
 import config
-from utils import timestand
+from utils.WholeTime import wholetime
 
 
 PROJECT_TZ = timezone(timedelta(hours=8))
@@ -28,7 +28,7 @@ class ProjectTimezoneFormatter(logging.Formatter):
             return dt.strftime(datefmt)
         return dt.strftime("%Y-%m-%d %H:%M:%S")
 
-class DailyLogManager:
+class LogManager:
     '''
     r
     '''
@@ -86,7 +86,7 @@ class DailyLogManager:
         基于当前日期更新日志文件路径，并清理过期日志
         :param force: 是否强制更新
         """
-        today = timestand.date_from_timestamp()
+        today = wholetime.today()   # 当前日期
 
         # 如果不是强制更新，并且日期没有变化，就不重复创建 FileHandler
         if not force and self.current_date == today:
@@ -193,7 +193,7 @@ class DailyLogManager:
 # 示例用法
 if __name__ == "__main__":
     # 初始化日志管理器
-    log = DailyLogManager('mylogs', logging.ERROR, logging.INFO)
+    log = LogManager('mylogs', logging.ERROR, logging.INFO)
 
     # 写入控制台的 INFO，不会写入文件
     log.info("这是一条普通信息，仅打印到控制台。")
