@@ -5,28 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ef0ad20-3211-4191-a443-be10b0568f8d" name="更改" comment="fg">
-      <change afterPath="$PROJECT_DIR$/utils/RequestDrive.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/WholeTime.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/callbackquery.py" beforeDir="false" afterPath="$PROJECT_DIR$/callbackquery.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logmanage.py" beforeDir="false" afterPath="$PROJECT_DIR$/logmanage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/member.py" beforeDir="false" afterPath="$PROJECT_DIR$/member.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/message.py" beforeDir="false" afterPath="$PROJECT_DIR$/message.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/telegram.py" beforeDir="false" afterPath="$PROJECT_DIR$/telegram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ubuntuhelp.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ubuntuhelp.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/TGrequest.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/TGrequest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/account.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/account.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/browsers.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/SeleniumDrive.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/quick.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/quick.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/register.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/register.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/rules.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/rules.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/search.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/search.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/timestand.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/timingtask.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/timingtask.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tools.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -382,7 +361,7 @@
       <workItem from="1783846034566" duration="27754000" />
       <workItem from="1783906809721" duration="19626000" />
       <workItem from="1783992201624" duration="6927000" />
-      <workItem from="1784002766926" duration="124882000" />
+      <workItem from="1784002766926" duration="125542000" />
     </task>
     <task id="LOCAL-00001" summary="fg">
       <option name="closed" value="true" />
